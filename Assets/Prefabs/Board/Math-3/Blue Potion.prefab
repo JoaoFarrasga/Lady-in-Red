@@ -129,7 +129,7 @@ MonoBehaviour:
   yIndex: 0
   isMatched: 0
   isMoving: 0
-  moveDuration: 0.2
+  moveDuration: 0.3
 --- !u!61 &-5627875217358824845
 BoxCollider2D:
   m_ObjectHideFlags: 0
