@@ -25,29 +25,13 @@ public class PotionBoard : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+        mainCamera = Camera.main;
+        inputActions = new PlayerInputActions();
     }
 
     void Start()
     {
         InitializeBoard();
-    }
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<Potion>())
-            {
-                if (isProcessingMove)
-                    return;
-                Potion potion = hit.collider.gameObject.GetComponent<Potion>();
-
-                SelectPotion(potion);
-            }
-        }
     }
 
     #region Click
@@ -115,7 +99,7 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        if (potionBoard == null)
+        if (potionBoard != null)
         {
             if (CheckBoard(false))
             {
