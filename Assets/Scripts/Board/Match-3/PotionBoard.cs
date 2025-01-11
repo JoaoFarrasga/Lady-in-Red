@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class PotionBoard : MonoBehaviour
 {
@@ -21,6 +24,10 @@ public class PotionBoard : MonoBehaviour
     public static PotionBoard Instance;
     private Camera mainCamera;
     private PlayerInputActions inputActions;
+    public Dictionary<PotionType, int> matchCountsByColor = new Dictionary<PotionType, int>();
+    public Dictionary<MatchType, int> matchCountsByType = new Dictionary<MatchType, int>();
+    public int totalCombos = 0;
+
 
     private void Awake()
     {
@@ -127,60 +134,107 @@ public class PotionBoard : MonoBehaviour
     public bool CheckBoard(bool _takeAction)
     {
         bool hasMatched = false;
+        HashSet<Potion> potionsToRemove = new HashSet<Potion>();
 
-        List<Potion> potionsToRemove = new();
-
-        foreach (Node nodePotion in potionBoard)
-        {
-            if (nodePotion.potion != null)
-            {
-                nodePotion.potion.GetComponent<Potion>().isMatched = false;
-            }
-        }
-
+        // Detectar matches
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                if (potionBoard[x, y].isUsable)
+                Potion potion = potionBoard[x, y]?.potion?.GetComponent<Potion>();
+                if (potion != null && !potion.isMatched)
                 {
-                    Potion potion = potionBoard[x, y].potion.GetComponent<Potion>();
-
-                    if (!potion.isMatched)
+                    MatchResult matchResult = IsConnected(potion);
+                    if (matchResult.connectedPotions.Count >= 3)
                     {
-                        MatchResult matchedPotions = IsConnected(potion);
-
-                        if (matchedPotions.connectedPotions.Count >= 3)
+                        foreach (Potion matchedPotion in matchResult.connectedPotions)
                         {
-                            MatchResult superMatchPotions = SuperMatch(matchedPotions);
-
-                            potionsToRemove.AddRange(superMatchPotions.connectedPotions);
-
-                            foreach (Potion pot in superMatchPotions.connectedPotions)
-                                pot.isMatched = true;
-
-                               hasMatched = true;
-                         }
+                            matchedPotion.isMatched = true;  // Marcar como matched
+                            potionsToRemove.Add(matchedPotion);
+                        }
+                        hasMatched = true;
                     }
                 }
             }
         }
-        
-        if (_takeAction)
-        {
-            foreach(Potion potionToRemove in potionsToRemove) 
-            {
-                potionToRemove.isMatched = false;
-            }
-            RemoveAndRefill(potionsToRemove);
 
+        if (_takeAction && hasMatched)
+        {
+            ProcessMatches(new List<Potion>(potionsToRemove));
+            RemoveAndRefill(new List<Potion>(potionsToRemove));
+        }
+
+        return hasMatched;
+    
+
+        if (_takeAction && hasMatched)
+        {
+            // Processar os matches detectados
+            ProcessMatches(potionsToRemove.ToList());
+            RemoveAndRefill(potionsToRemove.ToList());
+
+            // Limpar o estado isMatched para todas as poções após o processamento
+            foreach (Potion potion in potionsToRemove)
+            {
+                potion.isMatched = false;
+            }
+
+            // Verificar se novos matches ocorrem após reenchimento
             if (CheckBoard(false))
             {
                 CheckBoard(true);
             }
         }
-        //check for a brand new match
+
         return hasMatched;
+    }
+    private void ProcessMatches(List<Potion> matchedPotions)
+    {
+        if (matchedPotions.Count == 0) return;
+
+        // Determinar o tipo de match baseado no número de poções no primeiro conjunto de matches
+        MatchType matchType = matchedPotions.Count >= 4 ? MatchType.SuperMatch : MatchType.Normal;
+
+        // Atualizar a contagem de matches por tipo
+        if (!matchCountsByType.ContainsKey(matchType))
+        {
+            matchCountsByType[matchType] = 0;
+        }
+        matchCountsByType[matchType]++;
+
+        // Atualizar a contagem de matches por cor
+        foreach (Potion potion in matchedPotions)
+        {
+            if (!matchCountsByColor.ContainsKey(potion.potionType))
+            {
+                matchCountsByColor[potion.potionType] = 0;
+            }
+            matchCountsByColor[potion.potionType]++;
+        }
+
+        // Incrementar o total de combos
+        totalCombos++;
+        PrintMatchStats();
+    }
+
+
+    private void PrintMatchStats()
+    {
+        Debug.Log("Match Stats:");
+        foreach (var item in matchCountsByColor)
+        {
+            Debug.Log($"Color {item.Key}: {item.Value} matches");
+        }
+        foreach (var item in matchCountsByType)
+        {
+            Debug.Log($"Type {item.Key}: {item.Value} matches");
+        }
+        Debug.Log($"Total Combos: {totalCombos}");
+    }
+    public enum MatchType
+    {
+        Normal,    // Para 3 poções alinhadas
+        SuperMatch // Para 4 poções alinhadas
     }
 
     private void RemoveAndRefill(List<Potion> _potionsToRemove)
@@ -495,6 +549,10 @@ public class PotionBoard : MonoBehaviour
 
 
     #endregion
+
+
+
+
 }
 
 public class MatchResult
