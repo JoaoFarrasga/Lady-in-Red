@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c06deb3e13136f24288d13c589f7bc77, type: 3}
-  m_Name: BasicEnemy
+  m_Name: FireEnemy
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Fire
+  enemyAppearence: {fileID: 1877986880, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
   elementalType: 0
-  health: 0
-  basicDamageAttack: 0
-  heavyDamageAttack: 0
+  maxHealth: 0
+  maxBasicDamageAttack: 0
+  maxHeavyDamageAttack: 0
   basicAttack: 0
   heavyAttack: 0
+  elementWeaknessList: []
+  elementalWeakType: 1

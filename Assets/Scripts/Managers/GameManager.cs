@@ -33,8 +33,20 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
+            
+            case GameState.InitialScreen:
+                break;
+            case GameState.GameStart:
+                //Manage GameStart
+                break;
+            case GameState.GameEnd:
+                //Manage Enemy Turn
+                break;
+            case GameState.Pause:
+                break;
             default:
                 break;
+
         }
 
         OnGameStateChanged?.Invoke(newState);
@@ -52,8 +64,6 @@ public enum GameState
 {
     InitialScreen,
     GameStart,
-    PlayerTurn,
-    Enemyturn,
     GameEnd,
     Pause
 }

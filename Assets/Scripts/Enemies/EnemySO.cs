@@ -9,26 +9,30 @@ public class EnemySO : ScriptableObject
     [Header("Name")]
     public string enemyName;
 
+    [Header("Appearence")]
+    public Sprite enemyAppearence;
+
     [Header("ElementalType")]
     public Element elementalType;
 
     [Header("Health")]
-    public float health;
+    public float maxHealth;
 
     [Header("Damage")]
-    public float basicDamageAttack;
-    public float heavyDamageAttack;
+    public float maxBasicDamageAttack;
+    public float maxHeavyDamageAttack;
 
     [Header("Attacks")]
     public float basicAttack;
     public float heavyAttack;
 
     [Header("Weakness")]
-    public Tuple<GameObject> elementWeaknessList;
+    public List<GameObject> elementWeaknessList;
+    public Element elementalWeakType;
 }
 public enum Element
 {
     Fire,
     Water,
-    Air
+    Earth
 }
