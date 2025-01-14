@@ -22,3 +22,5 @@ MonoBehaviour:
   heavyAttack: 0
   elementWeaknessList: []
   elementalWeakType: 1
+  elementStrongList: []
+  elementalStrongType: 2

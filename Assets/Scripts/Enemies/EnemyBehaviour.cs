@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -11,8 +10,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] private EnemySO enemySO;
     private SpriteRenderer spriteRenderer;
-
-    private GameManager gameManager;
 
     private void Start()
     {
@@ -27,14 +24,20 @@ public class EnemyBehaviour : MonoBehaviour
         this.enemySO = enemySO;
     }
 
-    public void SetGameManager(GameManager _gameManager)
-    {
-        this.gameManager = _gameManager;
-    }
-
     // Método para receber dano
-    public void TakeDamage(int damage)
+    public void TakeDamage(int _damage, Element element)
     {
+        int damage = _damage;
+
+        if (element == enemySO.elementalWeakType)
+        {
+            damage = damage * 2; // Dano dobrado contra fraquezas
+        }
+        else if (element == enemySO.elementalStrongType)
+        {
+            damage = damage / 2; // Dano reduzido contra resistências
+        }
+
         health -= damage; // Reduz a vida do inimigo
 
         if (health <= 0)
@@ -45,6 +48,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        // Notificar o GameManager sobre a morte do inimigo
+        GameManager.gameManager.OnEnemyDeath(this);
+        Destroy(gameObject); // Destrói o inimigo
     }
 }
