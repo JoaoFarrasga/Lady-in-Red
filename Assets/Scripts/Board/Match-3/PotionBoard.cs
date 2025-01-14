@@ -217,24 +217,36 @@ public class PotionBoard : MonoBehaviour
     {
         if (matchedPotions.Count == 0) return;
 
-        // Conta cada conjunto de matches como um combo
-        totalCombos++;  // Isso será incrementado para cada conjunto de matches encontrado em um turno
+        // Determina se é um SuperMatch ou um Match Normal e incrementa os contadores apropriadamente
+        if (matchedPotions.Count == 4)
+        {
+            totalCombos += 2;  // Adiciona 2 ao contador de combos para SuperMatch
+        }
+        else if (matchedPotions.Count == 3)
+        {
+            totalCombos += 1;  // Adiciona 1 ao contador de combos para Match Normal
+        }
 
+        // Utiliza um HashSet para garantir que cada cor seja contada apenas uma vez por match
         HashSet<PotionType> uniqueColors = new HashSet<PotionType>();
         foreach (Potion potion in matchedPotions)
         {
             uniqueColors.Add(potion.potionType);
         }
 
+        // Incrementa a contagem para cada cor única encontrada no match
         foreach (PotionType type in uniqueColors)
         {
             if (!matchCountsByColor.ContainsKey(type))
             {
                 matchCountsByColor[type] = 0;
             }
-            matchCountsByColor[type]++;
+            matchCountsByColor[type]++;  // Incrementa por 1, independente do número de poções do mesmo tipo no match
         }
     }
+
+
+
 
     private void PrintMatchStats()
     {
