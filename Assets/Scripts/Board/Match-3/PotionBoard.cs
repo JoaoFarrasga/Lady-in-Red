@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -98,7 +97,7 @@ public class PotionBoard : MonoBehaviour
                 }
                 else
                 {
-                    int randomIndex = Random.Range(0, potionPrefabs.Length);
+                    int randomIndex = UnityEngine.Random.Range(0, potionPrefabs.Length);
                     GameObject potion = Instantiate(potionPrefabs[randomIndex], position, Quaternion.identity);
                     potion.transform.SetParent(potionParent.transform);
 
@@ -244,13 +243,40 @@ public class PotionBoard : MonoBehaviour
         Debug.Log("Match Stats:");
         Debug.Log($"Total Turnos: {totalTurns}");
         Debug.Log($"Total Combos: {totalCombos}");
+
         foreach (var item in matchCountsByColor)
         {
             Debug.Log($"{item.Key}: {item.Value} matches");
-            gameManager.Damage(item.Key, item.Value);
+
+            // Determinar o elemento com base no tipo de poção
+            Element element = DetermineElement(item.Key);
+
+            // Aplicar dano a todos os inimigos
+            ApplyDamageToEnemies(element, item.Value);
         }
     }
 
+    private void ApplyDamageToEnemies(Element element, int combo)
+    {
+        int baseDamage = 3 * combo; // Calcular o dano baseado no combo
+        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>(); // Obter todos os inimigos na cena
+
+        foreach (EnemyBehaviour enemy in enemies)
+        {
+            enemy.TakeDamage(baseDamage, element); // Aplicar dano ao inimigo
+        }
+    }
+
+    private Element DetermineElement(PotionType type)
+    {
+        return type switch
+        {
+            PotionType.Red => Element.Fire,
+            PotionType.Blue => Element.Water,
+            PotionType.Green => Element.Earth,
+            _ => Element.Nothing
+        };
+    }
 
     public enum MatchType
     {
@@ -327,7 +353,7 @@ public class PotionBoard : MonoBehaviour
         int index = FindIndexOflowestNull(x);
         int locationToMoveTo = 8 - index;
         //get a random potion
-        int randomIndex = Random.Range(0, potionPrefabs.Length);
+        int randomIndex = UnityEngine.Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
         //set indicies

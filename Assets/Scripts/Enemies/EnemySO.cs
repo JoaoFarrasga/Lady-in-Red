@@ -29,10 +29,15 @@ public class EnemySO : ScriptableObject
     [Header("Weakness")]
     public List<GameObject> elementWeaknessList;
     public Element elementalWeakType;
+
+    [Header("Strong")]
+    public List<GameObject> elementStrongList;
+    public Element elementalStrongType;
 }
 public enum Element
 {
     Fire,
     Water,
-    Earth
+    Earth,
+    Nothing
 }

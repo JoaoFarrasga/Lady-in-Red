@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +12,11 @@ public class GameManager : MonoBehaviour
         if (gameManager == null)
         {
             gameManager = this;
-            DontDestroyOnLoad(gameObject); // Don't destroy this object when loading new scenes
+            DontDestroyOnLoad(gameObject); // Não destrua este objeto ao carregar novas cenas
         }
         else
         {
-            // If an instance already exists, destroy this one
+            // Se uma instância já existir, destrua este objeto
             Destroy(gameObject);
         }
     }
@@ -36,10 +35,8 @@ public class GameManager : MonoBehaviour
             case GameState.InitialScreen:
                 break;
             case GameState.GameStart:
-                //Manage GameStart
                 break;
             case GameState.GameEnd:
-                //Manage Enemy Turn
                 break;
             case GameState.Pause:
                 break;
@@ -50,19 +47,25 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
-    public void Damage(PotionType type, int combo)
+    public void OnEnemyDeath(EnemyBehaviour enemy)
     {
-        int damage = 3 * combo; // Calcula o dano baseado no combo
-        Debug.Log($"Aplicando {damage} de dano aos inimigos.");
+        Debug.Log($"Enemy defeated: {enemy.name}");
 
-        // Envia o dano para todos os inimigos
-        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>(); // Obtém todos os inimigos na cena
-        foreach (EnemyBehaviour enemy in enemies)
+        // Lógica adicional para lidar com a morte do inimigo, como verificar se a batalha terminou
+        CheckBattleEnd();
+    }
+
+    private void CheckBattleEnd()
+    {
+        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>();
+        if (enemies.Length == 0)
         {
-            enemy.TakeDamage(damage);
+            Debug.Log("All enemies defeated!");
+            UpdateGameState(GameState.GameEnd);
         }
     }
 }
+
 
 //States of the game
 public enum GameState
