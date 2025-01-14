@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Earth
   enemyAppearence: {fileID: 734799198, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
   elementalType: 2
-  maxHealth: 0
+  maxHealth: 25
   maxBasicDamageAttack: 0
   maxHeavyDamageAttack: 0
   basicAttack: 0

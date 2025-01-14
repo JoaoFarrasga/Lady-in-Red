@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            
             case GameState.InitialScreen:
                 break;
             case GameState.GameStart:
@@ -46,17 +45,23 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
-
         }
 
         OnGameStateChanged?.Invoke(newState);
     }
 
-    private void Update()
+    public void Damage(PotionType type, int combo)
     {
+        int damage = 3 * combo; // Calcula o dano baseado no combo
+        Debug.Log($"Aplicando {damage} de dano aos inimigos.");
 
+        // Envia o dano para todos os inimigos
+        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>(); // Obtém todos os inimigos na cena
+        foreach (EnemyBehaviour enemy in enemies)
+        {
+            enemy.TakeDamage(damage);
+        }
     }
-
 }
 
 //States of the game
