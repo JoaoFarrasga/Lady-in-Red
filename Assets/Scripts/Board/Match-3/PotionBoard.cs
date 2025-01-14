@@ -24,10 +24,13 @@ public class PotionBoard : MonoBehaviour
     public static PotionBoard Instance;
     private Camera mainCamera;
     private PlayerInputActions inputActions;
+
     public Dictionary<PotionType, int> matchCountsByColor = new Dictionary<PotionType, int>();
     public Dictionary<MatchType, int> matchCountsByType = new Dictionary<MatchType, int>();
     public int totalCombos = 0;
     public int totalTurns = 0;
+
+    public GameManager gameManager;
 
 
     private void Awake()
@@ -244,6 +247,7 @@ public class PotionBoard : MonoBehaviour
         foreach (var item in matchCountsByColor)
         {
             Debug.Log($"{item.Key}: {item.Value} matches");
+            gameManager.Damage(item.Key, item.Value);
         }
     }
 
@@ -574,9 +578,6 @@ public class PotionBoard : MonoBehaviour
 
 
     #endregion
-
-
-
 
 }
 

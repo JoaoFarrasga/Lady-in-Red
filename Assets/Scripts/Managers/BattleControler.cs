@@ -22,6 +22,9 @@ public class BattleControler : MonoBehaviour
     [Header("BattleGeneratorInfo")]
     [SerializeField] private BattleGenerator battleGenerator;
 
+    [Header("GameMager")]
+    [SerializeField] private GameManager gameManager;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
@@ -82,6 +85,7 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
+            go.GetComponent<EnemyBehaviour>().SetGameManager(gameManager);
             if (isPlacingOnRightSide)
             {
                 float enemySpot = totalEnemySpace - (offsetMultiplier * enemyPlaceDivision);
