@@ -216,6 +216,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6bce82e075e4e9d4a980f06302133d6b, type: 2}
   - {fileID: 11400000, guid: f9a4a8d55b83ef7498e51604d0d0bd34, type: 2}
   - {fileID: 11400000, guid: 3b28bf4e8e796c04395268e028002058, type: 2}
+  - {fileID: 11400000, guid: cb6e8f198cf86fd4f8de66b69e716518, type: 2}
+  - {fileID: 11400000, guid: 5534089681e12ff4591dde76d418de95, type: 2}
+  - {fileID: 11400000, guid: d082bb69745c2f946a2177e35c5b8ea0, type: 2}
   battleControler: {fileID: 763919137}
 --- !u!1 &1635278665
 GameObject:
