@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text turnCounter;
     public TMP_Text comboCounter;
-    public PotionBoard potionBoard; // Certifique-se de que este componente está acessível
+    public PotionBoard potionBoard; 
 
     void Update()
     {
