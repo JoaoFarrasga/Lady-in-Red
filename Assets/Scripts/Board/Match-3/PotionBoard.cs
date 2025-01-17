@@ -179,6 +179,7 @@ public class PotionBoard : MonoBehaviour
                                 allMatches.Add(currentMatch);
                                 hasMatched = true;
                             }
+                            currentMatch = null;
                         }
                     }
                 }
@@ -192,7 +193,14 @@ public class PotionBoard : MonoBehaviour
                 ProcessMatches(matchGroup);
                 lastMatch = matchGroup;
             }
-            
+
+            /*
+            foreach (Potion potion in allMatches.SelectMany(m => m).ToList())
+            {
+                Debug.Log("Removing: " + potion.xIndex + ", " + potion.yIndex);
+            }
+            */
+
             //playerCharacteristics.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
             RemoveAndRefill(allMatches.SelectMany(m => m).ToList());
 
@@ -211,12 +219,14 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        if (_takeAction && isNewTurn)
+        allMatches = null;
+
+        if (_takeAction && isNewTurn && hasMatched)
         {
-            print("LastMatch: " + lastMatch[0].potionType);
+            // Debug.Log("LastMatch: " + lastMatch[0].potionType);
             foreach (var item in matchCountsByColor)
             {
-                Debug.Log($"{item.Key}: {item.Value} matches");
+                // Debug.Log($"{item.Key}: {item.Value} matches");
             }
             player.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
             totalTurns++; // Incrementa os turnos apenas no início do processamento de uma nova jogada
@@ -265,21 +275,6 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-
-
-
-    private void PrintMatchStats()
-    {
-        Debug.Log("Match Stats:");
-        Debug.Log($"Total Turnos: {totalTurns}");
-        Debug.Log($"Total Combos: {totalCombos}");
-        foreach (var item in matchCountsByColor)
-        {
-            Debug.Log($"{item.Key}: {item.Value} matches");
-        }
-    }
-
-
     public enum MatchType
     {
         Normal,    // Para 3 poções alinhadas
@@ -288,17 +283,13 @@ public class PotionBoard : MonoBehaviour
 
     private void RemoveAndRefill(List<Potion> _potionsToRemove)
     {
-        //removing the potion and clearing the board at that location
         foreach(Potion potion in _potionsToRemove)
         {
-            //getting it´s x and y indicates and storing them
             int _xIndex = potion.xIndex;
             int _yIndex = potion.yIndex;
 
-            //Destroy the potion
             Destroy(potion.gameObject);
 
-            //create a blank node on the potion board
             potionBoard[_xIndex, _yIndex] = new Node(true, null);
         }
         for (int x=0; x < width; x++)
@@ -307,7 +298,6 @@ public class PotionBoard : MonoBehaviour
             {
                 if (potionBoard[x, y].potion == null)
                 {
-                //Debug.Log("The location X:" + x + "Y" + y + "is empty, attepting to refill it");
                 RefillPotion(x, y);
                 }
             }
@@ -320,31 +310,24 @@ public class PotionBoard : MonoBehaviour
         //y offset
         int yOffset = 1;
 
-        //while the cell above our current cell is null and we´re below the height of the board
         while (y + yOffset < height && potionBoard[x,y + yOffset].potion == null)
         {
-            //Debug.Log("The potion above me is null, but im not at the top of the board yet, so add to my yOffset and try again, Current Offset is: " + yOffset + "Im about do add 1");
+            // Debug.Log("The potion above me is null, but im not at the top of the board yet, so add to my yOffset and try again, Current Offset is: " + yOffset + "Im about do add 1");
             yOffset++;
         }
-        //we´ve either hit the top of the board or we found the potion
+
         if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
         { 
-            //we´ve founf the potion
             Potion potionAbove = potionBoard[x,y + yOffset].potion.GetComponent<Potion>();
             
-            //move it to the current location
             Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
             //Debug.Log("I´ve found a potion when reflling the board and it was in the location: [" + x + "," + (y + yOffset) + "] we have moved it to the location:[" + x + "," + y + "]");
-            //Move to location
             potionAbove.MoveToTarget(targetPos);
-            //update incidies
             potionAbove.SetIndicies(x, y);
-            //update our potionboard
             potionBoard[x, y] = potionBoard[x,y + yOffset];
-            //set the location the potion came from to null
             potionBoard[x, y + yOffset] = new Node(true, null);
         }
-        //if we´ve hit the top of the board without finding a potion
+
         if (y + yOffset == height)
         {
             //Debug.Log("I´ve reached the top of the board without finding a potion");
@@ -371,7 +354,6 @@ public class PotionBoard : MonoBehaviour
         Vector3 targetPostion = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
         newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
     }
-
 
     private int FindIndexOflowestNull(int x)
     {
@@ -516,8 +498,6 @@ public class PotionBoard : MonoBehaviour
         return null;
     }
 
-     
-
     #endregion
 
     #region Swap Potions
@@ -583,25 +563,11 @@ public class PotionBoard : MonoBehaviour
 
         _currentPotion.MoveToTarget(potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion.transform.position);
         _targetPotion.MoveToTarget(potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion.transform.position);
-
     }
 
     private bool IsAdjacacent(Potion _currentPotion, Potion _targetPotion)
     {
         return Mathf.Abs(_currentPotion.xIndex - _targetPotion.xIndex) + Mathf.Abs(_currentPotion.yIndex - _targetPotion.yIndex) == 1;
-    }
-
-    private IEnumerator ProcessMatches(Potion _currentPotion, Potion _targetPotion)
-    {
-        yield return new WaitForSeconds(0.2f);
-        bool hasMatch = CheckBoard(true);
-
-        if (!hasMatch)
-        {
-            DoSwap(_currentPotion, _targetPotion);
-        }
-
-        isProcessingMove = false;
     }
 
     #endregion
@@ -612,10 +578,6 @@ public class PotionBoard : MonoBehaviour
 
 
     #endregion
-
-
-
-
 }
 
 public class MatchResult

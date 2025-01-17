@@ -52,8 +52,8 @@ public class EnemyBehaviour : MonoBehaviour
             Die();
         }
 
-        print("enemyHealth: " + health);
-        print("enemyName: " + enemySO.name);
+        // print("enemyHealth: " + health);
+        // print("enemyName: " + enemySO.name);
     }
 
     private void Die()

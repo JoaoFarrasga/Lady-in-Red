@@ -70,7 +70,7 @@ public class BattleControler : MonoBehaviour
         List<EnemySO> enemies = battleGenerator.Battles()[GameManager.gameManager.gameLevel - 1];
         if (enemies.Count == 0 && GameManager.gameManager.gameLevel != 10)
         {
-            Debug.Log("All enemies defeated!");
+            // Debug.Log("All enemies defeated!");
             GameManager.gameManager.gameLevel++;
             //UpdateGameState(GameState.GameEnd);
         }
@@ -109,7 +109,7 @@ public class BattleControler : MonoBehaviour
 
     private void EnemyTurnAttack()
     {
-        print("EnemyAttacking");
+        // print("EnemyAttacking");
         foreach (GameObject enemy in levelEnemies)
         {
             enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject);
