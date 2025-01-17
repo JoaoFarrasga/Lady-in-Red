@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &71082838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71082839}
+  m_Layer: 0
+  m_Name: Potions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71082839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71082838}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &763919136
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4538978905771880927, guid: 68883a803d54f26419672856403ce155, type: 3}
+  levelEnemies: []
   referencePoint: {fileID: 1321802194}
   totalEnemySpace: 5
   battleGenerator: {fileID: 1321802196}
@@ -216,6 +248,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6bce82e075e4e9d4a980f06302133d6b, type: 2}
   - {fileID: 11400000, guid: f9a4a8d55b83ef7498e51604d0d0bd34, type: 2}
   - {fileID: 11400000, guid: 3b28bf4e8e796c04395268e028002058, type: 2}
+  - {fileID: 11400000, guid: cb6e8f198cf86fd4f8de66b69e716518, type: 2}
+  - {fileID: 11400000, guid: 5534089681e12ff4591dde76d418de95, type: 2}
+  - {fileID: 11400000, guid: d082bb69745c2f946a2177e35c5b8ea0, type: 2}
   battleControler: {fileID: 763919137}
 --- !u!1 &1635278665
 GameObject:
@@ -377,12 +412,130 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653155543}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c46ca27b0f01cb34688c09f3b27d0ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
+  gameLevel: 1
+--- !u!1 &1760880630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760880632}
+  - component: {fileID: 1760880631}
+  m_Layer: 0
+  m_Name: Potion Board
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1760880631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760880630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e3796f09183b44a9046d7b169ff98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleControler: {fileID: 763919137}
+  player: {fileID: 1795842239}
+  width: 6
+  height: 8
+  spacingX: 0
+  spacingY: 0
+  potionPrefabs:
+  - {fileID: 394957948434363341, guid: bfd34209a7dedcf49b64286793a50124, type: 3}
+  - {fileID: 5523113219613811079, guid: 24df5a89d8f93d84aa6eedafcf31adac, type: 3}
+  - {fileID: 1717615574536951511, guid: 4794b6d2f665bda4f9a4ea7b05318f4f, type: 3}
+  - {fileID: 80330732404357557, guid: 392a40b060680e048955efba4ea6ae7f, type: 3}
+  - {fileID: 6018914302175285541, guid: 273f0a5d4b9d26f4b913a4a8205bef2f, type: 3}
+  potionBoardGameObject: {fileID: 1760880630}
+  potionsToDestroy: []
+  potionParent: {fileID: 71082838}
+  selectedPotion: {fileID: 0}
+  isProcessingMove: 0
+  arrayLayout:
+    rows:
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+    - row: 000000000000
+  totalCombos: 0
+  totalTurns: 0
+--- !u!4 &1760880632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760880630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1795842238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795842240}
+  - component: {fileID: 1795842239}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1795842239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795842238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e849ee6479182749aa4004803fcb049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1795842240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795842238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.8663, y: -3.5281749, z: 3.284725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897124749
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 1897124749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -7.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,3 +682,6 @@ SceneRoots:
   - {fileID: 1321802195}
   - {fileID: 763919138}
   - {fileID: 1653155545}
+  - {fileID: 1760880632}
+  - {fileID: 71082839}
+  - {fileID: 1795842240}

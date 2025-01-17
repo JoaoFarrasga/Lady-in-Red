@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleControler : MonoBehaviour
@@ -7,6 +9,11 @@ public class BattleControler : MonoBehaviour
 
     [Header("EnemyInfo")]
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<GameObject> levelEnemies;
+    public int maxEnemyTurns { get; set; } = 1;
+
+    [Header("PlayerInfo")]
+    public int maxPlayerTurns { get; set; } = 3;
 
     [Header("ReferencePoint")]
     [SerializeField] private GameObject referencePoint;
@@ -52,17 +59,24 @@ public class BattleControler : MonoBehaviour
 
     private void SetUpBattle()
     {
-        PlaceEnemies(1);
+        PlaceEnemies(GameManager.gameManager.gameLevel);
         UpdateBattleState(BattleState.PlayerTurn);
     }
 
     private void BattleEnd()
     {
-        // Logic for ending the battle
+        List<EnemySO> enemies = battleGenerator.Battles()[GameManager.gameManager.gameLevel - 1];
+        if (enemies.Count == 0 && GameManager.gameManager.gameLevel != 10)
+        {
+            Debug.Log("All enemies defeated!");
+            GameManager.gameManager.gameLevel++;
+            //UpdateGameState(GameState.GameEnd);
+        }
     }
 
     private void PlaceEnemies(int level)
     {
+        if(levelEnemies.Count != 0) levelEnemies.Clear();
         bool isPlacingOnRightSide = true;
         int offsetMultiplier = 1;
 
@@ -72,6 +86,8 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
+
+            levelEnemies.Add(go);
 
             if (isPlacingOnRightSide)
             {
@@ -88,6 +104,13 @@ public class BattleControler : MonoBehaviour
             }
         }
     }
+
+    public BattleState GetBattleState() { return battleState; }
+
+    public List<GameObject> GetLevelEnemies() { return levelEnemies; }
+
+    //public int GetMaxPlayerTurn() {  return maxPlayerTurns; }
+    //public int GetMaxEnemyTurn() {  return maxEnemyTurns; }
 }
 
 

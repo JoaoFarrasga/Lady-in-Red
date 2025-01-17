@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    public PotionType potionType;
+    public OrbType potionType;
 
     public int xIndex;
     public int yIndex;
@@ -54,7 +54,7 @@ public class Potion : MonoBehaviour
     }
 }
 
-public enum PotionType 
+public enum OrbType 
 {
     Red,
     Blue, 

@@ -25,7 +25,7 @@ public class BattleGenerator : MonoBehaviour
         CreateBattles();
     }
 
-    private void CreateBattles()
+    public void CreateBattles()
     {
         for (int i = 0; i < numOfLevels; i++) 
         {
@@ -38,11 +38,11 @@ public class BattleGenerator : MonoBehaviour
             }
             //print(enemies.Count);
             battles.Add(enemies);
-            print("BattleCount: " + battles[i].Count);
+            //print("BattleCount: " + battles[i].Count);
             //enemies.Clear();
         }
-        print("Num of Battles: " + battles.Count);
-        print("Num of enemies in Level1: " + battles[0].Count);
+        //print("Num of Battles: " + battles.Count);
+        //print("Num of enemies in Level1: " + battles[0].Count);
         battleControler.UpdateBattleState(BattleState.BattleInit); 
     }
 

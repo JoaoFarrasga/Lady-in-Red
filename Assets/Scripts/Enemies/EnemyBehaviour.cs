@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -25,9 +26,9 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // Método para receber dano
-    public void TakeDamage(int _damage, Element element)
+    public void TakeDamage(float _damage, OrbType element, int elementCount)
     {
-        int damage = _damage;
+        float damage = _damage * elementCount;
 
         if (element == enemySO.elementalWeakType)
         {
@@ -35,7 +36,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else if (element == enemySO.elementalStrongType)
         {
-            damage = damage / 2; // Dano reduzido contra resistências
+            damage = -(damage / 2); // Dano reduzido contra resistências
         }
 
         health -= damage; // Reduz a vida do inimigo
@@ -44,6 +45,9 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Die();
         }
+
+        print("enemyHealth: " + health);
+        print("enemyName: " + enemySO.name);
     }
 
     private void Die()
@@ -52,4 +56,6 @@ public class EnemyBehaviour : MonoBehaviour
         GameManager.gameManager.OnEnemyDeath(this);
         Destroy(gameObject); // Destrói o inimigo
     }
+
+    public EnemySO GetEnemySO() { return enemySO; }
 }
