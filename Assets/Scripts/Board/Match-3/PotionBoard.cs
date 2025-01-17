@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
@@ -9,6 +10,10 @@ using UnityEngine.InputSystem;
 
 public class PotionBoard : MonoBehaviour
 {
+
+    [Header("Battle Controller")]
+    [SerializeField] private BattleControler battleControler;
+    [SerializeField] private Player player;
     public int width = 6;
     public int height = 8;
     public float spacingX;
@@ -24,7 +29,7 @@ public class PotionBoard : MonoBehaviour
     public static PotionBoard Instance;
     private Camera mainCamera;
     private PlayerInputActions inputActions;
-    public Dictionary<PotionType, int> matchCountsByColor = new Dictionary<PotionType, int>();
+    public Dictionary<OrbType, int> matchCountsByColor = new Dictionary<OrbType, int>();
     public Dictionary<MatchType, int> matchCountsByType = new Dictionary<MatchType, int>();
     public int totalCombos = 0;
     public int totalTurns = 0;
@@ -65,7 +70,7 @@ public class PotionBoard : MonoBehaviour
         if (!rayHit.collider) return;
 
         var potion = rayHit.collider.gameObject.GetComponent<Potion>();
-        if (potion != null)
+        if (potion != null && battleControler.GetBattleState() == BattleState.PlayerTurn)
         {
             SelectPotion(potion);
         }
@@ -136,6 +141,7 @@ public class PotionBoard : MonoBehaviour
     {
         bool hasMatched = false;
         List<List<Potion>> allMatches = new List<List<Potion>>();
+        List<Potion> lastMatch = new List<Potion>();
 
         // Reseta o estado 'isMatched' para todas as poções
         foreach (Node node in potionBoard)
@@ -184,7 +190,10 @@ public class PotionBoard : MonoBehaviour
             foreach (List<Potion> matchGroup in allMatches)
             {
                 ProcessMatches(matchGroup);
+                lastMatch = matchGroup;
             }
+            
+            //playerCharacteristics.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
             RemoveAndRefill(allMatches.SelectMany(m => m).ToList());
 
             // Reseta o estado 'isMatched' após processar todos os matches
@@ -204,14 +213,24 @@ public class PotionBoard : MonoBehaviour
 
         if (_takeAction && isNewTurn)
         {
-            totalTurns++;  // Incrementa os turnos apenas no início do processamento de uma nova jogada
-            PrintMatchStats();  // Imprime estatísticas apenas uma vez após processar todos os matches
+            print("LastMatch: " + lastMatch[0].potionType);
+            foreach (var item in matchCountsByColor)
+            {
+                Debug.Log($"{item.Key}: {item.Value} matches");
+            }
+            player.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
+            totalTurns++; // Incrementa os turnos apenas no início do processamento de uma nova jogada
+            matchCountsByColor.Clear();
+            if (totalTurns == battleControler.maxPlayerTurns)
+            {
+                battleControler.UpdateBattleState(BattleState.EnemyTurn);
+                battleControler.maxEnemyTurns = 1;
+            }
+            //PrintMatchStats();  // Imprime estatísticas apenas uma vez após processar todos os matches
         }
 
         return hasMatched;
     }
-
-
 
     private void ProcessMatches(List<Potion> matchedPotions)
     {
@@ -228,14 +247,14 @@ public class PotionBoard : MonoBehaviour
         }
 
         // Utiliza um HashSet para garantir que cada cor seja contada apenas uma vez por match
-        HashSet<PotionType> uniqueColors = new HashSet<PotionType>();
+        HashSet<OrbType> uniqueColors = new HashSet<OrbType>();
         foreach (Potion potion in matchedPotions)
         {
             uniqueColors.Add(potion.potionType);
         }
 
         // Incrementa a contagem para cada cor única encontrada no match
-        foreach (PotionType type in uniqueColors)
+        foreach (OrbType type in uniqueColors)
         {
             if (!matchCountsByColor.ContainsKey(type))
             {
@@ -287,7 +306,7 @@ public class PotionBoard : MonoBehaviour
             {
                 if (potionBoard[x, y].potion == null)
                 {
-                Debug.Log("The location X:" + x + "Y" + y + "is empty, attepting to refill it");
+                //Debug.Log("The location X:" + x + "Y" + y + "is empty, attepting to refill it");
                 RefillPotion(x, y);
                 }
             }
@@ -303,7 +322,7 @@ public class PotionBoard : MonoBehaviour
         //while the cell above our current cell is null and we´re below the height of the board
         while (y + yOffset < height && potionBoard[x,y + yOffset].potion == null)
         {
-            Debug.Log("The potion above me is null, but im not at the top of the board yet, so add to my yOffset and try again, Current Offset is: " + yOffset + "Im about do add 1");
+            //Debug.Log("The potion above me is null, but im not at the top of the board yet, so add to my yOffset and try again, Current Offset is: " + yOffset + "Im about do add 1");
             yOffset++;
         }
         //we´ve either hit the top of the board or we found the potion
@@ -314,7 +333,7 @@ public class PotionBoard : MonoBehaviour
             
             //move it to the current location
             Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
-            Debug.Log("I´ve found a potion when reflling the board and it was in the location: [" + x + "," + (y + yOffset) + "] we have moved it to the location:[" + x + "," + y + "]");
+            //Debug.Log("I´ve found a potion when reflling the board and it was in the location: [" + x + "," + (y + yOffset) + "] we have moved it to the location:[" + x + "," + y + "]");
             //Move to location
             potionAbove.MoveToTarget(targetPos);
             //update incidies
@@ -327,7 +346,7 @@ public class PotionBoard : MonoBehaviour
         //if we´ve hit the top of the board without finding a potion
         if (y + yOffset == height)
         {
-            Debug.Log("I´ve reached the top of the board without finding a potion");
+            //Debug.Log("I´ve reached the top of the board without finding a potion");
             SpawnPotionAtTop(x);
         }
             
@@ -338,7 +357,7 @@ public class PotionBoard : MonoBehaviour
     {
         int index = FindIndexOflowestNull(x);
         int locationToMoveTo = 8 - index;
-        Debug.Log("About to spawn a potion, ideally i´d like to put it in the index of " + index);
+        //Debug.Log("About to spawn a potion, ideally i´d like to put it in the index of " + index);
         //get a random potion
         int randomIndex = Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
@@ -369,7 +388,7 @@ public class PotionBoard : MonoBehaviour
     MatchResult IsConnected(Potion potion)
     {
         List<Potion> connectedPotions = new();
-        PotionType potionType = potion.potionType;
+        OrbType potionType = potion.potionType;
 
         connectedPotions.Add(potion);
 
@@ -405,7 +424,7 @@ public class PotionBoard : MonoBehaviour
 
     void CheckDirection(Potion potion, Vector2Int direction, List<Potion> connectedPotions)
     {
-        PotionType potionType = potion.potionType;
+        OrbType potionType = potion.potionType;
 
         int x = potion.xIndex + direction.x;
         int y = potion.yIndex + direction.y;

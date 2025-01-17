@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    public int gameLevel = 1;
 
     private void Awake()
     {

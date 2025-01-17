@@ -13,7 +13,7 @@ public class EnemySO : ScriptableObject
     public Sprite enemyAppearence;
 
     [Header("ElementalType")]
-    public Element elementalType;
+    public OrbType elementalType;
 
     [Header("Health")]
     public float maxHealth;
@@ -28,11 +28,11 @@ public class EnemySO : ScriptableObject
 
     [Header("Weakness")]
     public List<GameObject> elementWeaknessList;
-    public Element elementalWeakType;
+    public OrbType elementalWeakType;
 
     [Header("Strong")]
     public List<GameObject> elementStrongList;
-    public Element elementalStrongType;
+    public OrbType elementalStrongType;
 }
 public enum Element
 {
