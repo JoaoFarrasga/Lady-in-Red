@@ -211,14 +211,14 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        if (_takeAction && isNewTurn)
+        if (_takeAction && isNewTurn && hasMatched)
         {
             print("LastMatch: " + lastMatch[0].potionType);
             foreach (var item in matchCountsByColor)
             {
                 Debug.Log($"{item.Key}: {item.Value} matches");
             }
-            player.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
+            player.Attack(lastMatch, matchCountsByColor, battleControler);
             totalTurns++; // Incrementa os turnos apenas no início do processamento de uma nova jogada
             matchCountsByColor.Clear();
             if (totalTurns == battleControler.maxPlayerTurns)

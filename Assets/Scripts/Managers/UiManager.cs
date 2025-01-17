@@ -5,7 +5,11 @@ public class UIManager : MonoBehaviour
 {
     public TMP_Text turnCounter;
     public TMP_Text comboCounter;
-    public PotionBoard potionBoard; 
+    public PotionBoard potionBoard;
+
+    [SerializeField] private BattleControler battleControler;
+    [SerializeField] private Player player; 
+    [SerializeField] private TMP_Text playerLife;
 
     void Update()
     {
@@ -13,6 +17,7 @@ public class UIManager : MonoBehaviour
         {
             turnCounter.text = "Turnos: " + potionBoard.totalTurns;
             comboCounter.text = "Combos: " + potionBoard.totalCombos;
+            playerLife.text = "Life: " + player.GetHealth();
         }
     }
 }
