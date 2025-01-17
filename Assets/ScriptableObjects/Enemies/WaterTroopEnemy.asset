@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyAppearence: {fileID: 1900768483, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
   elementalType: 1
   maxHealth: 100
-  maxBasicDamageAttack: 0
+  maxBasicDamageAttack: 5
   maxHeavyDamageAttack: 0
   basicAttack: 0
   heavyAttack: 0

@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4538978905771880927, guid: 68883a803d54f26419672856403ce155, type: 3}
   levelEnemies: []
+  player: {fileID: 1795842239}
   referencePoint: {fileID: 1321802194}
   totalEnemySpace: 5
   battleGenerator: {fileID: 1321802196}

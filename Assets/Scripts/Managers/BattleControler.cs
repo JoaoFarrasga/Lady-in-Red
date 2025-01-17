@@ -13,6 +13,7 @@ public class BattleControler : MonoBehaviour
     public int maxEnemyTurns { get; set; } = 1;
 
     [Header("PlayerInfo")]
+    [SerializeField] Player player;
     public int maxPlayerTurns { get; set; } = 3;
 
     [Header("ReferencePoint")]
@@ -47,6 +48,7 @@ public class BattleControler : MonoBehaviour
                 // Manage Player Turn
                 break;
             case BattleState.EnemyTurn:
+                EnemyTurnAttack();
                 // Manage Enemy Turn
                 break;
             case BattleState.BattleEnd:
@@ -105,9 +107,20 @@ public class BattleControler : MonoBehaviour
         }
     }
 
+    private void EnemyTurnAttack()
+    {
+        print("EnemyAttacking");
+        foreach (GameObject enemy in levelEnemies)
+        {
+            enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject);
+        }
+        UpdateBattleState(BattleState.PlayerTurn);
+    }
+
     public BattleState GetBattleState() { return battleState; }
 
     public List<GameObject> GetLevelEnemies() { return levelEnemies; }
+
 
     //public int GetMaxPlayerTurn() {  return maxPlayerTurns; }
     //public int GetMaxEnemyTurn() {  return maxEnemyTurns; }

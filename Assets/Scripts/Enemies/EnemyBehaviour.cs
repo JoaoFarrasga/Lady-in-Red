@@ -18,11 +18,17 @@ public class EnemyBehaviour : MonoBehaviour
         spriteRenderer.sprite = enemySO.enemyAppearence;
         maxHealth = enemySO.maxHealth;
         health = maxHealth;
+        basicDamageAttack = enemySO.maxBasicDamageAttack;
     }
 
     public void SetEnemySO(EnemySO enemySO)
     {
         this.enemySO = enemySO;
+    }
+
+    public void AttackPlayer(GameObject target)
+    {
+        target.GetComponent<Player>().TakeDamage(basicDamageAttack);
     }
 
     // Método para receber dano
