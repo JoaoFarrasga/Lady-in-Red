@@ -225,6 +225,7 @@ public class PotionBoard : MonoBehaviour
             {
                 battleControler.UpdateBattleState(BattleState.EnemyTurn);
                 battleControler.maxEnemyTurns = 1;
+                totalTurns = 0;
             }
             //PrintMatchStats();  // Imprime estatísticas apenas uma vez após processar todos os matches
         }

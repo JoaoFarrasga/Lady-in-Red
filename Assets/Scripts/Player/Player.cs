@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 { 
     [Header("Health")]
-    private float maxHealth;
+    private float maxHealth = 100;
     private float health;
 
     [Header("Damage")]
@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        print("PlayerHealth: " + health);
         if (health <= 0) Die();
     }
 
@@ -41,9 +42,6 @@ public class Player : MonoBehaviour
         }
         AttackEnemy(enemies[0], elementMatches);
     }
-
-    
-
 
     private void Die() { }
 
