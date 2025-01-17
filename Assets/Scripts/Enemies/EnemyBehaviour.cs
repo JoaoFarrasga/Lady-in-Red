@@ -1,12 +1,13 @@
-using Unity.VisualScripting;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     [Header("EnemyStats")]
-    private float health;
+    [SerializeField] private float health;
+    [SerializeField] private float maxHealth;
     private float basicDamageAttack;
-    private float HeavyDamageAttack;
+    private float heavyDamageAttack;
 
     [SerializeField] private EnemySO enemySO;
     private SpriteRenderer spriteRenderer;
@@ -15,9 +16,46 @@ public class EnemyBehaviour : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = enemySO.enemyAppearence;
+        maxHealth = enemySO.maxHealth;
+        health = maxHealth;
     }
-    public void SetEnemySO(EnemySO enemySO) 
+
+    public void SetEnemySO(EnemySO enemySO)
     {
         this.enemySO = enemySO;
     }
+
+    // Método para receber dano
+    public void TakeDamage(float _damage, OrbType element, int elementCount)
+    {
+        float damage = _damage * elementCount;
+
+        if (element == enemySO.elementalWeakType)
+        {
+            damage = damage * 2; // Dano dobrado contra fraquezas
+        }
+        else if (element == enemySO.elementalStrongType)
+        {
+            damage = -(damage / 2); // Dano reduzido contra resistências
+        }
+
+        health -= damage; // Reduz a vida do inimigo
+
+        if (health <= 0)
+        {
+            Die();
+        }
+
+        print("enemyHealth: " + health);
+        print("enemyName: " + enemySO.name);
+    }
+
+    private void Die()
+    {
+        // Notificar o GameManager sobre a morte do inimigo
+        GameManager.gameManager.OnEnemyDeath(this);
+        Destroy(gameObject); // Destrói o inimigo
+    }
+
+    public EnemySO GetEnemySO() { return enemySO; }
 }

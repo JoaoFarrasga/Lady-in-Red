@@ -1,23 +1,23 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    public int gameLevel = 1;
 
     private void Awake()
     {
         if (gameManager == null)
         {
             gameManager = this;
-            DontDestroyOnLoad(gameObject); // Don't destroy this object when loading new scenes
+            DontDestroyOnLoad(gameObject); // Não destrua este objeto ao carregar novas cenas
         }
         else
         {
-            // If an instance already exists, destroy this one
+            // Se uma instância já existir, destrua este objeto
             Destroy(gameObject);
         }
     }
@@ -33,31 +33,40 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            
             case GameState.InitialScreen:
                 break;
             case GameState.GameStart:
-                //Manage GameStart
                 break;
             case GameState.GameEnd:
-                //Manage Enemy Turn
                 break;
             case GameState.Pause:
                 break;
             default:
                 break;
-
         }
 
         OnGameStateChanged?.Invoke(newState);
     }
 
-    private void Update()
+    public void OnEnemyDeath(EnemyBehaviour enemy)
     {
+        Debug.Log($"Enemy defeated: {enemy.name}");
 
+        // Lógica adicional para lidar com a morte do inimigo, como verificar se a batalha terminou
+        CheckBattleEnd();
     }
 
+    private void CheckBattleEnd()
+    {
+        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>();
+        if (enemies.Length == 0)
+        {
+            Debug.Log("All enemies defeated!");
+            UpdateGameState(GameState.GameEnd);
+        }
+    }
 }
+
 
 //States of the game
 public enum GameState
