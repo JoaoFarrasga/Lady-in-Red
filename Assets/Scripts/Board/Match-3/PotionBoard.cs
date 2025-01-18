@@ -345,10 +345,10 @@ public class PotionBoard : MonoBehaviour
             foreach (Potion pot in _matchedResult.connectedPotions)
             {
                 List<Potion> extraConnectedPotions = new();
-                CheckDirection(pot, new Vector2Int(0,1), extraConnectedPotions);
+                CheckDirection(pot, new Vector2Int(0, 1), extraConnectedPotions);
                 CheckDirection(pot, new Vector2Int(0, -1), extraConnectedPotions);
 
-                if(extraConnectedPotions.Count >= 2)
+                if (extraConnectedPotions.Count >= 2)
                 {
                     extraConnectedPotions.AddRange(_matchedResult.connectedPotions);
 
@@ -373,7 +373,7 @@ public class PotionBoard : MonoBehaviour
             foreach (Potion pot in _matchedResult.connectedPotions)
             {
                 List<Potion> extraConnectedPotions = new();
-                CheckDirection(pot, new Vector2Int(1,0), extraConnectedPotions);
+                CheckDirection(pot, new Vector2Int(1, 0), extraConnectedPotions);
                 CheckDirection(pot, new Vector2Int(-1, 0), extraConnectedPotions);
 
                 if (extraConnectedPotions.Count >= 2)
@@ -414,7 +414,7 @@ public class PotionBoard : MonoBehaviour
         {
             selectedPotion = null;
         }
-        else if(selectedPotion != _potion) 
+        else if (selectedPotion != _potion)
         {
             SwapPosition(selectedPotion, _potion);
             selectedPotion = null;
@@ -456,7 +456,7 @@ public class PotionBoard : MonoBehaviour
 
     private void DoSwap(Potion _currentPotion, Potion _targetPotion)
     {
-        GameObject temp = potionBoard[_currentPotion.xIndex,_currentPotion.yIndex].potion;
+        GameObject temp = potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion;
 
         potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion = potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion;
         potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion = temp;
@@ -489,6 +489,8 @@ public class PotionBoard : MonoBehaviour
         {
             int _xIndex = potion.xIndex;
             int _yIndex = potion.yIndex;
+
+            potion.animator.SetTrigger("Destroyed");
 
             Destroy(potion.gameObject);
 
