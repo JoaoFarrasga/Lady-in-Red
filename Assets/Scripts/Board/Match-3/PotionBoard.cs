@@ -202,12 +202,9 @@ public class PotionBoard : MonoBehaviour
 
             if (_takeAction && isNewTurn && hasMatched)
             {
-                foreach (var item in matchCountsByColor)
-                {
-                    // Aqui voc� pode imprimir as estat�sticas dos matches, se necess�rio.
-                }
-                player.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
-                totalTurns++; // Incrementa os turnos
+                player.Attack(lastMatch, matchCountsByColor, battleControler, totalCombos);
+                totalTurns++;
+                totalCombos = 0;
                 matchCountsByColor.Clear();
                 if (totalTurns == battleControler.maxPlayerTurns)
                 {
@@ -215,31 +212,13 @@ public class PotionBoard : MonoBehaviour
                     battleControler.maxEnemyTurns = 1;
                     totalTurns = 0;
                 }
+                //PrintMatchStats();  // Imprime estat�sticas apenas uma vez ap�s processar todos os matches
             }
 
             if (CheckBoard(false))
             {
                 CheckBoard(true);
             }
-        }
-
-        if (_takeAction && isNewTurn && hasMatched)
-        {
-            print("LastMatch: " + lastMatch[0].potionType);
-            foreach (var item in matchCountsByColor)
-            {
-                Debug.Log($"{item.Key}: {item.Value} matches");
-            }
-            player.Attack(lastMatch, matchCountsByColor, battleControler);
-            totalTurns++; // Incrementa os turnos apenas no in�cio do processamento de uma nova jogada
-            matchCountsByColor.Clear();
-            if (totalTurns == battleControler.maxPlayerTurns)
-            {
-                battleControler.UpdateBattleState(BattleState.EnemyTurn);
-                battleControler.maxEnemyTurns = 1;
-                totalTurns = 0;
-            }
-            //PrintMatchStats();  // Imprime estat�sticas apenas uma vez ap�s processar todos os matches
         }
 
         return hasMatched;
