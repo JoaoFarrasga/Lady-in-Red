@@ -45,6 +45,7 @@ public class BattleControler : MonoBehaviour
                 SetUpBattle();
                 break;
             case BattleState.PlayerTurn:
+                //CheckNumEnemies();
                 // Manage Player Turn
                 break;
             case BattleState.EnemyTurn:
@@ -67,12 +68,12 @@ public class BattleControler : MonoBehaviour
 
     private void BattleEnd()
     {
-        List<EnemySO> enemies = battleGenerator.Battles()[GameManager.gameManager.gameLevel - 1];
-        if (enemies.Count == 0 && GameManager.gameManager.gameLevel != 10)
+        if (GameManager.gameManager.gameLevel != 10)
         {
             // Debug.Log("All enemies defeated!");
             GameManager.gameManager.gameLevel++;
             //UpdateGameState(GameState.GameEnd);
+            UpdateBattleState(BattleState.BattleInit);
         }
     }
 
@@ -115,6 +116,12 @@ public class BattleControler : MonoBehaviour
             enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject);
         }
         UpdateBattleState(BattleState.PlayerTurn);
+    }
+
+    public void CheckNumEnemies()
+    {
+        print("enemy count: " + levelEnemies.Count);
+        if (levelEnemies.Count == 0) UpdateBattleState(BattleState.BattleEnd);
     }
 
     public BattleState GetBattleState() { return battleState; }
