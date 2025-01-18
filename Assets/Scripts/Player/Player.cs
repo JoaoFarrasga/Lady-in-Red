@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
         damageAttack = 10f;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, BattleControler battleControler)
     {
         health -= damage;
-        if (health <= 0) Die();
+        //print("PlayerHealth: " + health);
+        if (health <= 0) Die(battleControler);
     }
 
     private void AttackEnemy(GameObject enemy, Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
@@ -42,7 +43,10 @@ public class Player : MonoBehaviour
         AttackEnemy(battleControler.GetLevelEnemies()[0], elementMatches, battleControler, combos);
     }
 
-    private void Die() { }
+    private void Die(BattleControler battleControler) 
+    {
+        battleControler.UpdateBattleState(BattleState.BattleEnd);
+    }
 
     public float GetHealth() { return health; }
 

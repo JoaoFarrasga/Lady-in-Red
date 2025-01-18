@@ -34,9 +34,9 @@ public class EnemyBehaviour : MonoBehaviour
         this.enemySO = enemySO;
     }
 
-    public void AttackPlayer(GameObject target)
+    public void AttackPlayer(GameObject target, BattleControler battleControler)
     {
-        target.GetComponent<Player>().TakeDamage(basicDamageAttack);
+        target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
     }
 
     // M�todo para receber dano
