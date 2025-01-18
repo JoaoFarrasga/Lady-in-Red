@@ -815,10 +815,9 @@ MonoBehaviour:
   spacingY: 0
   potionPrefabs:
   - {fileID: 4634129097429502340, guid: 8d4ea6d7a5e58d94484f75b171316b09, type: 3}
-  - {fileID: 5523113219613811079, guid: 24df5a89d8f93d84aa6eedafcf31adac, type: 3}
-  - {fileID: 1717615574536951511, guid: 4794b6d2f665bda4f9a4ea7b05318f4f, type: 3}
-  - {fileID: 80330732404357557, guid: 392a40b060680e048955efba4ea6ae7f, type: 3}
-  - {fileID: 6018914302175285541, guid: 273f0a5d4b9d26f4b913a4a8205bef2f, type: 3}
+  - {fileID: 355793390041107593, guid: 74319f2749fe6484aba799b5c7fad2c2, type: 3}
+  - {fileID: 1272471671633150874, guid: 1cb8d406319ed0640a83bc45ba9ae88e, type: 3}
+  - {fileID: 8979389445774865841, guid: 5c5be484d4a76d34dbc328147d6352fd, type: 3}
   potionBoardGameObject: {fileID: 1713796893}
   potionsToDestroy: []
   potionParent: {fileID: 252513919}

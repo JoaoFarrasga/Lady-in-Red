@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        print("PlayerHealth: " + health);
+        // print("PlayerHealth: " + health);
         if (health <= 0) Die();
     }
 
