@@ -35,9 +35,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.InitialScreen:
                 break;
-            case GameState.GameStart:
+            case GameState.InBattle:
                 break;
-            case GameState.GameEnd:
+            case GameState.ExitBattle:
                 break;
             case GameState.Pause:
                 break;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         if (enemies.Length == 0)
         {
             Debug.Log("All enemies defeated!");
-            UpdateGameState(GameState.GameEnd);
+            UpdateGameState(GameState.ExitBattle);
         }
     }
 }
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     InitialScreen,
-    GameStart,
-    GameEnd,
+    InBattle,
+    ExitBattle,
     Pause
 }

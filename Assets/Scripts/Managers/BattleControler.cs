@@ -53,7 +53,7 @@ public class BattleControler : MonoBehaviour
                 // Manage Enemy Turn
                 break;
             case BattleState.BattleEnd:
-                BattleEnd();
+                BattleEnd(player);
                 break;
             default:
                 break;
@@ -66,13 +66,17 @@ public class BattleControler : MonoBehaviour
         UpdateBattleState(BattleState.PlayerTurn);
     }
 
-    private void BattleEnd()
+    private void BattleEnd(Player player)
     {
-        if (GameManager.gameManager.gameLevel != 10)
+        if (player.GetHealth() < 0 || GameManager.gameManager.gameLevel >= 10)
+        {
+            GameManager.gameManager.UpdateGameState(GameState.InitialScreen);
+            return;
+        }
+        else if (GameManager.gameManager.gameLevel < 10)
         {
             Debug.Log("All enemies defeated!");
             GameManager.gameManager.gameLevel++;
-            //UpdateGameState(GameState.GameEnd);
             UpdateBattleState(BattleState.BattleInit);
         }
     }
@@ -113,7 +117,7 @@ public class BattleControler : MonoBehaviour
         print("EnemyAttacking");
         foreach (GameObject enemy in levelEnemies)
         {
-            enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject);
+            enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject, this);
         }
         UpdateBattleState(BattleState.PlayerTurn);
     }
