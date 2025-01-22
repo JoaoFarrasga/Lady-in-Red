@@ -1,38 +1,24 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
+
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.Audio;
+
 
 public class VolumeSettings : MonoBehaviour
 {
+    public Slider masterVol, musicVol, sfxVol;
+    public AudioMixer mainAudioMixer;
 
-    public Slider slider;
-    public float SliderValue;
-    public Image ImageMute;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ChangeMasterVolume()
     {
-        slider.value = PlayerPrefs.GetFloat("VolumeAudio", 0.5f);
-        AudioListener.volume = slider.value;
-        Mute();
-    }
-
-    public void ChangeSlider(float value)
+        mainAudioMixer.SetFloat("MasterVol", masterVol.value);
+    }public void ChangeMuscVolume()
     {
-        slider.value = value;
-        PlayerPrefs.SetFloat("VolumeAudio", SliderValue);
-        AudioListener.volume = slider.value;
-        Mute();
-    }
-    public void Mute()
+        mainAudioMixer.SetFloat("MusicVol", musicVol.value);
+    }public void ChangeSfxVolume()
     {
-        if (slider.value == 0)
-        {
-            ImageMute.enabled = true;
-        }
-        else
-        {
-            ImageMute.enabled= false;
-        }
+        mainAudioMixer.SetFloat("SfxVol", sfxVol.value);
     }
 }
