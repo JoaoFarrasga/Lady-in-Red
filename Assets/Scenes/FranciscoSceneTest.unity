@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4538978905771880927, guid: 68883a803d54f26419672856403ce155, type: 3}
+  focusedEnemy: {fileID: 0}
   levelEnemies: []
   player: {fileID: 2044331476}
   referencePoint: {fileID: 994066206}

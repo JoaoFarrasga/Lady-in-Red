@@ -54,6 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         health -= damage; // Reduz a vida do inimigo
+        print("takedamage");
         enemyHealthText.text = health.ToString();
 
         if (health <= 0)
@@ -67,7 +68,8 @@ public class EnemyBehaviour : MonoBehaviour
         // Notificar o GameManager sobre a morte do inimigo
         //GameManager.gameManager.OnEnemyDeath(this);
         battleControler.GetLevelEnemies().Remove(this.gameObject);
-        if (battleControler.GetLevelEnemies().Count == 0) battleControler.CheckNumEnemies();
+        battleControler.CheckNumEnemies();
+        //battleControler.focusedEnemy = battleControler.GetLevelEnemies()[0];
         Destroy(gameObject); // Destrói o inimigo
     }
 

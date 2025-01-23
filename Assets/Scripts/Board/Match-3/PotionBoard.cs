@@ -70,6 +70,7 @@ public class PotionBoard : MonoBehaviour
         if (!rayHit.collider) return;
 
         var potion = rayHit.collider.gameObject.GetComponent<Potion>();
+        print("potion: " + potion);
         if (potion != null && battleControler.GetBattleState() == BattleState.PlayerTurn)
         {
             SelectPotion(potion);
@@ -219,7 +220,7 @@ public class PotionBoard : MonoBehaviour
                 //Debug.Log($"{item.Key}: {item.Value} matches");
                 //matchCountsByColor[item.Key] *= totalCombos;
             }
-            player.Attack(lastMatch, matchCountsByColor, battleControler, totalCombos);
+            player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
             totalTurns++; // Incrementa os turnos apenas no início do processamento de uma nova jogada
             totalCombos = 0;
             matchCountsByColor.Clear();

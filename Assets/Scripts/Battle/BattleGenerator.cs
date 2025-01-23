@@ -32,8 +32,7 @@ public class BattleGenerator : MonoBehaviour
             int numOfEnemies = NumberOfEnemysInLevel();
             List<EnemySO> enemies = new();
             for (int j = 0; j < numOfEnemies; j++)
-            {
-                
+            { 
                 enemies.Add(listOfEnemiesSO[Random.Range(0, listOfEnemiesSO.Count)]); 
             }
             //print(enemies.Count);

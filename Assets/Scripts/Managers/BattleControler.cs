@@ -1,14 +1,20 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BattleControler : MonoBehaviour
 {
+    [Header("InputActions")]
+    private PlayerInputActions inputActions;
+    private Camera mainCamera;
+
     [Header("BattleState")]
     private BattleState battleState;
 
     [Header("EnemyInfo")]
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] public GameObject focusedEnemy { get; set; }
     [SerializeField] List<GameObject> levelEnemies;
     public int maxEnemyTurns { get; set; } = 1;
 
@@ -23,10 +29,40 @@ public class BattleControler : MonoBehaviour
     [Header("BattleGeneratorInfo")]
     [SerializeField] private BattleGenerator battleGenerator;
 
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+        inputActions = new PlayerInputActions();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
+        inputActions.Enable();
+        inputActions.Gameplay.Click.performed += OnClickEnemyPerformed;
         SetUpBattle();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Gameplay.Click.performed -= OnClickEnemyPerformed;
+        inputActions.Disable();
+    }
+
+    private void OnClickEnemyPerformed(InputAction.CallbackContext context)
+    {
+        //if (isProcessingMove) return;
+
+        var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+
+        if (!rayHit.collider) return;
+
+        var enemy = rayHit.collider.gameObject.GetComponent<EnemyBehaviour>();
+        //print("focusedEnemy: " +  enemy);
+        if (enemy != null)
+        {
+            focusedEnemy = enemy.gameObject;
+        }
     }
 
     // Update is called once per frame
@@ -110,6 +146,8 @@ public class BattleControler : MonoBehaviour
                 offsetMultiplier += 1;
             }
         }
+
+        focusedEnemy = levelEnemies[0];
     }
 
     private void EnemyTurnAttack()
@@ -126,15 +164,14 @@ public class BattleControler : MonoBehaviour
     {
         print("enemy count: " + levelEnemies.Count);
         if (levelEnemies.Count == 0) UpdateBattleState(BattleState.BattleEnd);
+        else focusedEnemy = levelEnemies[0];
     }
 
     public BattleState GetBattleState() { return battleState; }
 
     public List<GameObject> GetLevelEnemies() { return levelEnemies; }
 
-
-    //public int GetMaxPlayerTurn() {  return maxPlayerTurns; }
-    //public int GetMaxEnemyTurn() {  return maxEnemyTurns; }
+    //public GameObject GetFocusedEnemy() { return focusedEnemy; }
 }
 
 
