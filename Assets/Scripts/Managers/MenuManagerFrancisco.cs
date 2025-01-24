@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class MenuManagerFrancisco : MonoBehaviour
 {
-    [Header("BattleController")]
+    [Header("Battle")]
     [SerializeField] BattleControler battleControler;
+    [SerializeField] BattleGenerator battleGenerator;
 
     [Header("Canvas")]
     [SerializeField] private Button startBtn;
@@ -23,6 +24,7 @@ public class MenuManagerFrancisco : MonoBehaviour
 
     private void StartGame()
     {
+        battleGenerator.CreateBattles();
         battleControler.UpdateBattleState(BattleState.BattleInit);
         currentGOActive.SetActive(false);
         hud.SetActive(true);

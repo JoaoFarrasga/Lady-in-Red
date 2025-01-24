@@ -101,7 +101,7 @@ public class BattleControler : MonoBehaviour
 
     private void SetUpBattle()
     {
-        battleGenerator.CreateBattles();
+        //if(GameManager.gameManager.gameLevel == 1) battleGenerator.CreateBattles();
         PlaceEnemies(GameManager.gameManager.gameLevel);
         UpdateBattleState(BattleState.PlayerTurn);
     }
@@ -137,11 +137,12 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
-            if(level > 1)
-            {
-                go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
-                go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
-            }
+            //if (level > 1)
+            //{
+            //    print("increase everythinhg");
+            //    go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
+            //    go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
+            //}
 
             levelEnemies.Add(go);
 

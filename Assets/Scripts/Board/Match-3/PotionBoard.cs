@@ -214,8 +214,9 @@ public class PotionBoard : MonoBehaviour
 
         if (_takeAction && isNewTurn && hasMatched)
         {
+            print("numOfCicles");
             print("LastMatch: " + lastMatch[0].potionType);
-            player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
+            if (battleControler.GetLevelEnemies().Count != 0) player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
             totalTurns++; // Incrementa os turnos apenas no início do processamento de uma nova jogada
             totalCombos = 0;
             matchCountsByColor.Clear();

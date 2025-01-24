@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 1
-  gameLevel: 10
+  gameLevel: 1
   menuManager: {fileID: 0}
 --- !u!4 &1316139761
 Transform:
@@ -943,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleControler: {fileID: 288581800}
+  battleGenerator: {fileID: 994066207}
   startBtn: {fileID: 1446347228}
   optionsBtn: {fileID: 1799794621}
   exitBtn: {fileID: 1361775819}

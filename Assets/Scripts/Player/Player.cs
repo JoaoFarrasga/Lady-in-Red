@@ -24,11 +24,12 @@ public class Player : MonoBehaviour
 
     public void AttackEnemy(Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
     {
-        foreach(var item in elementMatches)
-        {
-            battleControler.focusedEnemy.GetComponent<EnemyBehaviour>().TakeDamage(damageAttack * combos, item.Key, item.Value, battleControler);
+        //foreach(var item in elementMatches)
+        //{
+            battleControler.focusedEnemy?.GetComponent<EnemyBehaviour>().TakeDamage(damageAttack * combos, elementMatches, battleControler);
             print("focusedEnemy: " + battleControler.focusedEnemy.GetComponent<EnemyBehaviour>().GetEnemySO().enemyName);
-        }
+        //}
+
     }
 
     private void Die(BattleControler battleControler) 

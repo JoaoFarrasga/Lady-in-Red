@@ -3,7 +3,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using TMPro.EditorUtilities;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -40,16 +42,21 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // Método para receber dano
-    public void TakeDamage(float _damage, OrbType element, int elementCount, BattleControler battleControler)
+    public void TakeDamage(float _damage, Dictionary<OrbType, int> elementMatches,  BattleControler battleControler)
     {
-        float damage = _damage * elementCount;
 
-        if (element == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
+        foreach (var item in elementMatches)
+        {
+            float damage = _damage * item.Value;
 
-        else if (element == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resistências
+            if (item.Key == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
 
-        health -= damage; // Reduz a vida do inimigo
-        print("takedamage");
+            else if (item.Key == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resistências
+
+            health -= damage; // Reduz a vida do inimigo
+            print("takedamage");
+        }
+
         enemyHealthText.text = health.ToString();
 
         if (health <= 0)
@@ -70,7 +77,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     public EnemySO GetEnemySO() { return enemySO; }
 
-    public void SetHealthIncrease(float healthPercentage) { health += maxHealth * healthPercentage ; }
+    public void SetHealthIncrease(float healthPercentage) 
+    {
+        print("health increase");
+        health += maxHealth * healthPercentage;
+        enemyHealthText.text = health.ToString();
+    }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) { basicDamageAttack += basicDamageAttack * damagePercentage; }
 }
