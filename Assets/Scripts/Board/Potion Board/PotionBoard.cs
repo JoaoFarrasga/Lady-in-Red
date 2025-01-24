@@ -14,34 +14,37 @@ public class PotionBoard : MonoBehaviour
     [Header("Battle Controller")]
     [SerializeField] private BattleControler battleControler;
     [SerializeField] private Player player;
-    public int width = 6;
-    public int height = 8;
-    public float spacingX;
-    public float spacingY;
-    public GameObject[] potionPrefabs;
+
+    [Header("Player Input Actions")]
+    [SerializeField] private PotionClickHandler potionClickHandler;
+
+    [Header("Potion Board")]
+    [SerializeField] public int width = 6;
+    [SerializeField] public int height = 8;
+    [SerializeField] public GameObject potionParent;
+    [SerializeField] public static PotionBoard Instance;
+    
+    [HideInInspector] public bool firstTurn = true;
+
+    [Header("Potion Initializer")]
+    [SerializeField] private PotionBoardInitializer potionBoardInitializer;
+
+    [Header("Something")]
     private Node[,] potionBoard;
     public GameObject potionBoardGameObject;
     public List<GameObject> potionsToDestroy = new();
-    public GameObject potionParent;
     [SerializeField] private Potion selectedPotion;
-    [SerializeField] private bool isProcessingMove;
-    public ArrayLayout arrayLayout;
-    public static PotionBoard Instance;
-    private Camera mainCamera;
-    private PlayerInputActions inputActions;
+    [SerializeField] public bool isProcessingMove;
     public Dictionary<OrbType, int> matchCountsByColor = new Dictionary<OrbType, int>();
     public Dictionary<MatchType, int> matchCountsByType = new Dictionary<MatchType, int>();
     public int totalCombos = 0;
     public int totalTurns = 0;
 
-    public bool firstTurn = true;
 
 
     private void Awake()
     {
         Instance = this;
-        mainCamera = Camera.main;
-        inputActions = new PlayerInputActions();
     }
 
     void Start()
@@ -49,93 +52,16 @@ public class PotionBoard : MonoBehaviour
         InitializeBoard();
     }
 
-    #region Click
-
-    private void OnEnable()
-    {
-        inputActions.Enable();
-        inputActions.Gameplay.Click.performed += OnClickPerformed;
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Gameplay.Click.performed -= OnClickPerformed;
-        inputActions.Disable();
-    }
-
-    private void OnClickPerformed(InputAction.CallbackContext context)
-    {
-        if (isProcessingMove) return;
-
-        if (firstTurn && GameManager.gameManager.State == GameState.InBattle) { firstTurn = false; }
-
-        var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-
-        if (!rayHit.collider) return;
-
-        var potion = rayHit.collider.gameObject.GetComponent<Potion>();
-
-        if (potion != null && battleControler.GetBattleState() == BattleState.PlayerTurn)
-        {
-            SelectPotion(potion);
-        }
-    }
-
-    #endregion
-
-    #region Initialize Board
-
     void InitializeBoard()
     {
-        DestroyPotions();
-        potionBoard = new Node[width, height];
-
-        spacingX = (float)(width - 1) / 2;
-        spacingY = (float)((height - 1) / 2) + 1;
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                Vector2 position = new Vector2(x - spacingX, y - spacingY);
-
-                if (arrayLayout.rows[y].row[x])
-                {
-                    potionBoard[x, y] = new Node(false, null); // Ensure Node is initialized
-                }
-                else
-                {
-                    int randomIndex = Random.Range(0, potionPrefabs.Length);
-                    GameObject potion = Instantiate(potionPrefabs[randomIndex], position, Quaternion.identity);
-                    potion.transform.SetParent(potionParent.transform);
-
-                    potion.GetComponent<Potion>().SetIndicies(x, y);
-
-                    potionBoard[x, y] = new Node(true, potion); // Properly assign the potion reference
-                    potionsToDestroy.Add(potion);
-                }
-            }
-        }
+        potionBoardInitializer.DestroyPotions(potionsToDestroy);
+        potionBoard = potionBoardInitializer.InitializeBoard(ref potionsToDestroy);
 
         if (potionBoard != null)
         {
             CheckBoard(true, firstTurn);
         }
     }
-
-    private void DestroyPotions()
-    {
-        if (potionsToDestroy != null)
-        {
-            foreach (GameObject potion in potionsToDestroy)
-            {
-                Destroy(potion);
-            }
-            potionsToDestroy.Clear();
-        }
-    }
-
-    #endregion
 
     #region Check Matches
 
@@ -520,7 +446,7 @@ public class PotionBoard : MonoBehaviour
         {
             Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
 
-            Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
+            Vector3 targetPos = new Vector3(x - potionBoardInitializer.spacingX, y - potionBoardInitializer.spacingY, potionAbove.transform.position.z);
             //Debug.Log("I�ve found a potion when reflling the board and it was in the location: [" + x + "," + (y + yOffset) + "] we have moved it to the location:[" + x + "," + y + "]");
             potionAbove.MoveToTarget(targetPos);
             potionAbove.SetIndicies(x, y);
@@ -543,8 +469,8 @@ public class PotionBoard : MonoBehaviour
         int locationToMoveTo = 8 - index;
         //Debug.Log("About to spawn a potion, ideally i�d like to put it in the index of " + index);
         //get a random potion
-        int randomIndex = Random.Range(0, potionPrefabs.Length);
-        GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
+        int randomIndex = Random.Range(0, potionBoardInitializer.potionPrefabs.Length);
+        GameObject newPotion = Instantiate(potionBoardInitializer.potionPrefabs[randomIndex], new Vector2(x - potionBoardInitializer.spacingX, height - potionBoardInitializer.spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
         //set indicies
         newPotion.GetComponent<Potion>().SetIndicies(x, index);
