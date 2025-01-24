@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FranciscoSceneTest.unity
-    guid: d592a746f1ffc0d4ba29a51cf91bba3e
+    path: Assets/Scenes/FranciscoSceneUI.unity
+    guid: afbc3a9a4e93f1c4bb4db621b41b5653
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
