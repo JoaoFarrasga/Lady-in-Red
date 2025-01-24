@@ -90,7 +90,7 @@ public class PotionBoard : MonoBehaviour
         DestroyPotions();
         potionBoard = new Node[width, height];
 
-        spacingX = (float)(width - 1) / 2;
+        spacingX = (float)(((width - 1) / 2) - 2.5);
         spacingY = (float)((height - 1) / 2) + 1;
 
         for (int y = 0; y < height; y++)
@@ -200,7 +200,7 @@ public class PotionBoard : MonoBehaviour
                 StartCoroutine(WaitAndCheckMatches());
             }
             
-            if (_takeAction && !firstTurn && hasMatched && isNewTurn)
+            if (_takeAction && !firstTurn && isNewTurn && hasMatched)
             {
                 player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 totalTurns++; // Incrementa os turnos
@@ -333,68 +333,6 @@ public class PotionBoard : MonoBehaviour
                 break;
             }
         }
-    }
-
-    private MatchResult SuperMatch(MatchResult _matchedResult)
-    {
-        if (_matchedResult.direction == MatchDirection.Horizontal || _matchedResult.direction == MatchDirection.LongHorizontal)
-        {
-            foreach (Potion pot in _matchedResult.connectedPotions)
-            {
-                List<Potion> extraConnectedPotions = new();
-                CheckDirection(pot, new Vector2Int(0, 1), extraConnectedPotions);
-                CheckDirection(pot, new Vector2Int(0, -1), extraConnectedPotions);
-
-                if (extraConnectedPotions.Count >= 2)
-                {
-                    extraConnectedPotions.AddRange(_matchedResult.connectedPotions);
-
-                    return new MatchResult
-                    {
-                        connectedPotions = extraConnectedPotions,
-                        direction = MatchDirection.Super
-                    };
-                }
-
-
-            }
-            return new MatchResult
-            {
-                connectedPotions = _matchedResult.connectedPotions,
-                direction = _matchedResult.direction
-
-            };
-        }
-        else if (_matchedResult.direction == MatchDirection.Vertical || _matchedResult.direction == MatchDirection.LongVertical)
-        {
-            foreach (Potion pot in _matchedResult.connectedPotions)
-            {
-                List<Potion> extraConnectedPotions = new();
-                CheckDirection(pot, new Vector2Int(1, 0), extraConnectedPotions);
-                CheckDirection(pot, new Vector2Int(-1, 0), extraConnectedPotions);
-
-                if (extraConnectedPotions.Count >= 2)
-                {
-                    Debug.Log("I have a super Vertical match");
-                    extraConnectedPotions.AddRange(_matchedResult.connectedPotions);
-
-                    return new MatchResult
-                    {
-                        connectedPotions = extraConnectedPotions,
-                        direction = MatchDirection.Super
-                    };
-                }
-
-
-            }
-            return new MatchResult
-            {
-                connectedPotions = _matchedResult.connectedPotions,
-                direction = _matchedResult.direction
-
-            };
-        }
-        return null;
     }
 
     #endregion
@@ -558,7 +496,7 @@ public class PotionBoard : MonoBehaviour
     private int FindIndexOflowestNull(int x)
     {
         int lowestNull = 99;
-        for (int y = 7; y >= 0; y--)
+        for (int y = height - 1; y >= 0; y--)
         {
             if (potionBoard[x, y].potion == null)
             {
