@@ -202,7 +202,7 @@ public class PotionBoard : MonoBehaviour
             
             if (_takeAction && !firstTurn && isNewTurn && hasMatched)
             {
-                player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
+                if (battleControler.GetLevelEnemies().Count != 0) player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 totalTurns++; // Incrementa os turnos
                 totalCombos = 0;
                 matchCountsByColor.Clear();

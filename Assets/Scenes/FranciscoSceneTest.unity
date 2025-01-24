@@ -943,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleControler: {fileID: 288581800}
+  battleGenerator: {fileID: 994066207}
   startBtn: {fileID: 1446347228}
   optionsBtn: {fileID: 1799794621}
   exitBtn: {fileID: 1361775819}
