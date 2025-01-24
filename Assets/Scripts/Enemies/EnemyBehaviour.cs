@@ -1,8 +1,4 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
-using System.Collections.Generic;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
