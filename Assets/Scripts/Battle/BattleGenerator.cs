@@ -19,38 +19,25 @@ public class BattleGenerator : MonoBehaviour
     [Header("BattleController")]
     [SerializeField] private BattleControler battleControler;
 
-    private void Start()
-    {
-        //print("CreatingBattles");
-        CreateBattles();
-    }
-
     public void CreateBattles()
     {
+        battles.Clear();
         for (int i = 0; i < numOfLevels; i++) 
         {
             int numOfEnemies = NumberOfEnemysInLevel();
             List<EnemySO> enemies = new();
             for (int j = 0; j < numOfEnemies; j++)
-            {
-                
+            { 
                 enemies.Add(listOfEnemiesSO[Random.Range(0, listOfEnemiesSO.Count)]); 
             }
-            //print(enemies.Count);
             battles.Add(enemies);
-            //print("BattleCount: " + battles[i].Count);
-            //enemies.Clear();
         }
-        //print("Num of Battles: " + battles.Count);
-        //print("Num of enemies in Level1: " + battles[0].Count);
-        battleControler.UpdateBattleState(BattleState.BattleInit); 
     }
 
     private int NumberOfEnemysInLevel()
     {
         //StartBattleLogic
         int currentBattleEnemyCount = (int)Random.Range(1.0f, 3.9f);
-        //print(currentBattleEnemyCount);
         return currentBattleEnemyCount;
     }
 
