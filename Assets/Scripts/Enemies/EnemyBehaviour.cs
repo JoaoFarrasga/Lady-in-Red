@@ -44,16 +44,12 @@ public class EnemyBehaviour : MonoBehaviour
     {
         float damage = _damage * elementCount;
 
-        if (element == enemySO.elementalWeakType)
-        {
-            damage = damage * 2; // Dano dobrado contra fraquezas
-        }
-        else if (element == enemySO.elementalStrongType)
-        {
-            damage = -(damage / 2); // Dano reduzido contra resist�ncias
-        }
+        if (element == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
+
+        else if (element == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resist�ncias
 
         health -= damage; // Reduz a vida do inimigo
+        print("takedamage");
         enemyHealthText.text = health.ToString();
 
         if (health <= 0)
@@ -67,9 +63,14 @@ public class EnemyBehaviour : MonoBehaviour
         // Notificar o GameManager sobre a morte do inimigo
         //GameManager.gameManager.OnEnemyDeath(this);
         battleControler.GetLevelEnemies().Remove(this.gameObject);
-        if (battleControler.GetLevelEnemies().Count == 0) battleControler.CheckNumEnemies();
+        battleControler.CheckNumEnemies();
+        //battleControler.focusedEnemy = battleControler.GetLevelEnemies()[0];
         Destroy(gameObject); // Destr�i o inimigo
     }
 
     public EnemySO GetEnemySO() { return enemySO; }
+
+    public void SetHealthIncrease(float healthPercentage) { health += maxHealth * healthPercentage ; }
+
+    public void SetBasicDamageAttackIncrease(float damagePercentage) { basicDamageAttack += basicDamageAttack * damagePercentage; }
 }

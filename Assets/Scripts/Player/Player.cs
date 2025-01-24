@@ -19,28 +19,16 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage, BattleControler battleControler)
     {
         health -= damage;
-        //print("PlayerHealth: " + health);
         if (health <= 0) Die(battleControler);
     }
 
-    private void AttackEnemy(GameObject enemy, Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
+    public void AttackEnemy(Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
     {
         foreach(var item in elementMatches)
         {
-            enemy.GetComponent<EnemyBehaviour>().TakeDamage(damageAttack * combos, item.Key, item.Value, battleControler);
+            battleControler.focusedEnemy.GetComponent<EnemyBehaviour>().TakeDamage(damageAttack * combos, item.Key, item.Value, battleControler);
+            print("focusedEnemy: " + battleControler.focusedEnemy.GetComponent<EnemyBehaviour>().GetEnemySO().enemyName);
         }
-    }
-
-    public void Attack(List<Potion> potion, Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
-    {
-        foreach (GameObject go in battleControler.GetLevelEnemies()) {
-            if (go.GetComponent<EnemyBehaviour>().GetEnemySO().elementalType == potion[0].potionType)
-            {
-                AttackEnemy(go, elementMatches, battleControler, combos);
-                return;
-            }
-        }
-        AttackEnemy(battleControler.GetLevelEnemies()[0], elementMatches, battleControler, combos);
     }
 
     private void Die(BattleControler battleControler) 

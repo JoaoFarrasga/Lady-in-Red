@@ -16,10 +16,17 @@ public class Potion : MonoBehaviour
     public bool isMoving;
     public float moveDuration = 0.2f;
 
+    public Animator animator;
+
     public Potion(int _x, int _y) 
     {
         xIndex = _x;
         yIndex = _y;
+    }
+
+    private void Awake()
+    {
+       animator = GetComponent<Animator>();
     }
 
     public void SetIndicies(int _x, int _y) 

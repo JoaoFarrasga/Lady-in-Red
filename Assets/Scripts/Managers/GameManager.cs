@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
     public int gameLevel = 1;
 
+    [Header("UIManager")]
+    [SerializeField] MenuManagerFrancisco menuManager;
+
     private void Awake()
     {
         if (gameManager == null)
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        menuManager = GetComponent<MenuManagerFrancisco>();
         State = GameState.InitialScreen;
     }
 
@@ -34,10 +38,13 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.InitialScreen:
+                gameLevel = 1;
                 break;
             case GameState.InBattle:
                 break;
             case GameState.ExitBattle:
+                menuManager.GameEnd();
+                UpdateGameState(GameState.InitialScreen);
                 break;
             case GameState.Pause:
                 break;
