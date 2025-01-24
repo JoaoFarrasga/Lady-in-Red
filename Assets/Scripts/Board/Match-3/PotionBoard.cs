@@ -34,6 +34,8 @@ public class PotionBoard : MonoBehaviour
     public int totalCombos = 0;
     public int totalTurns = 0;
 
+    private bool firstTurn = true;
+
 
     private void Awake()
     {
@@ -64,6 +66,8 @@ public class PotionBoard : MonoBehaviour
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
         if (isProcessingMove) return;
+
+        if (firstTurn) { firstTurn = false; }
 
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
@@ -114,10 +118,7 @@ public class PotionBoard : MonoBehaviour
 
         if (potionBoard != null)
         {
-            if (CheckBoard(false))
-            {
-                InitializeBoard();
-            }
+            CheckBoard(true, firstTurn, false);
         }
     }
 
@@ -137,7 +138,7 @@ public class PotionBoard : MonoBehaviour
 
     #region Check Matches
 
-    public bool CheckBoard(bool _takeAction, bool isNewTurn = false)
+    public bool CheckBoard(bool _takeAction, bool firstTurn,  bool isNewTurn = false)
     {
         bool hasMatched = false;
         List<List<Potion>> allMatches = new List<List<Potion>>();
@@ -191,7 +192,7 @@ public class PotionBoard : MonoBehaviour
             if (allMatches.Count > 0)
             {
                 List<Potion> firstMatchGroup = allMatches[0];
-                ProcessMatches(firstMatchGroup);
+                ProcessMatches(firstMatchGroup, firstTurn);
                 lastMatch = firstMatchGroup;
 
                 RemoveAndRefill(firstMatchGroup);
@@ -200,13 +201,21 @@ public class PotionBoard : MonoBehaviour
                 StartCoroutine(WaitAndCheckMatches());
             }
 
-            if (_takeAction && isNewTurn && hasMatched)
+            if (isNewTurn)
             {
+                Debug.Log("1");
+            }
+
+            if (_takeAction && !firstTurn && isNewTurn && hasMatched)
+            {
+                Debug.Log("2");
+
                 foreach (var item in matchCountsByColor)
                 {
                     // Aqui você pode imprimir as estatísticas dos matches, se necessário.
                 }
                 player.Attack(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
+                totalCombos = 0;
                 totalTurns++; // Incrementa os turnos
                 matchCountsByColor.Clear();
                 if (totalTurns == battleControler.maxPlayerTurns)
@@ -226,15 +235,15 @@ public class PotionBoard : MonoBehaviour
         // Aguarda que todas as poções concluam seus movimentos (cascade, spawn, etc.)
         yield return StartCoroutine(WaitForAllPotionsToSettle());
         // Agora, depois que todas as poções estão fixas, checa os matches novamente.
-        if (CheckBoard(false))
+        if (CheckBoard(false, firstTurn))
         {
-            CheckBoard(true);
+            CheckBoard(true, firstTurn);
         }
     }
 
-    private void ProcessMatches(List<Potion> matchedPotions)
+    private void ProcessMatches(List<Potion> matchedPotions, bool firstTurn = false)
     {
-        if (matchedPotions.Count == 0) return;
+        if (matchedPotions.Count == 0 || firstTurn) return;
 
         // Determina se é um SuperMatch ou um Match Normal e incrementa os contadores apropriadamente
         if (matchedPotions.Count == 4)
