@@ -139,7 +139,7 @@ public class PotionBoard : MonoBehaviour
 
     #region Check Matches
 
-    public bool CheckBoard(bool _takeAction, bool firstTurn)
+    public bool CheckBoard(bool _takeAction, bool firstTurn, bool isNewTurn = false)
     {
         bool hasMatched = false;
         List<List<Potion>> allMatches = new List<List<Potion>>();
@@ -200,7 +200,7 @@ public class PotionBoard : MonoBehaviour
                 StartCoroutine(WaitAndCheckMatches());
             }
             
-            if (_takeAction && !firstTurn && hasMatched)
+            if (_takeAction && !firstTurn && hasMatched && isNewTurn)
             {
                 player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 totalTurns++; // Incrementa os turnos
@@ -438,7 +438,7 @@ public class PotionBoard : MonoBehaviour
         // Aguarda que todas as po��es terminem suas anima��es (movimentos, cascade, spawn, etc.)
         yield return StartCoroutine(WaitForAllPotionsToSettle());
 
-        bool hasMatch = CheckBoard(true, true); // Passa true para isNewTurn
+        bool hasMatch = CheckBoard(true, false, true); // Passa true para isNewTurn
 
         if (!hasMatch)
         {
