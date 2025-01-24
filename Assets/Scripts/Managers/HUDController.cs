@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private BattleControler battleControler;
     [SerializeField] private Player player; 
-    [SerializeField] private TMP_Text playerLife;
+    [SerializeField] private Slider playerLife;
 
     void Update()
     {
@@ -17,7 +18,7 @@ public class HUDController : MonoBehaviour
         {
             turnCounter.text = "Turnos: " + potionBoard.totalTurns;
             comboCounter.text = "Combos: " + potionBoard.totalCombos;
-            playerLife.text = "Life: " + player.GetHealth();
+            playerLife.value= player.GetHealth();
         }
     }
 }
