@@ -154,6 +154,7 @@ MonoBehaviour:
   isMatched: 0
   isMoving: 0
   moveDuration: 0.3
+  animator: {fileID: 0}
 --- !u!95 &6077983027212534204
 Animator:
   serializedVersion: 7

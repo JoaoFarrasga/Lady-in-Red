@@ -108,6 +108,7 @@ MonoBehaviour:
   isMatched: 0
   isMoving: 0
   moveDuration: 0.3
+  animator: {fileID: 0}
 --- !u!61 &6429124814809022227
 BoxCollider2D:
   m_ObjectHideFlags: 0
