@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d834525dd66f75543a612c61e02a3b72
+guid: 9ab9825b69f52f841ada25a4ab248509
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,177 +110,177 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Agua_0
+      name: Roxo_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 769
-        width: 606
-        height: 625
+        y: 703
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a5c406e055b11642ba1ece8ea65dbdb
-      internalID: 622068715
+      spriteID: 4ad999d7d78e28e49a1e9736f4b89794
+      internalID: 1947402051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_1
+      name: Roxo_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 769
-        width: 606
-        height: 625
+        x: 605
+        y: 703
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3da57d603ac78784a88ae697fe368bf1
-      internalID: -1756641191
+      spriteID: 376c62c4beb80f8479995e57dc6b5eb4
+      internalID: -1391317486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_2
+      name: Roxo_2
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 769
-        width: 606
-        height: 625
+        x: 1210
+        y: 703
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9778f607c9427489764c47a260c41c
-      internalID: 159390560
+      spriteID: e19e4b976b3b36844bf25da1930ade87
+      internalID: 1232396493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_3
+      name: Roxo_3
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 769
-        width: 606
-        height: 625
+        x: 1815
+        y: 703
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afea9c5dee9fa04a9e3a05406f0cd1c
-      internalID: 1808807538
+      spriteID: 46df54dbae2e6844ea9e65e334b3aeea
+      internalID: 1912823531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_4
+      name: Roxo_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
-        width: 606
-        height: 625
+        y: 87
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056cbe1f57a152b4bb529301c1b95ef5
-      internalID: -1220852146
+      spriteID: 8a1082ec4efbdf74c9c86dd887a280c8
+      internalID: -529747432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_5
+      name: Roxo_5
       rect:
         serializedVersion: 2
-        x: 606
-        y: 144
-        width: 606
-        height: 625
+        x: 605
+        y: 87
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 847d3f1ad4e1c784d87f4fddd47b3086
-      internalID: -1506697743
+      spriteID: 2b9a88135e9a3a44c8f67242f315d8f5
+      internalID: 1277858012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_6
+      name: Roxo_6
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 144
-        width: 606
-        height: 625
+        x: 1210
+        y: 87
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f25848507ed8bb4db5c15ad18b377d0
-      internalID: 1709545828
+      spriteID: 7fbd4b5ae38911147b8f850bb532a5d4
+      internalID: 1809179797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_7
+      name: Roxo_7
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 144
-        width: 606
-        height: 625
+        x: 1815
+        y: 87
+        width: 605
+        height: 616
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 541e0d7eb37915546b9a3492a102fc63
-      internalID: -377652626
+      spriteID: 884f36af7a73a9744abe1ef81b552397
+      internalID: 1908370890
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5a45829a649bcce4db5f594ebf630cc4
+    spriteID: c89ec1f33d3fed342a29350a467ec358
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Agua_0: 622068715
-      Agua_1: -1756641191
-      Agua_2: 159390560
-      Agua_3: 1808807538
-      Agua_4: -1220852146
-      Agua_5: -1506697743
-      Agua_6: 1709545828
-      Agua_7: -377652626
+      Roxo_0: 1947402051
+      Roxo_1: -1391317486
+      Roxo_2: 1232396493
+      Roxo_3: 1912823531
+      Roxo_4: -529747432
+      Roxo_5: 1277858012
+      Roxo_6: 1809179797
+      Roxo_7: 1908370890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

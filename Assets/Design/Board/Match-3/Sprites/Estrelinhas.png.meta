@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d834525dd66f75543a612c61e02a3b72
+guid: 97732af6caa9dae4495d6fb8a59e2c72
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,177 +110,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Agua_0
+      name: Estrelinhas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 769
+        y: 587
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a5c406e055b11642ba1ece8ea65dbdb
-      internalID: 622068715
+      spriteID: e3670f86550775347813363cd8416881
+      internalID: -1325485283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_1
+      name: Estrelinhas_1
       rect:
         serializedVersion: 2
         x: 606
-        y: 769
+        y: 587
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3da57d603ac78784a88ae697fe368bf1
-      internalID: -1756641191
+      spriteID: 90d7e0114c257c749995981b2969bd8b
+      internalID: 257019782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_2
+      name: Estrelinhas_2
       rect:
         serializedVersion: 2
         x: 1212
-        y: 769
+        y: 587
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9778f607c9427489764c47a260c41c
-      internalID: 159390560
+      spriteID: c03a34c1f9cd7154f9204b3f6796aa8f
+      internalID: 1470994606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_3
+      name: Estrelinhas_3
       rect:
         serializedVersion: 2
         x: 1818
-        y: 769
+        y: 587
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afea9c5dee9fa04a9e3a05406f0cd1c
-      internalID: 1808807538
+      spriteID: 25a93610aad196c42abd3b04978c88c5
+      internalID: -249228861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_4
+      name: Estrelinhas_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
+        y: 0
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056cbe1f57a152b4bb529301c1b95ef5
-      internalID: -1220852146
+      spriteID: 70e41f144ec3a6947829a3227b1902e2
+      internalID: 1233277459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_5
+      name: Estrelinhas_5
       rect:
         serializedVersion: 2
         x: 606
-        y: 144
+        y: 0
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 847d3f1ad4e1c784d87f4fddd47b3086
-      internalID: -1506697743
+      spriteID: b735ad5af1dc049449d07f6300496d48
+      internalID: 1394459684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_6
+      name: Estrelinhas_6
       rect:
         serializedVersion: 2
         x: 1212
-        y: 144
+        y: 0
         width: 606
-        height: 625
+        height: 587
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f25848507ed8bb4db5c15ad18b377d0
-      internalID: 1709545828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Agua_7
-      rect:
-        serializedVersion: 2
-        x: 1818
-        y: 144
-        width: 606
-        height: 625
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 541e0d7eb37915546b9a3492a102fc63
-      internalID: -377652626
+      spriteID: 22f9a2dc0d5782a47a964d78ea51a0e9
+      internalID: -1370498769
       vertices: []
       indices: 
       edges: []
@@ -289,7 +267,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5a45829a649bcce4db5f594ebf630cc4
+    spriteID: facef927fdd119645a156e64bfb28afe
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +277,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Agua_0: 622068715
-      Agua_1: -1756641191
-      Agua_2: 159390560
-      Agua_3: 1808807538
-      Agua_4: -1220852146
-      Agua_5: -1506697743
-      Agua_6: 1709545828
-      Agua_7: -377652626
+      Estrelinhas_0: -1325485283
+      Estrelinhas_1: 257019782
+      Estrelinhas_2: 1470994606
+      Estrelinhas_3: -249228861
+      Estrelinhas_4: 1233277459
+      Estrelinhas_5: 1394459684
+      Estrelinhas_6: -1370498769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

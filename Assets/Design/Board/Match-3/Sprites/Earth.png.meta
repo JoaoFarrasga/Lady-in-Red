@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d834525dd66f75543a612c61e02a3b72
+guid: 39639c8bfcc535142a32ec2cbe72139d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,177 +110,177 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Agua_0
+      name: Earth_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 769
-        width: 606
-        height: 625
+        y: 735
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a5c406e055b11642ba1ece8ea65dbdb
-      internalID: 622068715
+      spriteID: cb76f1e6f26b8d84b80e565319f72d21
+      internalID: 670110513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_1
+      name: Earth_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 769
-        width: 606
-        height: 625
+        x: 600
+        y: 737
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3da57d603ac78784a88ae697fe368bf1
-      internalID: -1756641191
+      spriteID: 6003d9213c8d2ab4d8fe9e9e21f8d2b3
+      internalID: 1103297447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_2
+      name: Earth_2
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 769
-        width: 606
-        height: 625
+        x: 1200
+        y: 737
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9778f607c9427489764c47a260c41c
-      internalID: 159390560
+      spriteID: b385454793af87e46b701afb829e5dab
+      internalID: -2087204098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_3
+      name: Earth_3
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 769
-        width: 606
-        height: 625
+        x: 1800
+        y: 737
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afea9c5dee9fa04a9e3a05406f0cd1c
-      internalID: 1808807538
+      spriteID: 43a99a5da1f87c1428e6c4f8e8fa42e2
+      internalID: -1733660126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_4
+      name: Earth_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
-        width: 606
-        height: 625
+        y: 117
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056cbe1f57a152b4bb529301c1b95ef5
-      internalID: -1220852146
+      spriteID: 1f8c5c4bab64fef48a651c54ff536d09
+      internalID: -523489442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_5
+      name: Earth_5
       rect:
         serializedVersion: 2
-        x: 606
-        y: 144
-        width: 606
-        height: 625
+        x: 600
+        y: 117
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 847d3f1ad4e1c784d87f4fddd47b3086
-      internalID: -1506697743
+      spriteID: 470d3a4889592fa4982e73255bd2e6b1
+      internalID: -829833099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_6
+      name: Earth_6
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 144
-        width: 606
-        height: 625
+        x: 1200
+        y: 117
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f25848507ed8bb4db5c15ad18b377d0
-      internalID: 1709545828
+      spriteID: 308691332033e8c498babedb54e87e27
+      internalID: -1708447001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_7
+      name: Earth_7
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 144
-        width: 606
-        height: 625
+        x: 1800
+        y: 117
+        width: 600
+        height: 620
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 541e0d7eb37915546b9a3492a102fc63
-      internalID: -377652626
+      spriteID: 740514bb653083b40af17a519086d376
+      internalID: -452532302
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5a45829a649bcce4db5f594ebf630cc4
+    spriteID: 13c36d2f9d65240449bb45b08de497b2
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Agua_0: 622068715
-      Agua_1: -1756641191
-      Agua_2: 159390560
-      Agua_3: 1808807538
-      Agua_4: -1220852146
-      Agua_5: -1506697743
-      Agua_6: 1709545828
-      Agua_7: -377652626
+      Earth_0: 670110513
+      Earth_1: 1103297447
+      Earth_2: -2087204098
+      Earth_3: -1733660126
+      Earth_4: -523489442
+      Earth_5: -829833099
+      Earth_6: -1708447001
+      Earth_7: -452532302
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

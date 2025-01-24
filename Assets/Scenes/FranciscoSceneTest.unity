@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46ca27b0f01cb34688c09f3b27d0ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 1
+  State: 0
   gameLevel: 1
   menuManager: {fileID: 0}
 --- !u!4 &1316139761
@@ -1023,11 +1023,10 @@ MonoBehaviour:
   spacingX: 0
   spacingY: 0
   potionPrefabs:
-  - {fileID: 394957948434363341, guid: bfd34209a7dedcf49b64286793a50124, type: 3}
-  - {fileID: 5523113219613811079, guid: 24df5a89d8f93d84aa6eedafcf31adac, type: 3}
-  - {fileID: 1717615574536951511, guid: 4794b6d2f665bda4f9a4ea7b05318f4f, type: 3}
-  - {fileID: 80330732404357557, guid: 392a40b060680e048955efba4ea6ae7f, type: 3}
-  - {fileID: 6018914302175285541, guid: 273f0a5d4b9d26f4b913a4a8205bef2f, type: 3}
+  - {fileID: 4634129097429502340, guid: 8d4ea6d7a5e58d94484f75b171316b09, type: 3}
+  - {fileID: 355793390041107593, guid: 74319f2749fe6484aba799b5c7fad2c2, type: 3}
+  - {fileID: 1272471671633150874, guid: 1cb8d406319ed0640a83bc45ba9ae88e, type: 3}
+  - {fileID: 8979389445774865841, guid: 5c5be484d4a76d34dbc328147d6352fd, type: 3}
   potionBoardGameObject: {fileID: 1713796893}
   potionsToDestroy: []
   potionParent: {fileID: 252513919}
@@ -1045,6 +1044,7 @@ MonoBehaviour:
     - row: 000000000000
   totalCombos: 0
   totalTurns: 0
+  firstTurn: 1
 --- !u!114 &1799794621 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3624359034114300945, guid: b6af0d212c78bec4f8901a2cfc184a0c, type: 3}
@@ -1320,107 +1320,6 @@ RectTransform:
   m_AnchoredPosition: {x: -522, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &6082860533011339784
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 361039871852811115, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368080595381017585, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_Name
-      value: CanvasTester
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368080595381017585, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d7fd63653a69c7440a2dc338f5350881, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1432,6 +1331,5 @@ SceneRoots:
   - {fileID: 288581801}
   - {fileID: 1316139761}
   - {fileID: 51186834}
-  - {fileID: 6082860533011339784}
   - {fileID: 1955943177}
   - {fileID: 2044331477}

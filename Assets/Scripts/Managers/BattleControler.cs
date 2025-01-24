@@ -117,7 +117,7 @@ public class BattleControler : MonoBehaviour
         }
         else if (GameManager.gameManager.gameLevel < 10)
         {
-            Debug.Log("All enemies defeated!");
+            // Debug.Log("All enemies defeated!");
             GameManager.gameManager.gameLevel++;
             increaseHealthPercentage += 0.15f;
             increaseDamagePercentage += 0.03f;
@@ -166,7 +166,7 @@ public class BattleControler : MonoBehaviour
 
     private void EnemyTurnAttack()
     {
-        print("EnemyAttacking");
+        // print("EnemyAttacking");
         foreach (GameObject enemy in levelEnemies)
         {
             enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject, this);
