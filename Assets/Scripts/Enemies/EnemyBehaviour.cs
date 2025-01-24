@@ -44,14 +44,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         float damage = _damage * elementCount;
 
-        if (element == enemySO.elementalWeakType)
-        {
-            damage = damage * 2; // Dano dobrado contra fraquezas
-        }
-        else if (element == enemySO.elementalStrongType)
-        {
-            damage = -(damage / 2); // Dano reduzido contra resistências
-        }
+        if (element == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
+
+        else if (element == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resistências
 
         health -= damage; // Reduz a vida do inimigo
         print("takedamage");
@@ -74,4 +69,8 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     public EnemySO GetEnemySO() { return enemySO; }
+
+    public void SetHealthIncrease(float healthPercentage) { health += maxHealth * healthPercentage ; }
+
+    public void SetBasicDamageAttackIncrease(float damagePercentage) { basicDamageAttack += basicDamageAttack * damagePercentage; }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class HUDController : MonoBehaviour
 {
     public TMP_Text turnCounter;
     public TMP_Text comboCounter;

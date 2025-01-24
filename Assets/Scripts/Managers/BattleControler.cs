@@ -16,6 +16,8 @@ public class BattleControler : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] public GameObject focusedEnemy { get; set; }
     [SerializeField] List<GameObject> levelEnemies;
+    private float increaseHealthPercentage = 0.5f;
+    private float increaseDamagePercentage = 0.15f;
     public int maxEnemyTurns { get; set; } = 1;
 
     [Header("PlayerInfo")]
@@ -28,6 +30,7 @@ public class BattleControler : MonoBehaviour
 
     [Header("BattleGeneratorInfo")]
     [SerializeField] private BattleGenerator battleGenerator;
+
 
     private void Awake()
     {
@@ -98,6 +101,7 @@ public class BattleControler : MonoBehaviour
 
     private void SetUpBattle()
     {
+        battleGenerator.CreateBattles();
         PlaceEnemies(GameManager.gameManager.gameLevel);
         UpdateBattleState(BattleState.PlayerTurn);
     }
@@ -106,13 +110,17 @@ public class BattleControler : MonoBehaviour
     {
         if (player.GetHealth() < 0 || GameManager.gameManager.gameLevel >= 10)
         {
-            GameManager.gameManager.UpdateGameState(GameState.InitialScreen);
+            GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
+            increaseHealthPercentage = 0.5f;
+            increaseDamagePercentage = 0.15f;
             return;
         }
         else if (GameManager.gameManager.gameLevel < 10)
         {
             Debug.Log("All enemies defeated!");
             GameManager.gameManager.gameLevel++;
+            increaseHealthPercentage += 0.15f;
+            increaseDamagePercentage += 0.03f;
             UpdateBattleState(BattleState.BattleInit);
         }
     }
@@ -129,6 +137,11 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
+            if(level > 1)
+            {
+                go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
+                go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
+            }
 
             levelEnemies.Add(go);
 
@@ -170,8 +183,6 @@ public class BattleControler : MonoBehaviour
     public BattleState GetBattleState() { return battleState; }
 
     public List<GameObject> GetLevelEnemies() { return levelEnemies; }
-
-    //public GameObject GetFocusedEnemy() { return focusedEnemy; }
 }
 
 
