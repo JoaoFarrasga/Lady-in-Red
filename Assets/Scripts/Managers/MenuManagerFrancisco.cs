@@ -24,6 +24,7 @@ public class MenuManagerFrancisco : MonoBehaviour
     private void StartGame()
     {
         battleControler.UpdateBattleState(BattleState.BattleInit);
+        GameManager.gameManager.UpdateGameState(GameState.InBattle);
         currentGOActive.SetActive(false);
         hud.SetActive(true);
         currentGOActive = hud;

@@ -34,7 +34,7 @@ public class PotionBoard : MonoBehaviour
     public int totalCombos = 0;
     public int totalTurns = 0;
 
-    private bool firstTurn = true;
+    public bool firstTurn = true;
 
 
     private void Awake()
@@ -67,14 +67,14 @@ public class PotionBoard : MonoBehaviour
     {
         if (isProcessingMove) return;
 
-        if (firstTurn) { firstTurn = false; }
+        if (firstTurn && GameManager.gameManager.State == GameState.InBattle) { firstTurn = false; }
 
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
         if (!rayHit.collider) return;
 
         var potion = rayHit.collider.gameObject.GetComponent<Potion>();
-        print("potion: " + potion);
+
         if (potion != null && battleControler.GetBattleState() == BattleState.PlayerTurn)
         {
             SelectPotion(potion);
@@ -119,7 +119,7 @@ public class PotionBoard : MonoBehaviour
 
         if (potionBoard != null)
         {
-            CheckBoard(true, firstTurn, false);
+            CheckBoard(true, firstTurn);
         }
     }
 
@@ -139,11 +139,10 @@ public class PotionBoard : MonoBehaviour
 
     #region Check Matches
 
-    public bool CheckBoard(bool _takeAction, bool firstTurn,  bool isNewTurn = false)
+    public bool CheckBoard(bool _takeAction, bool firstTurn)
     {
         bool hasMatched = false;
         List<List<Potion>> allMatches = new List<List<Potion>>();
-        List<Potion> lastMatch = new List<Potion>();
 
         // Resetando o estado de match para todas as po��es...
         foreach (Node node in potionBoard)
@@ -194,7 +193,6 @@ public class PotionBoard : MonoBehaviour
             {
                 List<Potion> firstMatchGroup = allMatches[0];
                 ProcessMatches(firstMatchGroup, firstTurn);
-                lastMatch = firstMatchGroup;
 
                 RemoveAndRefill(firstMatchGroup);
 
@@ -202,9 +200,9 @@ public class PotionBoard : MonoBehaviour
                 StartCoroutine(WaitAndCheckMatches());
             }
             
-            if (_takeAction && !firstTurn && isNewTurn && hasMatched)
+            if (_takeAction && !firstTurn && hasMatched)
             {
-                player.AttackEnemy(lastMatch, battleControler.GetLevelEnemies(), matchCountsByColor);
+                player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 totalTurns++; // Incrementa os turnos
                 totalCombos = 0;
                 matchCountsByColor.Clear();
