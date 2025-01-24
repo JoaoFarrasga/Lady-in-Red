@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -44,6 +43,7 @@ public class EnemyBehaviour : MonoBehaviour
         foreach (var item in elementMatches)
         {
             float damage = _damage * item.Value;
+            Debug.Log("Damage: " + damage);
 
             if (item.Key == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
 
