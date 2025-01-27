@@ -111,19 +111,19 @@ public class BattleControler : MonoBehaviour
         if (player.GetHealth() < 0 || GameManager.gameManager.gameLevel >= 10)
         {
             GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
+            DestroyLevelEnemies();
             increaseHealthPercentage = 0.5f;
             increaseDamagePercentage = 0.15f;
             return;
         }
-        else if (GameManager.gameManager.gameLevel < 10)
-        {
-            // Debug.Log("All enemies defeated!");
-            GameManager.gameManager.gameLevel++;
-            increaseHealthPercentage += 0.15f;
-            increaseDamagePercentage += 0.03f;
-            UpdateBattleState(BattleState.BattleInit);
-        }
+        Debug.Log("All enemies defeated!");
+        GameManager.gameManager.gameLevel++;
+        increaseHealthPercentage += 0.15f;
+        increaseDamagePercentage += 0.03f;
+        UpdateBattleState(BattleState.BattleInit);
     }
+
+    private void DestroyLevelEnemies(){ foreach(GameObject enemy in levelEnemies) Destroy(enemy); }
 
     private void PlaceEnemies(int level)
     {
@@ -137,12 +137,8 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
-            //if (level > 1)
-            //{
-            //    print("increase everythinhg");
-            //    go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
-            //    go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
-            //}
+            go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
+            go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
 
             levelEnemies.Add(go);
 

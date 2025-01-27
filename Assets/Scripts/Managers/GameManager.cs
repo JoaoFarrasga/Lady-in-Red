@@ -54,24 +54,6 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
-
-    public void OnEnemyDeath(EnemyBehaviour enemy)
-    {
-        Debug.Log($"Enemy defeated: {enemy.name}");
-
-        // Lógica adicional para lidar com a morte do inimigo, como verificar se a batalha terminou
-        CheckBattleEnd();
-    }
-
-    private void CheckBattleEnd()
-    {
-        EnemyBehaviour[] enemies = FindObjectsOfType<EnemyBehaviour>();
-        if (enemies.Length == 0)
-        {
-            Debug.Log("All enemies defeated!");
-            UpdateGameState(GameState.ExitBattle);
-        }
-    }
 }
 
 

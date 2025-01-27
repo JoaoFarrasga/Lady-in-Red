@@ -7,7 +7,8 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("EnemyStats")]
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
-    private float basicDamageAttack;
+    [SerializeField] private float maxBasicDamageAttack;
+    [SerializeField] private float basicDamageAttack;
     private float heavyDamageAttack;
 
     [SerializeField] private TMP_Text enemyHealthText;
@@ -15,20 +16,24 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private EnemySO enemySO;
     private SpriteRenderer spriteRenderer;
 
+    private void Awake()
+    {
+        enemyHealthText = GetComponentInChildren<TMP_Text>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyHealthText = GetComponentInChildren<TMP_Text>();
         spriteRenderer.sprite = enemySO.enemyAppearence;
-        maxHealth = enemySO.maxHealth;
-        health = maxHealth;
-        basicDamageAttack = enemySO.maxBasicDamageAttack;
-        enemyHealthText.text = health.ToString();
+        //health = maxHealth;
+        //basicDamageAttack = enemySO.maxBasicDamageAttack;
+        //enemyHealthText.text = health.ToString();
     }
 
     public void SetEnemySO(EnemySO enemySO)
     {
         this.enemySO = enemySO;
+        maxHealth = enemySO.maxHealth;
+        maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
     }
 
     public void AttackPlayer(GameObject target, BattleControler battleControler)
@@ -37,37 +42,35 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // M�todo para receber dano
-    public void TakeDamage(float _damage, Dictionary<OrbType, int> elementMatches,  BattleControler battleControler)
+    public void TakeDamage(float _damage, Dictionary<OrbType, int> elementMatches, int combos, BattleControler battleControler)
     {
-
+        float totalDamage = 0f;
         foreach (var item in elementMatches)
         {
             float damage = _damage * item.Value;
-            Debug.Log("Damage: " + damage);
+            //print("damage: " + damage);
 
             if (item.Key == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
 
             else if (item.Key == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resist�ncias
 
-            health -= damage; // Reduz a vida do inimigo
-            print("takedamage");
+            totalDamage += damage;
         }
-
-        enemyHealthText.text = health.ToString();
+        health -= totalDamage * combos; // Reduz a vida do inimigo
+        print("takedamage");
 
         if (health <= 0)
         {
             Die(battleControler);
+            return;
         }
+        enemyHealthText.text = health.ToString();
     }
 
     private void Die(BattleControler battleControler)
     {
-        // Notificar o GameManager sobre a morte do inimigo
-        //GameManager.gameManager.OnEnemyDeath(this);
         battleControler.GetLevelEnemies().Remove(this.gameObject);
         battleControler.CheckNumEnemies();
-        //battleControler.focusedEnemy = battleControler.GetLevelEnemies()[0];
         Destroy(gameObject); // Destr�i o inimigo
     }
 
@@ -75,10 +78,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void SetHealthIncrease(float healthPercentage) 
     {
-        print("health increase");
-        health += maxHealth * healthPercentage;
+        print("Maxhealth: " + maxHealth);
+        if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
+        else health = maxHealth + (maxHealth * healthPercentage);
+        
+        print("Health: " + health);
         enemyHealthText.text = health.ToString();
     }
 
-    public void SetBasicDamageAttackIncrease(float damagePercentage) { basicDamageAttack += basicDamageAttack * damagePercentage; }
+    public void SetBasicDamageAttackIncrease(float damagePercentage) 
+    {
+        if (GameManager.gameManager.gameLevel == 1) basicDamageAttack = enemySO.maxBasicDamageAttack;
+        else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * damagePercentage); 
+    }
 }
