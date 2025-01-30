@@ -6,7 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UIElements;
 
 public class PotionBoard : MonoBehaviour
 {
@@ -35,7 +35,6 @@ public class PotionBoard : MonoBehaviour
     public int totalTurns = 0;
 
     public bool firstTurn = true;
-
 
     private void Awake()
     {
@@ -90,18 +89,18 @@ public class PotionBoard : MonoBehaviour
         DestroyPotions();
         potionBoard = new Node[width, height];
 
-        spacingX = (float)(((width - 1) / 2) - 2.5);
-        spacingY = (float)((height - 1) / 2) + 1;
+        spacingX = (float)(((width - 1) / 2) - 3.25);
+        spacingY = (float)(((height - 1) / 2) + 1.75);
 
-        for (int y = 0; y < height; y++)
+        for (int i = 0; i < height; i++)
         {
-            for (int x = 0; x < width; x++)
+            for (int j = 0; j < width; j++)
             {
-                Vector2 position = new Vector2(x - spacingX, y - spacingY);
+                Vector2 position = new Vector2(j - spacingX, i - spacingY);
 
-                if (arrayLayout.rows[y].row[x])
+                if (arrayLayout.rows[i].row[j])
                 {
-                    potionBoard[x, y] = new Node(false, null); // Ensure Node is initialized
+                    potionBoard[j, i] = new Node(false, null); // Ensure Node is initialized
                 }
                 else
                 {
@@ -109,9 +108,9 @@ public class PotionBoard : MonoBehaviour
                     GameObject potion = Instantiate(potionPrefabs[randomIndex], position, Quaternion.identity);
                     potion.transform.SetParent(potionParent.transform);
 
-                    potion.GetComponent<Potion>().SetIndicies(x, y);
+                    potion.GetComponent<Potion>().SetIndicies(j, i);
 
-                    potionBoard[x, y] = new Node(true, potion); // Properly assign the potion reference
+                    potionBoard[j, i] = new Node(true, potion); // Properly assign the potion reference
                     potionsToDestroy.Add(potion);
                 }
             }
