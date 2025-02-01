@@ -16,12 +16,15 @@ public class BattleControler : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] public GameObject focusedEnemy { get; set; }
     [SerializeField] List<GameObject> levelEnemies;
-    private float increaseHealthPercentage = 0.5f;
-    private float increaseDamagePercentage = 0.15f;
+    private float increaseEnemyHealthPercentage = 0.5f;
+    private float increaseEnemyDamagePercentage = 0.15f;
     public int maxEnemyTurns { get; set; } = 1;
 
     [Header("PlayerInfo")]
     [SerializeField] Player player;
+    private float increasePlayerHealthPercentage = 0.2f;
+    private float increasePlayerDamagePercentage = 0.05f;
+
     public int maxPlayerTurns { get; set; } = 3;
 
     [Header("ReferencePoint")]
@@ -68,11 +71,6 @@ public class BattleControler : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void UpdateBattleState(BattleState newbattleState)
     {
@@ -101,8 +99,8 @@ public class BattleControler : MonoBehaviour
 
     private void SetUpBattle()
     {
-        //if(GameManager.gameManager.gameLevel == 1) battleGenerator.CreateBattles();
         PlaceEnemies(GameManager.gameManager.gameLevel);
+        IncreasePlayerStats();
         UpdateBattleState(BattleState.PlayerTurn);
     }
 
@@ -112,14 +110,14 @@ public class BattleControler : MonoBehaviour
         {
             GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
             DestroyLevelEnemies();
-            increaseHealthPercentage = 0.5f;
-            increaseDamagePercentage = 0.15f;
+            increaseEnemyHealthPercentage = 0.5f;
+            increaseEnemyDamagePercentage = 0.15f;
             return;
         }
         Debug.Log("All enemies defeated!");
         GameManager.gameManager.gameLevel++;
-        increaseHealthPercentage += 0.15f;
-        increaseDamagePercentage += 0.03f;
+        increaseEnemyHealthPercentage += 0.15f;
+        increaseEnemyDamagePercentage += 0.03f;
         UpdateBattleState(BattleState.BattleInit);
     }
 
@@ -137,8 +135,8 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
-            go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseHealthPercentage);
-            go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseDamagePercentage);
+            go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseEnemyHealthPercentage);
+            go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseEnemyDamagePercentage);
 
             levelEnemies.Add(go);
 
@@ -158,6 +156,12 @@ public class BattleControler : MonoBehaviour
         }
 
         focusedEnemy = levelEnemies[0];
+    }
+
+    private void IncreasePlayerStats()
+    {
+        player.SetHealthIncrease(increasePlayerHealthPercentage, GameManager.gameManager.gameLevel);
+        player.SetBasicDamageAttackIncrease(increasePlayerDamagePercentage, GameManager.gameManager.gameLevel);
     }
 
     private void EnemyTurnAttack()

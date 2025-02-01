@@ -11,22 +11,28 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float basicDamageAttack;
     private float heavyDamageAttack;
 
+    [Header("EnemyHealthText")]
     [SerializeField] private TMP_Text enemyHealthText;
 
+    [Header("EnemySO")]
     [SerializeField] private EnemySO enemySO;
-    private SpriteRenderer spriteRenderer;
+
+    [Header("EnemyAppearence")]
+    //[SerializeField] private GameObject body, face, particles;
+    private SpriteRenderer bodySpriteRenderer, faceSpriteRenderer, particleSpriteRenderer;
 
     private void Awake()
     {
         enemyHealthText = GetComponentInChildren<TMP_Text>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        bodySpriteRenderer = transform.Find("Body").GetComponent<SpriteRenderer>();
+        faceSpriteRenderer = transform.Find("Face").GetComponent<SpriteRenderer>();
+        particleSpriteRenderer = transform.Find("Particle").GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
-        spriteRenderer.sprite = enemySO.enemyAppearence;
-        //health = maxHealth;
-        //basicDamageAttack = enemySO.maxBasicDamageAttack;
-        //enemyHealthText.text = health.ToString();
+        bodySpriteRenderer.sprite = enemySO.bodySprite;
+        faceSpriteRenderer.sprite = enemySO.faceSprite;
+        if (enemySO.particleSprite != null) particleSpriteRenderer.sprite = enemySO.particleSprite;
     }
 
     public void SetEnemySO(EnemySO enemySO)
@@ -78,17 +84,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void SetHealthIncrease(float healthPercentage) 
     {
-        print("Maxhealth: " + maxHealth);
+        //print("Maxhealth: " + maxHealth);
         if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
-        else health = maxHealth + (maxHealth * healthPercentage);
+        else health = maxHealth + (maxHealth * (healthPercentage));
         
-        print("Health: " + health);
+        //print("Health: " + health);
         enemyHealthText.text = health.ToString();
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
     {
         if (GameManager.gameManager.gameLevel == 1) basicDamageAttack = enemySO.maxBasicDamageAttack;
-        else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * damagePercentage); 
+        else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * (damagePercentage)); 
     }
 }

@@ -6,11 +6,11 @@ public class Player : MonoBehaviour
 { 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100;
-    private float health;
+    [SerializeField] private float health;
 
     [Header("Damage")]
     [SerializeField] private float maxDamageAttack = 10f;
-    private float damageAttack;
+    [SerializeField] private float damageAttack;
 
     private void Awake()
     {
@@ -35,10 +35,7 @@ public class Player : MonoBehaviour
         focusedEnemy.TakeDamage(damageAttack, elementMatches, combos, battleControler);
     }
 
-    private void OnGameEnd(GameState gameState)
-    {
-        if (gameState == GameState.ExitBattle) { ResetStats(); }
-    }
+    private void OnGameEnd(GameState gameState) { if (gameState == GameState.ExitBattle) ResetStats(); }  
 
     private void ResetStats()
     {
@@ -47,6 +44,19 @@ public class Player : MonoBehaviour
     }
 
     private void Die(BattleControler battleControler) {  battleControler.UpdateBattleState(BattleState.BattleEnd); }
+
+    public void SetHealthIncrease(float healthPercentage, int level)
+    { 
+        if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
+        else health = maxHealth + (maxHealth * (healthPercentage * level));
+        print("Health: " + health);
+    }
+
+    public void SetBasicDamageAttackIncrease(float damagePercentage, int level)
+    {
+        if (GameManager.gameManager.gameLevel == 1) damageAttack = maxDamageAttack;
+        else damageAttack += maxDamageAttack + (maxDamageAttack * (damagePercentage * level));
+    }
 
     public float GetHealth() { return health; }
 }
