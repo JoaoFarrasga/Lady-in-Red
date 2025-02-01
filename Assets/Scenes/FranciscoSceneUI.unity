@@ -1633,6 +1633,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e849ee6479182749aa4004803fcb049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
+  maxDamageAttack: 10
+  damageAttack: 0
 --- !u!4 &2044331477
 Transform:
   m_ObjectHideFlags: 0
@@ -4475,7 +4479,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7561383115191174490}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5311317654852232289, guid: d79f1e64712d44342a3b9b25b2a3260e, type: 2}
   m_audioClip: {fileID: 8300000, guid: c805a320b235daf4bb7b7a544feac7f6, type: 3}
@@ -4777,7 +4781,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4477036098330624105}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5136868435762447216, guid: d79f1e64712d44342a3b9b25b2a3260e, type: 2}
   m_audioClip: {fileID: 8300000, guid: fed154eadf5bb3d4388a633f08df68a3, type: 3}
@@ -7175,6 +7179,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
+  - {fileID: 1144868618}
   - {fileID: 869684416}
   - {fileID: 1713796895}
   - {fileID: 252513920}

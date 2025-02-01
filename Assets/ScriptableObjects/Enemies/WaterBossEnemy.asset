@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c06deb3e13136f24288d13c589f7bc77, type: 3}
-  m_Name: WaterTroopEnemy
+  m_Name: WaterBossEnemy
   m_EditorClassIdentifier: 
-  enemyName: Water Troop
-  enemyAppearence: {fileID: 1900768483, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
+  enemyName: Water Boss
+  bodySprite: {fileID: 1264146355, guid: 8db86abe4bee36e4f9df5472ff0fcd5d, type: 3}
+  faceSprite: {fileID: -897875286, guid: 97b845e484d71da45bb9dcc06d4c740b, type: 3}
+  particleSprite: {fileID: 1041456488, guid: 6541d24545c3f5348856ebdd34f0b0ec, type: 3}
   elementalType: 1
   maxHealth: 100
   maxBasicDamageAttack: 5

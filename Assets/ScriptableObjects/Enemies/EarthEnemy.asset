@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: EarthEnemy
   m_EditorClassIdentifier: 
   enemyName: Earth
-  enemyAppearence: {fileID: 734799198, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
+  bodySprite: {fileID: 1288997943, guid: 433a554e269c5084fb31b7903e703ca9, type: 3}
+  faceSprite: {fileID: -1298340285, guid: 8c1e9ade8071bf241997c8dc4077937b, type: 3}
+  particleSprite: {fileID: 0}
   elementalType: 2
   maxHealth: 100
   maxBasicDamageAttack: 5
