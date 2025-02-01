@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9ab9825b69f52f841ada25a4ab248509
+guid: b2434b7d215ca0c47893f898852cb223
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Roxo_0
+      name: Agua_Pecas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 703
-        width: 605
-        height: 616
+        y: 706
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ad999d7d78e28e49a1e9736f4b89794
-      internalID: 1947402051
+      spriteID: a457d5675edcc4f4ea5251e69912cc92
+      internalID: -43174712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_1
+      name: Agua_Pecas_1
       rect:
         serializedVersion: 2
-        x: 605
-        y: 703
-        width: 605
-        height: 616
+        x: 606
+        y: 706
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 376c62c4beb80f8479995e57dc6b5eb4
-      internalID: -1391317486
+      spriteID: 6bdc70b9079fa664a80aef0fdea3d21a
+      internalID: -2093614943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_2
+      name: Agua_Pecas_2
       rect:
         serializedVersion: 2
-        x: 1210
-        y: 703
-        width: 605
-        height: 616
+        x: 1212
+        y: 706
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e19e4b976b3b36844bf25da1930ade87
-      internalID: 1232396493
+      spriteID: 62e5538fc9fe4fb4cbe2916ccaec8dac
+      internalID: 1315258706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_3
+      name: Agua_Pecas_3
       rect:
         serializedVersion: 2
-        x: 1815
-        y: 703
-        width: 605
-        height: 616
+        x: 1818
+        y: 706
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46df54dbae2e6844ea9e65e334b3aeea
-      internalID: 1912823531
+      spriteID: bfa71749e5438ce4d8194c04ab5dcb41
+      internalID: -1752218918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_4
+      name: Agua_Pecas_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 87
-        width: 605
-        height: 616
+        y: 100
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a1082ec4efbdf74c9c86dd887a280c8
-      internalID: -529747432
+      spriteID: 4933b67e578e398469d58c1bbd325010
+      internalID: 1222653300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_5
+      name: Agua_Pecas_5
       rect:
         serializedVersion: 2
-        x: 605
-        y: 87
-        width: 605
-        height: 616
+        x: 606
+        y: 100
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b9a88135e9a3a44c8f67242f315d8f5
-      internalID: 1277858012
+      spriteID: b3a75990e8f013b429bf95dc9667f89e
+      internalID: 985324170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_6
+      name: Agua_Pecas_6
       rect:
         serializedVersion: 2
-        x: 1210
-        y: 87
-        width: 605
-        height: 616
+        x: 1212
+        y: 100
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fbd4b5ae38911147b8f850bb532a5d4
-      internalID: 1809179797
+      spriteID: c841b4ddfaade1e4cbd526e60283dfe4
+      internalID: -1385385073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roxo_7
+      name: Agua_Pecas_7
       rect:
         serializedVersion: 2
-        x: 1815
-        y: 87
-        width: 605
-        height: 616
+        x: 1818
+        y: 100
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 884f36af7a73a9744abe1ef81b552397
-      internalID: 1908370890
+      spriteID: 44202decc48486a4b874c67b2e6b6d5e
+      internalID: 1593756757
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c89ec1f33d3fed342a29350a467ec358
+    spriteID: d42bf5b20cdf25641ac24f3a487a2ed3
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Roxo_0: 1947402051
-      Roxo_1: -1391317486
-      Roxo_2: 1232396493
-      Roxo_3: 1912823531
-      Roxo_4: -529747432
-      Roxo_5: 1277858012
-      Roxo_6: 1809179797
-      Roxo_7: 1908370890
+      Agua_Pecas_0: -43174712
+      Agua_Pecas_1: -2093614943
+      Agua_Pecas_2: 1315258706
+      Agua_Pecas_3: -1752218918
+      Agua_Pecas_4: 1222653300
+      Agua_Pecas_5: 985324170
+      Agua_Pecas_6: -1385385073
+      Agua_Pecas_7: 1593756757
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -29,9 +29,16 @@ public class PotionBoard : MonoBehaviour
     public static PotionBoard Instance;
     private Camera mainCamera;
     private PlayerInputActions inputActions;
+
+    // Dicionário de contagem de match por cor
     public Dictionary<OrbType, int> matchCountsByColor = new Dictionary<OrbType, int>();
+    // Dicionário de contagem de match por tipo (se quiser usar)
     public Dictionary<MatchType, int> matchCountsByType = new Dictionary<MatchType, int>();
+
+    // Total de combos dentro de um único turno
     public int totalCombos = 0;
+
+    // Total de turnos do jogador (para controlar o limite, etc.)
     public int totalTurns = 0;
 
     public bool firstTurn = true;
@@ -66,7 +73,10 @@ public class PotionBoard : MonoBehaviour
     {
         if (isProcessingMove) return;
 
-        if (firstTurn && GameManager.gameManager.State == GameState.InBattle) { firstTurn = false; }
+        if (firstTurn && GameManager.gameManager.State == GameState.InBattle)
+        {
+            firstTurn = false;
+        }
 
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
@@ -76,7 +86,22 @@ public class PotionBoard : MonoBehaviour
 
         if (potion != null && battleControler.GetBattleState() == BattleState.PlayerTurn)
         {
+            EnableAndDisableChildSprite(potion.transform);
             SelectPotion(potion);
+        }
+    }
+
+    void EnableAndDisableChildSprite(Transform _transform)
+    {
+        SpriteRenderer sr = _transform.Find("Luz").GetComponent<SpriteRenderer>();
+
+        if (sr.enabled)
+        {
+            sr.enabled = false;
+        } 
+        else
+        {
+            sr.enabled = true;
         }
     }
 
@@ -100,7 +125,7 @@ public class PotionBoard : MonoBehaviour
 
                 if (arrayLayout.rows[i].row[j])
                 {
-                    potionBoard[j, i] = new Node(false, null); // Ensure Node is initialized
+                    potionBoard[j, i] = new Node(false, null); // Espaço "vazio" ou não utilizável
                 }
                 else
                 {
@@ -110,7 +135,7 @@ public class PotionBoard : MonoBehaviour
 
                     potion.GetComponent<Potion>().SetIndicies(j, i);
 
-                    potionBoard[j, i] = new Node(true, potion); // Properly assign the potion reference
+                    potionBoard[j, i] = new Node(true, potion);
                     potionsToDestroy.Add(potion);
                 }
             }
@@ -118,6 +143,7 @@ public class PotionBoard : MonoBehaviour
 
         if (potionBoard != null)
         {
+            // Checa se já existe algum match inicial (opcional):
             CheckBoard(true, firstTurn);
         }
     }
@@ -143,7 +169,7 @@ public class PotionBoard : MonoBehaviour
         bool hasMatched = false;
         List<List<Potion>> allMatches = new List<List<Potion>>();
 
-        // Resetando o estado de match para todas as po��es...
+        // Reseta o estado de match para todas as poções
         foreach (Node node in potionBoard)
         {
             if (node.potion != null)
@@ -152,17 +178,21 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        // Detecta matches...
+        // Detecta matches
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                if (potionBoard[x, y].isUsable)
+                if (potionBoard[x, y].isUsable && potionBoard[x, y].potion != null)
                 {
-                    Potion potion = potionBoard[x, y].potion?.GetComponent<Potion>();
+                    Potion potion = potionBoard[x, y].potion.GetComponent<Potion>();
+
+                    // Se não está marcado como matched, testamos.
                     if (potion != null && !potion.isMatched)
                     {
                         MatchResult matchResult = IsConnected(potion);
+
+                        // Se há 3 ou mais conectados, é um match.
                         if (matchResult.connectedPotions.Count >= 3)
                         {
                             List<Potion> currentMatch = new List<Potion>();
@@ -174,8 +204,11 @@ public class PotionBoard : MonoBehaviour
                                     currentMatch.Add(matchedPotion);
                                 }
                             }
+
                             if (currentMatch.Count > 0)
                             {
+                                // Aqui poderia agrupar todos os matches.
+                                // Mas, para simplificar, vamos guardar apenas o último encontrado.
                                 allMatches.Clear();
                                 allMatches.Add(currentMatch);
                                 hasMatched = true;
@@ -186,25 +219,55 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
+        // Se detectamos match e queremos tomar ação (remover etc.)
         if (_takeAction && hasMatched)
         {
             if (allMatches.Count > 0)
             {
                 List<Potion> firstMatchGroup = allMatches[0];
+
+                // Processa os matches: soma combos, registra tipo do primeiro match, etc.
                 ProcessMatches(firstMatchGroup, firstTurn);
 
+                // Remove e faz a cascata
                 RemoveAndRefill(firstMatchGroup);
 
-                // Em vez de chamar WaitOneSecond(), chamamos a espera pelo fim dos movimentos:
-                StartCoroutine(WaitAndCheckMatches());
+                // Chama corrotina para aguardar settle e checar novamente
+                StartCoroutine(WaitAndCheckMatches(_takeAction, firstTurn, isNewTurn));
             }
-            
-            if (_takeAction && !firstTurn && isNewTurn && hasMatched)
+        }
+
+        return hasMatched;
+    }
+
+    private IEnumerator WaitAndCheckMatches(bool _takeAction, bool firstTurn, bool isNewTurn)
+    {
+        // Espera todas as poções pararem de se mover
+        yield return StartCoroutine(WaitForAllPotionsToSettle());
+
+        // Agora checa se ainda há matches
+        bool hasMatch = CheckBoard(false, firstTurn);
+
+        if (hasMatch)
+        {
+            CheckBoard(true, firstTurn, isNewTurn);
+        }
+        else
+        {
+            if (_takeAction && !firstTurn && isNewTurn)
             {
-                if (battleControler.GetLevelEnemies().Count != 0) player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
-                totalTurns++; // Incrementa os turnos
+                if (battleControler.GetLevelEnemies().Count != 0)
+                {
+                    player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
+                }
+
+                totalTurns++;
+
+                // Limpamos as variáveis para o próximo turno.
                 totalCombos = 0;
                 matchCountsByColor.Clear();
+
+                // Se atingimos limite de turnos do jogador
                 if (totalTurns == battleControler.maxPlayerTurns)
                 {
                     battleControler.UpdateBattleState(BattleState.EnemyTurn);
@@ -213,57 +276,42 @@ public class PotionBoard : MonoBehaviour
                 }
             }
         }
-
-        return hasMatched;
-    }
-
-    private IEnumerator WaitAndCheckMatches()
-    {
-        // Aguarda que todas as po��es concluam seus movimentos (cascade, spawn, etc.)
-        yield return StartCoroutine(WaitForAllPotionsToSettle());
-        // Agora, depois que todas as po��es est�o fixas, checa os matches novamente.
-        if (CheckBoard(false, firstTurn))
-        {
-            CheckBoard(true, firstTurn);
-        }
     }
 
     private void ProcessMatches(List<Potion> matchedPotions, bool firstTurn = false)
     {
         if (matchedPotions.Count == 0 || firstTurn) return;
 
-        // Determina se � um SuperMatch ou um Match Normal e incrementa os contadores apropriadamente
-        if (matchedPotions.Count == 4)
+        // Verifica quantas poções foram combinadas para definir o tipo do match
+        // e incrementa combos.
+        MatchType matchType;
+
+        if (matchedPotions.Count >= 4)
         {
-            totalCombos += 2;  // Adiciona 2 ao contador de combos para SuperMatch
+            matchType = MatchType.SuperMatch;
+            totalCombos += 2;  // Exemplo: +2 combos para um SuperMatch (4 peças)
         }
-        else if (matchedPotions.Count == 3)
+        else
         {
-            totalCombos += 1;  // Adiciona 1 ao contador de combos para Match Normal
+            matchType = MatchType.Normal;
+            totalCombos += 1;  // Exemplo: +1 combo para um match normal (3 peças)
         }
 
-        // Utiliza um HashSet para garantir que cada cor seja contada apenas uma vez por match
         HashSet<OrbType> uniqueColors = new HashSet<OrbType>();
         foreach (Potion potion in matchedPotions)
         {
             uniqueColors.Add(potion.potionType);
         }
 
-        // Incrementa a contagem para cada cor �nica encontrada no match
+        // Incrementa 1 para cada cor distinta
         foreach (OrbType type in uniqueColors)
         {
             if (!matchCountsByColor.ContainsKey(type))
             {
                 matchCountsByColor[type] = 0;
             }
-            matchCountsByColor[type]++;  // Incrementa por 1, independente do n�mero de po��es do mesmo tipo no match
+            matchCountsByColor[type]++;
         }
-    }
-
-    public enum MatchType
-    {
-        Normal,    // Para 3 po��es alinhadas
-        SuperMatch // Para 4 po��es alinhadas
     }
 
     MatchResult IsConnected(Potion potion)
@@ -273,8 +321,9 @@ public class PotionBoard : MonoBehaviour
 
         connectedPotions.Add(potion);
 
-        CheckDirection(potion, new Vector2Int(1, 0), connectedPotions); // Right
-        CheckDirection(potion, new Vector2Int(-1, 0), connectedPotions); // Left
+        // Checa horizontalmente (esquerda e direita)
+        CheckDirection(potion, new Vector2Int(1, 0), connectedPotions);
+        CheckDirection(potion, new Vector2Int(-1, 0), connectedPotions);
 
         if (connectedPotions.Count >= 3)
         {
@@ -285,11 +334,12 @@ public class PotionBoard : MonoBehaviour
             };
         }
 
+        // Se não achou 3 na horizontal, checa vertical
         connectedPotions.Clear();
         connectedPotions.Add(potion);
 
-        CheckDirection(potion, new Vector2Int(0, 1), connectedPotions); // Up
-        CheckDirection(potion, new Vector2Int(0, -1), connectedPotions); // Down
+        CheckDirection(potion, new Vector2Int(0, 1), connectedPotions);
+        CheckDirection(potion, new Vector2Int(0, -1), connectedPotions);
 
         if (connectedPotions.Count >= 3)
         {
@@ -357,42 +407,61 @@ public class PotionBoard : MonoBehaviour
 
     private void SwapPosition(Potion _currentPotion, Potion _targetPotion)
     {
-        if (!IsAdjacacent(_currentPotion, _targetPotion))
+        // Só podemos trocar se forem adjacentes
+        if (!IsAdjacent(_currentPotion, _targetPotion))
         {
             return;
         }
 
+        // Realiza a troca e então processa matches
         DoSwap(_currentPotion, _targetPotion);
         isProcessingMove = true;
+
+        // Reseta as variáveis de contagem, pois é início de um novo turno do jogador
+        totalCombos = 0;
+        matchCountsByColor.Clear();
+
         StartCoroutine(ProcessMatchesAfterSwap(_currentPotion, _targetPotion));
     }
 
     private IEnumerator ProcessMatchesAfterSwap(Potion _currentPotion, Potion _targetPotion)
     {
-        // Aguarda um curto per�odo para que a anima��o de swap se inicie.
+        // Espera um pouco para a animação de swap
         yield return new WaitForSeconds(0.2f);
 
-        // Aguarda que todas as po��es terminem suas anima��es (movimentos, cascade, spawn, etc.)
+        // Espera todas as poções terminarem movimentos
         yield return StartCoroutine(WaitForAllPotionsToSettle());
 
-        bool hasMatch = CheckBoard(true, false, true); // Passa true para isNewTurn
+        // Checa se houve match
+        bool hasMatch = CheckBoard(true, false, true);
+        // Aqui passamos isNewTurn = true para, ao final das cascatas, disparar o AttackEnemy se tiver combos.
 
         if (!hasMatch)
         {
-            // Se n�o houve match, desfaz a troca
+            // Se não houve match, desfaz a troca
             DoSwap(_currentPotion, _targetPotion);
-            // Aguarda novamente para que o swap de desfazer termine (se houver anima��o)
-            yield return StartCoroutine(WaitForAllPotionsToSettle());
+            EnableAndDisableChildSprite(_currentPotion.transform);
+            EnableAndDisableChildSprite(_targetPotion.transform);
+            yield return StartForAllPotionsSettleAgain();
         }
 
+        EnableAndDisableChildSprite(_currentPotion.transform);
+        EnableAndDisableChildSprite(_targetPotion.transform);
         isProcessingMove = false;
+    }
+
+    private IEnumerator StartForAllPotionsSettleAgain()
+    {
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(WaitForAllPotionsToSettle());
     }
 
     private void DoSwap(Potion _currentPotion, Potion _targetPotion)
     {
         GameObject temp = potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion;
 
-        potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion = potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion;
+        potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion =
+            potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion;
         potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion = temp;
 
         int tempXIndex = _currentPotion.xIndex;
@@ -404,13 +473,16 @@ public class PotionBoard : MonoBehaviour
         _targetPotion.xIndex = tempXIndex;
         _targetPotion.yIndex = tempYIndex;
 
-        _currentPotion.MoveToTarget(potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion.transform.position);
-        _targetPotion.MoveToTarget(potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion.transform.position);
+        _currentPotion.MoveToTarget(
+            potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion.transform.position);
+        _targetPotion.MoveToTarget(
+            potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion.transform.position);
     }
 
-    private bool IsAdjacacent(Potion _currentPotion, Potion _targetPotion)
+    private bool IsAdjacent(Potion _currentPotion, Potion _targetPotion)
     {
-        return Mathf.Abs(_currentPotion.xIndex - _targetPotion.xIndex) + Mathf.Abs(_currentPotion.yIndex - _targetPotion.yIndex) == 1;
+        return Mathf.Abs(_currentPotion.xIndex - _targetPotion.xIndex) +
+               Mathf.Abs(_currentPotion.yIndex - _targetPotion.yIndex) == 1;
     }
 
     #endregion
@@ -424,12 +496,18 @@ public class PotionBoard : MonoBehaviour
             int _xIndex = potion.xIndex;
             int _yIndex = potion.yIndex;
 
-            potion.animator.SetTrigger("Destroyed");
+            // Animação de destruir (se tiver)
+            if (potion.animator != null)
+            {
+                potion.animator.SetTrigger("Destroyed");
+            }
 
             Destroy(potion.gameObject);
 
             potionBoard[_xIndex, _yIndex] = new Node(true, null);
         }
+
+        // "cair" as poções acima
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -444,65 +522,45 @@ public class PotionBoard : MonoBehaviour
 
     private void RefillPotion(int x, int y)
     {
-        //y offset
+        // yOffset para buscar a próxima poção acima
         int yOffset = 1;
 
         while (y + yOffset < height && potionBoard[x, y + yOffset].potion == null)
         {
-            // Debug.Log("The potion above me is null, but im not at the top of the board yet, so add to my yOffset and try again, Current Offset is: " + yOffset + "Im about do add 1");
             yOffset++;
         }
 
+        // Se encontramos uma poção acima
         if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
         {
             Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
 
             Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
-            //Debug.Log("I�ve found a potion when reflling the board and it was in the location: [" + x + "," + (y + yOffset) + "] we have moved it to the location:[" + x + "," + y + "]");
             potionAbove.MoveToTarget(targetPos);
             potionAbove.SetIndicies(x, y);
+
             potionBoard[x, y] = potionBoard[x, y + yOffset];
             potionBoard[x, y + yOffset] = new Node(true, null);
         }
-
-        if (y + yOffset == height)
+        else if (y + yOffset >= height)
         {
-            //Debug.Log("I�ve reached the top of the board without finding a potion");
-            SpawnPotionAtTop(x);
+            // Se chegamos no topo sem encontrar nenhuma poção, spawnamos uma nova
+            SpawnPotionAtTop(x, y);
         }
-
-
     }
 
-    private void SpawnPotionAtTop(int x)
+    private void SpawnPotionAtTop(int x, int y)
     {
-        int index = FindIndexOflowestNull(x);
-        int locationToMoveTo = 8 - index;
-        //Debug.Log("About to spawn a potion, ideally i�d like to put it in the index of " + index);
-        //get a random potion
         int randomIndex = Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
-        //set indicies
-        newPotion.GetComponent<Potion>().SetIndicies(x, index);
-        //set it on the potion board
-        potionBoard[x, index] = new Node(true, newPotion);
-        //move it to that location
-        Vector3 targetPostion = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
-        newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
-    }
 
-    private int FindIndexOflowestNull(int x)
-    {
-        int lowestNull = 99;
-        for (int y = height - 1; y >= 0; y--)
-        {
-            if (potionBoard[x, y].potion == null)
-            {
-                lowestNull = y;
-            }
-        }
-        return lowestNull;
+        newPotion.GetComponent<Potion>().SetIndicies(x, y);
+        potionBoard[x, y] = new Node(true, newPotion);
+
+        // Move até a posição correta
+        Vector3 targetPostion = new Vector3(x - spacingX, y - spacingY, newPotion.transform.position.z);
+        newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
     }
 
     private IEnumerator WaitForAllPotionsToSettle()
@@ -511,7 +569,7 @@ public class PotionBoard : MonoBehaviour
         while (anyMoving)
         {
             anyMoving = false;
-            // Percorre o tabuleiro para ver se alguma po��o est� em movimento.
+            // Percorre o tabuleiro para ver se alguma poção está em movimento
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -526,8 +584,7 @@ public class PotionBoard : MonoBehaviour
                         }
                     }
                 }
-                if (anyMoving)
-                    break;
+                if (anyMoving) break;
             }
             yield return null;
         }
@@ -550,4 +607,11 @@ public enum MatchDirection
     LongHorizontal,
     Super,
     None
+}
+
+public enum MatchType
+{
+    Normal,    // 3 poções
+    SuperMatch, // 4 ou mais poções
+    None       // Caso não haja match (uso interno)
 }

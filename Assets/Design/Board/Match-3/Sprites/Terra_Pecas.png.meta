@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d834525dd66f75543a612c61e02a3b72
+guid: 5abf06ca870d632408b9c2afa3838b58
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,177 +110,177 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Agua_0
+      name: Terra_Pecas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 769
+        y: 698
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a5c406e055b11642ba1ece8ea65dbdb
-      internalID: 622068715
+      spriteID: 175a6159eb6935c4b99498bf7e4d226b
+      internalID: -569514133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_1
+      name: Terra_Pecas_1
       rect:
         serializedVersion: 2
         x: 606
-        y: 769
+        y: 698
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3da57d603ac78784a88ae697fe368bf1
-      internalID: -1756641191
+      spriteID: 234b2f43f03353e4ab4c9cb7c79ead10
+      internalID: 95643715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_2
+      name: Terra_Pecas_2
       rect:
         serializedVersion: 2
         x: 1212
-        y: 769
+        y: 698
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9778f607c9427489764c47a260c41c
-      internalID: 159390560
+      spriteID: df94dad6a42f17140a1622e8c5098ccb
+      internalID: 1912212023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_3
+      name: Terra_Pecas_3
       rect:
         serializedVersion: 2
         x: 1818
-        y: 769
+        y: 698
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1afea9c5dee9fa04a9e3a05406f0cd1c
-      internalID: 1808807538
+      spriteID: 921928449610a5d498aa4548d51ca23f
+      internalID: 1034386780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_4
+      name: Terra_Pecas_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
+        y: 92
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056cbe1f57a152b4bb529301c1b95ef5
-      internalID: -1220852146
+      spriteID: c987078fc5db47945ac80fe2c4257234
+      internalID: -1516533347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_5
+      name: Terra_Pecas_5
       rect:
         serializedVersion: 2
         x: 606
-        y: 144
+        y: 92
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 847d3f1ad4e1c784d87f4fddd47b3086
-      internalID: -1506697743
+      spriteID: 9b77faba2794ff34d94a8af16ca84e92
+      internalID: 1873132280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_6
+      name: Terra_Pecas_6
       rect:
         serializedVersion: 2
         x: 1212
-        y: 144
+        y: 92
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f25848507ed8bb4db5c15ad18b377d0
-      internalID: 1709545828
+      spriteID: cbaf39a58d6b89448a4fd5ab59615a8b
+      internalID: -906964887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Agua_7
+      name: Terra_Pecas_7
       rect:
         serializedVersion: 2
         x: 1818
-        y: 144
+        y: 92
         width: 606
-        height: 625
+        height: 606
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 541e0d7eb37915546b9a3492a102fc63
-      internalID: -377652626
+      spriteID: 4333f60ce56404d4ea51dc92beb98b74
+      internalID: 770676615
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5a45829a649bcce4db5f594ebf630cc4
+    spriteID: e97932eec3b477040a84933d9928d78f
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Agua_0: 622068715
-      Agua_1: -1756641191
-      Agua_2: 159390560
-      Agua_3: 1808807538
-      Agua_4: -1220852146
-      Agua_5: -1506697743
-      Agua_6: 1709545828
-      Agua_7: -377652626
+      Terra_Pecas_0: -569514133
+      Terra_Pecas_1: 95643715
+      Terra_Pecas_2: 1912212023
+      Terra_Pecas_3: 1034386780
+      Terra_Pecas_4: -1516533347
+      Terra_Pecas_5: 1873132280
+      Terra_Pecas_6: -906964887
+      Terra_Pecas_7: 770676615
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

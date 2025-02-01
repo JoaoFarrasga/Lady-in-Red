@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73e540a4190f3d94281a93da6f39651c
+guid: 9d9f39bec8f706a4e9dbec17604e4664
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fogo_0
+      name: Neutro_Pecas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 805
+        y: 655
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6caf550c3b28384aa8dfe910c898991
-      internalID: -343951067
+      spriteID: 06445c87ed2d88d4cad6a07c2a8000bf
+      internalID: -949493344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_1
+      name: Neutro_Pecas_1
       rect:
         serializedVersion: 2
         x: 606
-        y: 805
+        y: 655
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43d2f426e84d9984092ee5199429a13e
-      internalID: -1323454909
+      spriteID: a5928604057273e4c8252fa9bd934ab2
+      internalID: -1328975995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_2
+      name: Neutro_Pecas_2
       rect:
         serializedVersion: 2
         x: 1212
-        y: 805
+        y: 655
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4542aaf972b91a24b85db2cc2ff7bd6d
-      internalID: -574651794
+      spriteID: 40b0e74795d14e54ea5b49aafe5da891
+      internalID: 1573225236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_3
+      name: Neutro_Pecas_3
       rect:
         serializedVersion: 2
         x: 1818
-        y: 805
+        y: 655
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5af2a5a1129898644b370daa1105b585
-      internalID: -1100418315
+      spriteID: a51b0e4a12c7b224780ba9f34171f4c6
+      internalID: 2061523652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_4
+      name: Neutro_Pecas_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 170
+        y: 49
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 258f52da892e5e348af2e7f57595a85d
-      internalID: -407223187
+      spriteID: 43ec372b07400684bb08102dee3d7ac9
+      internalID: -1159516899
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_5
+      name: Neutro_Pecas_5
       rect:
         serializedVersion: 2
         x: 606
-        y: 170
+        y: 49
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a080aaa4231fab04d886e112fd9f1f83
-      internalID: -743635450
+      spriteID: a5f4e9c3ecfd8964c8f53ad5e76ed08c
+      internalID: 1192326110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_6
+      name: Neutro_Pecas_6
       rect:
         serializedVersion: 2
         x: 1212
-        y: 170
+        y: 49
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fba394315b44c8a4daeb00e7cbed2036
-      internalID: 170628667
+      spriteID: 7d90e808e17ee4648a7d2e24fba3b530
+      internalID: 1588864826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fogo_7
+      name: Neutro_Pecas_7
       rect:
         serializedVersion: 2
         x: 1818
-        y: 170
+        y: 49
         width: 606
-        height: 635
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c3305d3e56d6844fa72473a1b44c176
-      internalID: 1761832612
+      spriteID: 69e10e45a8fd91c43a8e8d5881a959ca
+      internalID: 778665187
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3ae457b6fb006a1459869094e84bbcbb
+    spriteID: 25bbb60c858e2df4c84642fbacb9b09d
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fogo_0: -343951067
-      Fogo_1: -1323454909
-      Fogo_2: -574651794
-      Fogo_3: -1100418315
-      Fogo_4: -407223187
-      Fogo_5: -743635450
-      Fogo_6: 170628667
-      Fogo_7: 1761832612
+      Neutro_Pecas_0: -949493344
+      Neutro_Pecas_1: -1328975995
+      Neutro_Pecas_2: 1573225236
+      Neutro_Pecas_3: 2061523652
+      Neutro_Pecas_4: -1159516899
+      Neutro_Pecas_5: 1192326110
+      Neutro_Pecas_6: 1588864826
+      Neutro_Pecas_7: 778665187
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

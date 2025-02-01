@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 39639c8bfcc535142a32ec2cbe72139d
+guid: b837fd61a440de2498df8557cd1f1030
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Earth_0
+      name: Fogo_Pecas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 735
-        width: 600
-        height: 620
+        y: 702
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb76f1e6f26b8d84b80e565319f72d21
-      internalID: 670110513
+      spriteID: 225b432bff983744ebaef86eb9f1bc6b
+      internalID: -172142936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_1
+      name: Fogo_Pecas_1
       rect:
         serializedVersion: 2
-        x: 600
-        y: 737
-        width: 600
-        height: 620
+        x: 606
+        y: 702
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6003d9213c8d2ab4d8fe9e9e21f8d2b3
-      internalID: 1103297447
+      spriteID: 08c861214c230f34898eb166fe7c9500
+      internalID: 1580207379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_2
+      name: Fogo_Pecas_2
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 737
-        width: 600
-        height: 620
+        x: 1212
+        y: 702
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b385454793af87e46b701afb829e5dab
-      internalID: -2087204098
+      spriteID: bcd69b411a874624181b26ac50c97df0
+      internalID: 1909933998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_3
+      name: Fogo_Pecas_3
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 737
-        width: 600
-        height: 620
+        x: 1818
+        y: 702
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43a99a5da1f87c1428e6c4f8e8fa42e2
-      internalID: -1733660126
+      spriteID: 1bddff1228f120c429107d1164f26a1c
+      internalID: -1526891093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_4
+      name: Fogo_Pecas_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 117
-        width: 600
-        height: 620
+        y: 96
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f8c5c4bab64fef48a651c54ff536d09
-      internalID: -523489442
+      spriteID: cbf767b366a93a848bda14d6ed9c8796
+      internalID: 1367339852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_5
+      name: Fogo_Pecas_5
       rect:
         serializedVersion: 2
-        x: 600
-        y: 117
-        width: 600
-        height: 620
+        x: 606
+        y: 96
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 470d3a4889592fa4982e73255bd2e6b1
-      internalID: -829833099
+      spriteID: 2ab3e749fab20db449316414856806e3
+      internalID: 1394638617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_6
+      name: Fogo_Pecas_6
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 117
-        width: 600
-        height: 620
+        x: 1212
+        y: 96
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 308691332033e8c498babedb54e87e27
-      internalID: -1708447001
+      spriteID: cbe8f53ea3b8e524caa8c7411655e553
+      internalID: -104362741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Earth_7
+      name: Fogo_Pecas_7
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 117
-        width: 600
-        height: 620
+        x: 1818
+        y: 96
+        width: 606
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 740514bb653083b40af17a519086d376
-      internalID: -452532302
+      spriteID: 3cbdf85e563ac9c4ab63a6d7782352cd
+      internalID: -354260569
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 13c36d2f9d65240449bb45b08de497b2
+    spriteID: 3b996b5f0d948d34aa06b791c313ae28
     internalID: 0
     vertices: []
     indices: 
@@ -299,14 +299,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Earth_0: 670110513
-      Earth_1: 1103297447
-      Earth_2: -2087204098
-      Earth_3: -1733660126
-      Earth_4: -523489442
-      Earth_5: -829833099
-      Earth_6: -1708447001
-      Earth_7: -452532302
+      Fogo_Pecas_0: -172142936
+      Fogo_Pecas_1: 1580207379
+      Fogo_Pecas_2: 1909933998
+      Fogo_Pecas_3: -1526891093
+      Fogo_Pecas_4: 1367339852
+      Fogo_Pecas_5: 1394638617
+      Fogo_Pecas_6: -104362741
+      Fogo_Pecas_7: -354260569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
