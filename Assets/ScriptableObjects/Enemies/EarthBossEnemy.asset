@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06deb3e13136f24288d13c589f7bc77, type: 3}
+  m_Name: EarthBossEnemy
+  m_EditorClassIdentifier: 
+  enemyName: Earth Boss
+  bodySprite: {fileID: 610335494, guid: 244eecfe273b19b4ea5cfc024602f624, type: 3}
+  faceSprite: {fileID: 1224610504, guid: 92cfd556e7aad5245b3ec0009c2cd96a, type: 3}
+  particleSprite: {fileID: -558114066, guid: d7d60cdca3ca67d4e985c4dfe88d81ab, type: 3}
+  elementalType: 2
+  maxHealth: 100
+  maxBasicDamageAttack: 5
+  maxHeavyDamageAttack: 0
+  basicAttack: 0
+  heavyAttack: 0
+  elementWeaknessList: []
+  elementalWeakType: 1
+  elementStrongList: []
+  elementalStrongType: 2

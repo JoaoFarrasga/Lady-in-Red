@@ -10,7 +10,9 @@ public class EnemySO : ScriptableObject
     public string enemyName;
 
     [Header("Appearence")]
-    public Sprite enemyAppearence;
+    public Sprite bodySprite;
+    public Sprite faceSprite;
+    public Sprite particleSprite;
 
     [Header("ElementalType")]
     public OrbType elementalType;

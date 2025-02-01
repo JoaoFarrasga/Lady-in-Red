@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: FireEnemy
   m_EditorClassIdentifier: 
   enemyName: Fire
-  enemyAppearence: {fileID: 1877986880, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
+  bodySprite: {fileID: 1869817167, guid: 69677ac23a4719044bb972c504482350, type: 3}
+  faceSprite: {fileID: -955466055, guid: 89ba76d1f25923240a96b197646297ad, type: 3}
+  particleSprite: {fileID: 0}
   elementalType: 0
   maxHealth: 100
   maxBasicDamageAttack: 5
