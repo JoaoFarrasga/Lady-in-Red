@@ -259,7 +259,7 @@ MonoBehaviour:
   levelEnemies: []
   player: {fileID: 2044331476}
   referencePoint: {fileID: 994066206}
-  totalEnemySpace: 5
+  totalEnemySpace: 10
   battleGenerator: {fileID: 994066207}
 --- !u!4 &288581801
 Transform:
