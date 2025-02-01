@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: WaterEnemy
   m_EditorClassIdentifier: 
   enemyName: Water
-  enemyAppearence: {fileID: -973322595, guid: 1d90d4dd072b15d4b9c4299907a2d284, type: 3}
+  bodySprite: {fileID: 1836754118, guid: a998b214a57a6d7439b41c4b7ed7f555, type: 3}
+  faceSprite: {fileID: 1318160370, guid: 6c216a28f12049243aa1e0818a03d85d, type: 3}
+  particleSprite: {fileID: 0}
   elementalType: 1
   maxHealth: 100
   maxBasicDamageAttack: 5
