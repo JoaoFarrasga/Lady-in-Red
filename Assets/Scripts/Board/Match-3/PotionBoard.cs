@@ -208,7 +208,7 @@ public class PotionBoard : MonoBehaviour
                 matchCountsByColor.Clear();
                 if (totalTurns == battleControler.maxPlayerTurns)
                 {
-                    battleControler.UpdateBattleState(BattleState.EnemyTurn);
+                    if(battleControler.GetLevelEnemies().Count != 0) battleControler.UpdateBattleState(BattleState.EnemyTurn);
                     battleControler.maxEnemyTurns = 1;
                     totalTurns = 0;
                 }

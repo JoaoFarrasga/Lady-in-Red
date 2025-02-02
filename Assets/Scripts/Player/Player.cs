@@ -26,7 +26,11 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage, BattleControler battleControler)
     {
         health -= damage;
-        if (health <= 0) Die(battleControler);
+        if (health <= 0)
+        {
+            Die(battleControler);
+            return;
+        }
     }
 
     public void AttackEnemy(Dictionary<OrbType, int> elementMatches, BattleControler battleControler, int combos)
@@ -45,11 +49,12 @@ public class Player : MonoBehaviour
 
     private void Die(BattleControler battleControler) {  battleControler.UpdateBattleState(BattleState.BattleEnd); }
 
-    public void SetHealthIncrease(float healthPercentage, int level)
+    public float SetHealthIncrease(float healthPercentage, int level)
     { 
         if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
         else health = maxHealth + (maxHealth * (healthPercentage * level));
         print("Health: " + health);
+        return health;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage, int level)

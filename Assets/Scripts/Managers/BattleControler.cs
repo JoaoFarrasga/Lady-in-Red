@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,7 @@ public class BattleControler : MonoBehaviour
     private Camera mainCamera;
 
     [Header("BattleState")]
-    private BattleState battleState;
+    [SerializeField] private BattleState battleState;
 
     [Header("EnemyInfo")]
     [SerializeField] GameObject enemyPrefab;
@@ -34,11 +35,19 @@ public class BattleControler : MonoBehaviour
     [Header("BattleGeneratorInfo")]
     [SerializeField] private BattleGenerator battleGenerator;
 
+    [Header("HUD Controller")]
+    [SerializeField] HUDController_ hudController;
+
 
     private void Awake()
     {
         mainCamera = Camera.main;
         inputActions = new PlayerInputActions();
+    }
+
+    private void Start()
+    {
+        hudController = GetComponent<HUDController_>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -72,7 +81,7 @@ public class BattleControler : MonoBehaviour
     }
 
 
-    public void UpdateBattleState(BattleState newbattleState)
+    public async void UpdateBattleState(BattleState newbattleState)
     {
         battleState = newbattleState;
 
@@ -82,10 +91,10 @@ public class BattleControler : MonoBehaviour
                 SetUpBattle();
                 break;
             case BattleState.PlayerTurn:
-                //CheckNumEnemies();
-                // Manage Player Turn
+                print("EnemyTurn");
                 break;
             case BattleState.EnemyTurn:
+                await GameManager.gameManager.MessagePOP_UP("EnemyTurn");
                 EnemyTurnAttack();
                 // Manage Enemy Turn
                 break;
@@ -104,12 +113,21 @@ public class BattleControler : MonoBehaviour
         UpdateBattleState(BattleState.PlayerTurn);
     }
 
-    private void BattleEnd(Player player)
+    private async void BattleEnd(Player player)
     {
-        if (player.GetHealth() < 0 || GameManager.gameManager.gameLevel >= 10)
+        if (player.GetHealth() < 0)
         {
-            GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
+            await GameManager.gameManager.MessagePOP_UP("YOU DIED\n(skill issue)", () => { GameManager.gameManager.UpdateGameState(GameState.ExitBattle); });
+            //GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
             DestroyLevelEnemies();
+            increaseEnemyHealthPercentage = 0.5f;
+            increaseEnemyDamagePercentage = 0.15f;
+            return;
+        }
+        else if(GameManager.gameManager.gameLevel >= 10)
+        {
+            await GameManager.gameManager.MessagePOP_UP("YOU WON", () => { GameManager.gameManager.UpdateGameState(GameState.ExitBattle); });
+            //GameManager.gameManager.UpdateGameState(GameState.ExitBattle);
             increaseEnemyHealthPercentage = 0.5f;
             increaseEnemyDamagePercentage = 0.15f;
             return;
@@ -118,7 +136,8 @@ public class BattleControler : MonoBehaviour
         GameManager.gameManager.gameLevel++;
         increaseEnemyHealthPercentage += 0.15f;
         increaseEnemyDamagePercentage += 0.03f;
-        UpdateBattleState(BattleState.BattleInit);
+        await GameManager.gameManager.MessagePOP_UP("ENEMIES DEFEATED", () => { UpdateBattleState(BattleState.BattleInit); });
+        //UpdateBattleState(BattleState.BattleInit);
     }
 
     private void DestroyLevelEnemies(){ foreach(GameObject enemy in levelEnemies) Destroy(enemy); }
@@ -160,18 +179,21 @@ public class BattleControler : MonoBehaviour
 
     private void IncreasePlayerStats()
     {
-        player.SetHealthIncrease(increasePlayerHealthPercentage, GameManager.gameManager.gameLevel);
+        float playerHealthIncrease = player.SetHealthIncrease(increasePlayerHealthPercentage, GameManager.gameManager.gameLevel);
         player.SetBasicDamageAttackIncrease(increasePlayerDamagePercentage, GameManager.gameManager.gameLevel);
+
+        hudController.GetPlayerLifeSlider().maxValue = playerHealthIncrease;
     }
 
-    private void EnemyTurnAttack()
+    private async void EnemyTurnAttack()
     {
-        // print("EnemyAttacking");
         foreach (GameObject enemy in levelEnemies)
         {
+            if (player.GetHealth() <= 0) return;
             enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject, this);
+            await Task.Delay(1500);
         }
-        UpdateBattleState(BattleState.PlayerTurn);
+        if( battleState != BattleState.BattleEnd) await GameManager.gameManager.MessagePOP_UP("Player Turn", () => { UpdateBattleState(BattleState.PlayerTurn); });
     }
 
     public void CheckNumEnemies()
