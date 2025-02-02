@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class HUDController_ : MonoBehaviour
 {
-    public TMP_Text turnCounter;
     public TMP_Text comboCounter;
     public PotionBoard potionBoard;
 
@@ -16,8 +15,7 @@ public class HUDController_ : MonoBehaviour
     {
         if (potionBoard != null)
         {
-            turnCounter.text = "Turnos: " + potionBoard.totalTurns;
-            comboCounter.text = "Combos: " + potionBoard.totalCombos;
+            comboCounter.text = potionBoard.totalCombos.ToString();
             playerLife.value = player.GetHealth();
         }
     }
