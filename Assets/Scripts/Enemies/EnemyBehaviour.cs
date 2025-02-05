@@ -50,11 +50,11 @@ public class EnemyBehaviour : MonoBehaviour
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
     }
 
-    public async void AttackPlayer(GameObject target, BattleControler battleControler)
+    public async Task AttackPlayer(GameObject target, BattleControler battleControler)
     {
         PauseAnimation();
-        target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
-        await Task.Delay(1500);
+        await target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
+        //await Task.Delay(500);
         ResumeAnimation();
     }
 

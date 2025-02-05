@@ -1,6 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem.Android;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 { 
@@ -11,6 +15,9 @@ public class Player : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float maxDamageAttack = 10f;
     [SerializeField] private float damageAttack;
+
+    [Header("DamageEffect")]
+    [SerializeField] Image damageEffect;
 
     private void Awake()
     {
@@ -23,13 +30,32 @@ public class Player : MonoBehaviour
         damageAttack = maxDamageAttack;
     }
 
-    public void TakeDamage(float damage, BattleControler battleControler)
+    public async Task TakeDamage(float damage, BattleControler battleControler)
     {
         health -= damage;
+        await TakeDamageEffect();
+        //await Task.Delay(5000);
         if (health <= 0)
         {
             Die(battleControler);
             return;
+        }
+    }
+
+    private async Task TakeDamageEffect()
+    {
+        Color newColor = damageEffect.color;
+        newColor.a = 120f / 255f;             
+        damageEffect.color = newColor;
+
+        await Task.Delay(400);
+
+        while (newColor.a > 0f) 
+        {
+            newColor.a -= 0.01f;
+            damageEffect.color = newColor;
+
+            await Task.Delay(100); ;
         }
     }
 

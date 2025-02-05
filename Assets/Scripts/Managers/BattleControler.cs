@@ -95,7 +95,7 @@ public class BattleControler : MonoBehaviour
                 break;
             case BattleState.EnemyTurn:
                 await GameManager.gameManager.MessagePOP_UP("EnemyTurn");
-                EnemyTurnAttack();
+                await EnemyTurnAttack();
                 // Manage Enemy Turn
                 break;
             case BattleState.BattleEnd:
@@ -185,13 +185,13 @@ public class BattleControler : MonoBehaviour
         hudController.GetPlayerLifeSlider().maxValue = playerHealthIncrease;
     }
 
-    private async void EnemyTurnAttack()
+    private async Task EnemyTurnAttack()
     {
         foreach (GameObject enemy in levelEnemies)
         {
             if (player.GetHealth() <= 0) return;
-            enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject, this);
-            await Task.Delay(1500);
+            await enemy.GetComponent<EnemyBehaviour>().AttackPlayer(player.gameObject, this);
+            //await Task.Delay(1500);
         }
         if( battleState != BattleState.BattleEnd) await GameManager.gameManager.MessagePOP_UP("Player Turn", () => { UpdateBattleState(BattleState.PlayerTurn); });
     }
