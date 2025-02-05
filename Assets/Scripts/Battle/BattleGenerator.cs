@@ -8,11 +8,11 @@ using Random = UnityEngine.Random;
 public class BattleGenerator : MonoBehaviour
 {
     [Header("GameInfos")]
-    [SerializeField] private int numOfLevels = 10;
+    [SerializeField] private int numOfLevels = 12;
 
     [Header("Enemies")]
     //private List<EnemySO> enemies = new();
-    [SerializeField] private List<EnemySO> listOfEnemiesSO;
+    [SerializeField] private List<EnemySO> listOfMinionsEnemiesSO, listOfBossEnemiesSO;
     [SerializeField] private List<List<EnemySO>> battles = new();
 
     [Header("BattleController")]
@@ -25,9 +25,16 @@ public class BattleGenerator : MonoBehaviour
         {
             int numOfEnemies = NumberOfEnemysInLevel();
             List<EnemySO> enemies = new();
-            for (int j = 0; j < numOfEnemies; j++)
-            { 
-                enemies.Add(listOfEnemiesSO[Random.Range(0, listOfEnemiesSO.Count)]); 
+            if((i + 1) % 4 == 0)
+            {
+                enemies.Add(listOfBossEnemiesSO[((i + 1) / 4) - 1]);
+            }
+            else
+            {
+                for (int j = 0; j < numOfEnemies; j++)
+                {
+                    enemies.Add(listOfMinionsEnemiesSO[Random.Range(0, listOfMinionsEnemiesSO.Count)]);
+                }
             }
             battles.Add(enemies);
         }

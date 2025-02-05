@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Earth Boss
   bodySprite: {fileID: 610335494, guid: 244eecfe273b19b4ea5cfc024602f624, type: 3}
-  faceSprite: {fileID: 1224610504, guid: 92cfd556e7aad5245b3ec0009c2cd96a, type: 3}
+  normalFaceSprite: {fileID: 1224610504, guid: 92cfd556e7aad5245b3ec0009c2cd96a, type: 3}
+  madFaceSprite: {fileID: -1070872717, guid: 6d2579277a721cf408cf696a48f2b4d9, type: 3}
   particleSprite: {fileID: -558114066, guid: d7d60cdca3ca67d4e985c4dfe88d81ab, type: 3}
   elementalType: 2
-  maxHealth: 15000
+  maxHealth: 10000
   maxBasicDamageAttack: 5
   maxHeavyDamageAttack: 0
   basicAttack: 0

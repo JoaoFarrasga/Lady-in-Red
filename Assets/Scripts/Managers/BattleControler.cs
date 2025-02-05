@@ -15,7 +15,7 @@ public class BattleControler : MonoBehaviour
 
     [Header("EnemyInfo")]
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] public GameObject focusedEnemy { get; set; }
+    public GameObject focusedEnemy { get; set; }
     [SerializeField] List<GameObject> levelEnemies;
     private float increaseEnemyHealthPercentage = 0.5f;
     private float increaseEnemyDamagePercentage = 0.15f;

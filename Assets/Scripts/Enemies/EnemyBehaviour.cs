@@ -39,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         bodySpriteRenderer.sprite = enemySO.bodySprite;
-        faceSpriteRenderer.sprite = enemySO.faceSprite;
+        faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
         if (enemySO.particleSprite != null) particleSpriteRenderer.sprite = enemySO.particleSprite;
     }
 
@@ -53,9 +53,11 @@ public class EnemyBehaviour : MonoBehaviour
     public async Task AttackPlayer(GameObject target, BattleControler battleControler)
     {
         PauseAnimation();
+        faceSpriteRenderer.sprite = enemySO.madFaceSprite;
         await target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
         //await Task.Delay(500);
         ResumeAnimation();
+        faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
     }
 
     // M�todo para receber dano

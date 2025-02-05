@@ -11,7 +11,8 @@ public class EnemySO : ScriptableObject
 
     [Header("Appearence")]
     public Sprite bodySprite;
-    public Sprite faceSprite;
+    public Sprite normalFaceSprite;
+    public Sprite madFaceSprite;
     public Sprite particleSprite;
 
     [Header("ElementalType")]
