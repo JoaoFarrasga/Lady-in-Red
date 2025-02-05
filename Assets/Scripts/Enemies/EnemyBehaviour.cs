@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float heavyDamageAttack;
 
     [Header("EnemyHealthText")]
-    [SerializeField] private TMP_Text enemyHealthText;
+    [SerializeField] private Slider enemyHealthText;
 
     [Header("EnemySO")]
     [SerializeField] private EnemySO enemySO;
@@ -21,9 +23,15 @@ public class EnemyBehaviour : MonoBehaviour
     //[SerializeField] private GameObject body, face, particles;
     private SpriteRenderer bodySpriteRenderer, faceSpriteRenderer, particleSpriteRenderer;
 
+    [Header("EnemyAnimator")]
+    private Animator animator;
+    private string currentAnimation;
+    private float savedTime;
+
     private void Awake()
     {
-        enemyHealthText = GetComponentInChildren<TMP_Text>();
+        animator = GetComponent<Animator>();
+        enemyHealthText = GetComponentInChildren<Slider>();
         bodySpriteRenderer = transform.Find("Body").GetComponent<SpriteRenderer>();
         faceSpriteRenderer = transform.Find("Face").GetComponent<SpriteRenderer>();
         particleSpriteRenderer = transform.Find("Particle").GetComponent<SpriteRenderer>();
@@ -42,9 +50,12 @@ public class EnemyBehaviour : MonoBehaviour
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
     }
 
-    public void AttackPlayer(GameObject target, BattleControler battleControler)
+    public async Task AttackPlayer(GameObject target, BattleControler battleControler)
     {
-        target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
+        PauseAnimation();
+        await target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
+        //await Task.Delay(500);
+        ResumeAnimation();
     }
 
     // M�todo para receber dano
@@ -70,7 +81,7 @@ public class EnemyBehaviour : MonoBehaviour
             Die(battleControler);
             return;
         }
-        enemyHealthText.text = health.ToString();
+        enemyHealthText.value = health;
     }
 
     private void Die(BattleControler battleControler)
@@ -89,12 +100,26 @@ public class EnemyBehaviour : MonoBehaviour
         else health = maxHealth + (maxHealth * (healthPercentage));
         
         //print("Health: " + health);
-        enemyHealthText.text = health.ToString();
+        enemyHealthText.value = health;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
     {
         if (GameManager.gameManager.gameLevel == 1) basicDamageAttack = enemySO.maxBasicDamageAttack;
         else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * (damagePercentage)); 
+    }
+
+    void PauseAnimation()
+    {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        currentAnimation = state.IsName("EnemyIdle") ? "EnemyIdle" : state.fullPathHash.ToString(); // Store current animation name
+        savedTime = state.normalizedTime; // Store current time (normalized)
+        animator.speed = 0;
+    }
+
+    void ResumeAnimation()
+    {
+        animator.speed = 1;
+        animator.Play(currentAnimation, 0, savedTime); // Resume from saved time
     }
 }

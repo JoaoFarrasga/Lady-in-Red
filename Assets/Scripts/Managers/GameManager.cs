@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using TMPro;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UIManager")]
     [SerializeField] MenuManagerFrancisco menuManager;
+    [SerializeField] GameObject messagePopUp;
 
     private void Awake()
     {
@@ -53,6 +57,17 @@ public class GameManager : MonoBehaviour
         }
 
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    public async Task MessagePOP_UP(string message, System.Action onComplete = null)
+    {
+        messagePopUp.SetActive(true);
+        messagePopUp.transform.GetComponentInChildren<TMP_Text>().text = message;
+        //print("Animation duration: " + (double) messagePopUp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        await Task.Delay(1500);
+        messagePopUp.SetActive(false);
+        onComplete?.Invoke(); // Call the callback when done
+
     }
 }
 

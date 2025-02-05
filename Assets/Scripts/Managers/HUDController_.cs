@@ -19,4 +19,6 @@ public class HUDController_ : MonoBehaviour
             playerLife.value = player.GetHealth();
         }
     }
+
+    public Slider GetPlayerLifeSlider() { return playerLife; }
 }
