@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterEnemy
   m_EditorClassIdentifier: 
   enemyName: Water
+  enemyType: Minion
   bodySprite: {fileID: 1836754118, guid: a998b214a57a6d7439b41c4b7ed7f555, type: 3}
   normalFaceSprite: {fileID: 1318160370, guid: 6c216a28f12049243aa1e0818a03d85d, type: 3}
   madFaceSprite: {fileID: 19543174, guid: 5c4435d9f786a47468d7779b83d4b995, type: 3}

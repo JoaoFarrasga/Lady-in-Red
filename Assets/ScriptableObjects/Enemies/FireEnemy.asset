@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireEnemy
   m_EditorClassIdentifier: 
   enemyName: Fire
+  enemyType: Minion
   bodySprite: {fileID: 1869817167, guid: 69677ac23a4719044bb972c504482350, type: 3}
   normalFaceSprite: {fileID: -955466055, guid: 89ba76d1f25923240a96b197646297ad, type: 3}
   madFaceSprite: {fileID: -1273553593, guid: a1e65034733a6ed4bb6844e06a274a79, type: 3}

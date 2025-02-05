@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EarthEnemy
   m_EditorClassIdentifier: 
   enemyName: Earth
+  enemyType: Minion
   bodySprite: {fileID: 1288997943, guid: 433a554e269c5084fb31b7903e703ca9, type: 3}
   normalFaceSprite: {fileID: -1298340285, guid: 8c1e9ade8071bf241997c8dc4077937b, type: 3}
   madFaceSprite: {fileID: -1689898592, guid: 71b83c1396ac5f94abb3ce83f51c992f, type: 3}

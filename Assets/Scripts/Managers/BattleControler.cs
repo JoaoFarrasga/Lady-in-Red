@@ -154,9 +154,12 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
-            go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseEnemyHealthPercentage);
-            go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseEnemyDamagePercentage);
 
+            if (go.GetComponent<EnemyBehaviour>().GetEnemySO().enemyType == "Minion")
+            {
+                go.GetComponent<EnemyBehaviour>().SetHealthIncrease(increaseEnemyHealthPercentage);
+                go.GetComponent<EnemyBehaviour>().SetBasicDamageAttackIncrease(increaseEnemyDamagePercentage);
+            }
             levelEnemies.Add(go);
 
             if (isPlacingOnRightSide)

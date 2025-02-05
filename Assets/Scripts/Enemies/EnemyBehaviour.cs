@@ -48,6 +48,11 @@ public class EnemyBehaviour : MonoBehaviour
         this.enemySO = enemySO;
         maxHealth = enemySO.maxHealth;
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
+        if (enemySO.enemyType == "Boss")
+        {
+            health = maxHealth;
+            basicDamageAttack = maxBasicDamageAttack;
+        }
     }
 
     public async Task AttackPlayer(GameObject target, BattleControler battleControler)
@@ -71,7 +76,11 @@ public class EnemyBehaviour : MonoBehaviour
 
             if (item.Key == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
 
-            else if (item.Key == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resist�ncias
+            else if (item.Key == enemySO.elementalStrongType)
+            {
+                damage = -(damage / 2);
+                if(health > maxHealth) health = maxHealth;
+            }// Dano reduzido contra resist�ncias
 
             totalDamage += damage;
         }
@@ -99,7 +108,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
         //print("Maxhealth: " + maxHealth);
         if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
-        else health = maxHealth + (maxHealth * (healthPercentage));
+        else
+        {
+            maxHealth += maxHealth * (healthPercentage);
+            health = maxHealth;
+        }
         
         //print("Health: " + health);
         enemyHealthText.value = health;
@@ -108,7 +121,11 @@ public class EnemyBehaviour : MonoBehaviour
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
     {
         if (GameManager.gameManager.gameLevel == 1) basicDamageAttack = enemySO.maxBasicDamageAttack;
-        else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * (damagePercentage)); 
+        else
+        {
+            maxBasicDamageAttack += maxBasicDamageAttack * (damagePercentage);
+            basicDamageAttack = maxBasicDamageAttack;
+        }
     }
 
     void PauseAnimation()
