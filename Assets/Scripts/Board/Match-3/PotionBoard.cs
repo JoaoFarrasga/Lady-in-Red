@@ -43,6 +43,9 @@ public class PotionBoard : MonoBehaviour
 
     public bool firstTurn = true;
 
+    // Damage VFX
+    [SerializeField] private DamageVFX damageVFX;
+
     private void Awake()
     {
         Instance = this;
@@ -257,7 +260,10 @@ public class PotionBoard : MonoBehaviour
             if (_takeAction && !firstTurn && isNewTurn)
             {
                 if (battleControler.GetLevelEnemies().Count != 0)
-                {
+                {   
+                    var firstOrbType = matchCountsByColor.Keys.First();
+                    damageVFX.DamgeVFXStart(firstOrbType);
+
                     player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 }
 

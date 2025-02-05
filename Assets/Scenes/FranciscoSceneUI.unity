@@ -1731,6 +1731,7 @@ GameObject:
   - component: {fileID: 1316139761}
   - component: {fileID: 1316139760}
   - component: {fileID: 1316139762}
+  - component: {fileID: 1316139763}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1788,6 +1789,23 @@ MonoBehaviour:
   hud: {fileID: 6615716924921765078}
   menu: {fileID: 7352832176410801618}
   options: {fileID: 0}
+--- !u!114 &1316139763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316139759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7b37c600c6b8b42b9b4cbd5da2391a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleControler: {fileID: 288581800}
+  ataque_Agua: {fileID: 3606776540263256171, guid: 34f00dded56e8394888cf13d3ebf93b3, type: 3}
+  ataque_Fogo: {fileID: 9221950754210884270, guid: 3d71be348b2d5d84e9065f8c692159f5, type: 3}
+  ataque_Folha: {fileID: 3270700038113783200, guid: c4d127d6f0309ea4b80c12a36975a21b, type: 3}
+  ataque_Normal: {fileID: 4879448161167804293, guid: d0dc7cd55031be343aa807563b03b7bb, type: 3}
 --- !u!1 &1333513677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,6 +2594,7 @@ MonoBehaviour:
   totalCombos: 0
   totalTurns: 0
   firstTurn: 1
+  damageVFX: {fileID: 1316139763}
 --- !u!1 &1824123912
 GameObject:
   m_ObjectHideFlags: 0
