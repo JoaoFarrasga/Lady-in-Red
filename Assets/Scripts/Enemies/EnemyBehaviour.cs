@@ -47,6 +47,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         this.enemySO = enemySO;
         maxHealth = enemySO.maxHealth;
+        enemyHealthText.maxValue = maxHealth;
+        enemyHealthText.value = maxHealth;
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
     }
 
@@ -100,7 +102,7 @@ public class EnemyBehaviour : MonoBehaviour
         else health = maxHealth + (maxHealth * (healthPercentage));
         
         //print("Health: " + health);
-        enemyHealthText.value = health;
+        enemyHealthText.maxValue = health;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
