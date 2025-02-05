@@ -47,6 +47,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         this.enemySO = enemySO;
         maxHealth = enemySO.maxHealth;
+        enemyHealthText.maxValue = maxHealth;
+        enemyHealthText.value = maxHealth;
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
         if (enemySO.enemyType == "Boss")
         {
@@ -115,7 +117,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         
         //print("Health: " + health);
-        enemyHealthText.value = health;
+        enemyHealthText.maxValue = maxHealth;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
