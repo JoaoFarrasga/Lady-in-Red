@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveBackground : MonoBehaviour
 {
-    public float speed = 2f; // Velocidade do movimento
+    public float speed = 15f; // Velocidade do movimento
     public float limitLeft = 300f; // Posição mínima
     public float limitRight = 500f; // Posição máxima
 
@@ -31,4 +31,3 @@ public class MoveBackground : MonoBehaviour
         }
     }
 }
-
