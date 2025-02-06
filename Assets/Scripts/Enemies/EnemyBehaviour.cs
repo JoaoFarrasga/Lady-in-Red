@@ -15,6 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [Header("EnemyHealthText")]
     [SerializeField] private Slider enemyHealthText;
+    [SerializeField] private SpriteRenderer healthSprite;
 
     [Header("EnemySO")]
     [SerializeField] private EnemySO enemySO;
@@ -35,12 +36,14 @@ public class EnemyBehaviour : MonoBehaviour
         bodySpriteRenderer = transform.Find("Body").GetComponent<SpriteRenderer>();
         faceSpriteRenderer = transform.Find("Face").GetComponent<SpriteRenderer>();
         particleSpriteRenderer = transform.Find("Particle").GetComponent<SpriteRenderer>();
+        healthSprite = transform.Find("HealthSprite").GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
         bodySpriteRenderer.sprite = enemySO.bodySprite;
         faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
         if (enemySO.particleSprite != null) particleSpriteRenderer.sprite = enemySO.particleSprite;
+        healthSprite.sprite = enemySO.healthSprite;
     }
 
     public void SetEnemySO(EnemySO enemySO)

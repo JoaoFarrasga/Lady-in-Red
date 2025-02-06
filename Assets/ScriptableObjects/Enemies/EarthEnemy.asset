@@ -19,6 +19,7 @@ MonoBehaviour:
   madFaceSprite: {fileID: -1689898592, guid: 71b83c1396ac5f94abb3ce83f51c992f, type: 3}
   particleSprite: {fileID: 0}
   elementalType: 2
+  healthSprite: {fileID: -906964887, guid: 5abf06ca870d632408b9c2afa3838b58, type: 3}
   maxHealth: 3000
   maxBasicDamageAttack: 5
   maxHeavyDamageAttack: 0

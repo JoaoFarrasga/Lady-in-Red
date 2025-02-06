@@ -18,6 +18,7 @@ public class EnemySO : ScriptableObject
 
     [Header("ElementalType")]
     public OrbType elementalType;
+    public Sprite healthSprite;
 
     [Header("Health")]
     public float maxHealth;
