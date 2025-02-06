@@ -127,7 +127,7 @@ public class BattleControler : MonoBehaviour
             increaseEnemyDamagePercentage = 0.15f;
             return;
         }
-        else if(GameManager.gameManager.gameLevel >= 10)
+        else if(GameManager.gameManager.gameLevel >= 12)
         {
             await GameManager.gameManager.MessagePOP_UP("YOU WON", () => { GameManager.gameManager.UpdateGameState(GameState.ExitBattle); });
             //GameManager.gameManager.UpdateGameState(GameState.ExitBattle);

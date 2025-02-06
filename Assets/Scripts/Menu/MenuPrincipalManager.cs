@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-
 public class MenuPrincipalManager : MonoBehaviour
 {
     [SerializeField] private string JoaoScene;
@@ -14,7 +12,7 @@ public class MenuPrincipalManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Jogar()
     {
-        SceneManager.LoadScene(JoaoScene);
+        painelMenuInicial.SetActive(false);
     }
     public void AbrirOpcoes()
     {
