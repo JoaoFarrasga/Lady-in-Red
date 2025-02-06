@@ -26,23 +26,24 @@ public class FundoController : MonoBehaviour
 
     void AtualizarFundo()
     {
+        // Desabilita todos antes de configurar o que precisa ficar ativo
         Fundo1.SetActive(false);
         Fundo2.SetActive(false);
         Fundo3.SetActive(false);
 
-        int fundoIndex = (gameLevel - 1) % 3;
-
-        switch (fundoIndex)
+        // Verifica em qual faixa de níveis o gameLevel está
+        if (gameLevel >= 1 && gameLevel <= 4)
         {
-            case 0:
-                Fundo1.SetActive(true);
-                break;
-            case 1:
-                Fundo2.SetActive(true);
-                break;
-            case 2:
-                Fundo3.SetActive(true);
-                break;
+            Fundo1.SetActive(true);
         }
+        else if (gameLevel >= 5 && gameLevel <= 8)
+        {
+            Fundo2.SetActive(true);
+        }
+        else if (gameLevel >= 9 && gameLevel <= 12)
+        {
+            Fundo3.SetActive(true);
+        }
+        // Caso tenha mais níveis, você pode continuar a lógica conforme necessário.
     }
 }

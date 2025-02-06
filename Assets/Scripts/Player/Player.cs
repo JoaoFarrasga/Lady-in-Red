@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour

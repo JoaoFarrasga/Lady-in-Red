@@ -40,6 +40,8 @@ public class PotionBoard : MonoBehaviour
 
     // Total de turnos do jogador (para controlar o limite, etc.)
     public int totalTurns = 0;
+    private int gameLevel = 0;
+    private int currentGameLevel = 0;
 
     public bool firstTurn = true;
 
@@ -56,6 +58,18 @@ public class PotionBoard : MonoBehaviour
     void Start()
     {
         InitializeBoard();
+        currentGameLevel = GameManager.gameManager.gameLevel;
+    }
+
+    private void Update()
+    {
+        gameLevel = GameManager.gameManager.gameLevel;
+
+        if (gameLevel != currentGameLevel)
+        {
+            currentGameLevel = gameLevel;
+            totalTurns = 0;
+        }
     }
 
     #region Click
@@ -264,6 +278,8 @@ public class PotionBoard : MonoBehaviour
                     var firstOrbType = matchCountsByColor.Keys.First();
                     damageVFX.DamgeVFXStart(firstOrbType);
 
+                    yield return new WaitForSeconds(1f);
+
                     player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
                 }
 
@@ -416,6 +432,8 @@ public class PotionBoard : MonoBehaviour
         // Só podemos trocar se forem adjacentes
         if (!IsAdjacent(_currentPotion, _targetPotion))
         {
+            EnableAndDisableChildSprite(_currentPotion.transform);
+            EnableAndDisableChildSprite(_targetPotion.transform);
             return;
         }
 
@@ -451,10 +469,39 @@ public class PotionBoard : MonoBehaviour
             yield return StartForAllPotionsSettleAgain();
         }
 
-        EnableAndDisableChildSprite(_currentPotion.transform);
-        EnableAndDisableChildSprite(_targetPotion.transform);
+        DisableAllChieldSprite();
         isProcessingMove = false;
     }
+
+    private void DisableAllChieldSprite()
+    {
+        // Percorre todo o tabuleiro
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                // Verifica se o Node é utilizável e se há uma poção
+                if (potionBoard[x, y] != null && potionBoard[x, y].potion != null)
+                {
+                    // Acessa o componente Potion
+                    Potion potion = potionBoard[x, y].potion.GetComponent<Potion>();
+
+                    // Localiza o filho chamado "Luz"
+                    Transform luzTransform = potion.transform.Find("Luz");
+                    if (luzTransform != null)
+                    {
+                        // Desabilita o SpriteRenderer
+                        SpriteRenderer sr = luzTransform.GetComponent<SpriteRenderer>();
+                        if (sr != null)
+                        {
+                            sr.enabled = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     private IEnumerator StartForAllPotionsSettleAgain()
     {

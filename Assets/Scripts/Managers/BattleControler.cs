@@ -38,6 +38,9 @@ public class BattleControler : MonoBehaviour
     [Header("HUD Controller")]
     [SerializeField] HUDController_ hudController;
 
+    [Header("Dead VFX")]
+    [SerializeField] GameObject deadVFX;
+
 
     private void Awake()
     {
@@ -76,7 +79,7 @@ public class BattleControler : MonoBehaviour
         //print("focusedEnemy: " +  enemy);
         if (enemy != null)
         {
-            focusedEnemy = enemy.gameObject;
+            FocusEnemy(enemy.gameObject);
         }
     }
 
@@ -154,6 +157,7 @@ public class BattleControler : MonoBehaviour
         {
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
+            go.GetComponent<EnemyBehaviour>().SetDeadVFX(deadVFX);
 
             if (go.GetComponent<EnemyBehaviour>().GetEnemySO().enemyType == "Minion")
             {
@@ -177,7 +181,7 @@ public class BattleControler : MonoBehaviour
             }
         }
 
-        focusedEnemy = levelEnemies[0];
+        FocusEnemy(levelEnemies[0]);
     }
 
     private void IncreasePlayerStats()
@@ -203,12 +207,24 @@ public class BattleControler : MonoBehaviour
     {
         print("enemy count: " + levelEnemies.Count);
         if (levelEnemies.Count == 0) UpdateBattleState(BattleState.BattleEnd);
-        else focusedEnemy = levelEnemies[0];
+        else FocusEnemy(levelEnemies[0]);
     }
 
     public BattleState GetBattleState() { return battleState; }
 
     public List<GameObject> GetLevelEnemies() { return levelEnemies; }
+
+    private void FocusEnemy(GameObject focus)
+    {
+        if (focusedEnemy != null)
+        {
+            focusedEnemy.GetComponent<EnemyBehaviour>().DefocusEnemy();
+        }
+
+        focusedEnemy = focus;
+
+        focusedEnemy.GetComponent<EnemyBehaviour>().FocusEnemy();
+    }
 }
 
 

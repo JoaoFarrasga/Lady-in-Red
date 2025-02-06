@@ -20,7 +20,7 @@ MonoBehaviour:
   particleSprite: {fileID: 0}
   elementalType: 1
   healthSprite: {fileID: -1385385073, guid: b2434b7d215ca0c47893f898852cb223, type: 3}
-  maxHealth: 3000
+  maxHealth: 500
   maxBasicDamageAttack: 5
   maxHeavyDamageAttack: 0
   basicAttack: 0

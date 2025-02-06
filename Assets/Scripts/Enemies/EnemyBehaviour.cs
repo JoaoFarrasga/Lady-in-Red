@@ -29,6 +29,11 @@ public class EnemyBehaviour : MonoBehaviour
     private string currentAnimation;
     private float savedTime;
 
+    [Header("Dead VFX")]
+    [SerializeField] private GameObject deadVFX;
+
+    private bool amIFocused = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -53,10 +58,22 @@ public class EnemyBehaviour : MonoBehaviour
         enemyHealthText.maxValue = maxHealth;
         enemyHealthText.value = maxHealth;
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
+
         if (enemySO.enemyType == "Boss")
         {
+            // Ajusta a vida e o dano para o Boss
             health = maxHealth;
             basicDamageAttack = maxBasicDamageAttack;
+
+            // Diminui a escala (tamanho) dos sprites pela metade
+            bodySpriteRenderer.transform.localScale *= 0.4f;
+            faceSpriteRenderer.transform.localScale *= 0.4f;
+
+            // Verifica se existe um particleSprite antes de alterar
+            if (particleSpriteRenderer != null)
+            {
+                particleSpriteRenderer.transform.localScale *= 0.4f;
+            }
         }
     }
 
@@ -104,6 +121,12 @@ public class EnemyBehaviour : MonoBehaviour
     {
         battleControler.GetLevelEnemies().Remove(this.gameObject);
         battleControler.CheckNumEnemies();
+
+        if (deadVFX != null)
+        {
+            Instantiate(deadVFX, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject); // Destr�i o inimigo
     }
 
@@ -121,6 +144,7 @@ public class EnemyBehaviour : MonoBehaviour
         
         //print("Health: " + health);
         enemyHealthText.maxValue = maxHealth;
+        enemyHealthText.value = maxHealth;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
@@ -143,7 +167,37 @@ public class EnemyBehaviour : MonoBehaviour
 
     void ResumeAnimation()
     {
-        animator.speed = 1;
+        speedAnimation();
         animator.Play(currentAnimation, 0, savedTime); // Resume from saved time
+    }
+
+    void speedAnimation()
+    {
+        animator.speed = amIFocused ? 2 : 1;
+    }
+
+    public void FocusEnemy()
+    {
+        if (!amIFocused)
+        {
+            amIFocused = true;
+        }
+
+        speedAnimation();
+    }
+
+    public void DefocusEnemy()
+    {
+        if (amIFocused)
+        {
+            amIFocused = false;
+        }
+
+        speedAnimation();
+    }
+
+    public void SetDeadVFX(GameObject _deadVFX)
+    {
+        deadVFX = _deadVFX;
     }
 }
