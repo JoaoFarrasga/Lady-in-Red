@@ -2,25 +2,32 @@ using UnityEngine;
 
 public class MoveBackground : MonoBehaviour
 {
-    public float speed = 2.0f; // Velocidade do movimento
-    public float limitLeft = -5.0f; // Limite esquerdo
-    public float limitRight = 5.0f; // Limite direito
+    public float speed = 15f; // Velocidade do movimento
+    public float limitLeft = 300f; // Posição mínima
+    public float limitRight = 500f; // Posição máxima
 
-    private int direction = 1; // Direção inicial (1 para direita, -1 para esquerda)
+    private RectTransform rectTransform;
+    private int direction = 1; // 1 para direita, -1 para esquerda
+
+    void Start()
+    {
+        // Pegamos o RectTransform para mover corretamente na UI
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     void Update()
     {
-        // Move o objeto na direção atual
-        transform.position += Vector3.right * speed * direction * Time.deltaTime;
+        // Atualiza a posição baseada na direção
+        rectTransform.anchoredPosition += new Vector2(speed * direction * Time.deltaTime, 0);
 
-        // Verifica se atingiu o limite esquerdo ou direito
-        if (transform.position.x >= limitRight)
+        // Verifica os limites e inverte direção
+        if (rectTransform.anchoredPosition.x >= limitRight)
         {
-            direction = -1; // Muda a direção para a esquerda
+            direction = -1; // Vai para esquerda
         }
-        else if (transform.position.x <= limitLeft)
+        else if (rectTransform.anchoredPosition.x <= limitLeft)
         {
-            direction = 1; // Muda a direção para a direita
+            direction = 1; // Vai para direita
         }
     }
 }
