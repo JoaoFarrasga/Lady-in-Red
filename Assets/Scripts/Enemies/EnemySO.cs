@@ -6,12 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
 public class EnemySO : ScriptableObject
 {
-    [Header("Name")]
+    [Header("NameAndID")]
     public string enemyName;
+    public string enemyType;
 
     [Header("Appearence")]
     public Sprite bodySprite;
-    public Sprite faceSprite;
+    public Sprite normalFaceSprite;
+    public Sprite madFaceSprite;
     public Sprite particleSprite;
 
     [Header("ElementalType")]

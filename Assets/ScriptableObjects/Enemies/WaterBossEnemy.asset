@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: WaterBossEnemy
   m_EditorClassIdentifier: 
   enemyName: Water Boss
+  enemyType: Boss
   bodySprite: {fileID: 1264146355, guid: 8db86abe4bee36e4f9df5472ff0fcd5d, type: 3}
-  faceSprite: {fileID: -897875286, guid: 97b845e484d71da45bb9dcc06d4c740b, type: 3}
+  normalFaceSprite: {fileID: -897875286, guid: 97b845e484d71da45bb9dcc06d4c740b, type: 3}
+  madFaceSprite: {fileID: 1288087990, guid: 4c1a19265e938784096a20722481f5a7, type: 3}
   particleSprite: {fileID: 1041456488, guid: 6541d24545c3f5348856ebdd34f0b0ec, type: 3}
   elementalType: 1
-  maxHealth: 100
-  maxBasicDamageAttack: 5
+  maxHealth: 10000
+  maxBasicDamageAttack: 10
   maxHeavyDamageAttack: 0
   basicAttack: 0
   heavyAttack: 0

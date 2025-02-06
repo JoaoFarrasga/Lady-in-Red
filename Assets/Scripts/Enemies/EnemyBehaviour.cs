@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float heavyDamageAttack;
 
     [Header("EnemyHealthText")]
-    [SerializeField] private TMP_Text enemyHealthText;
+    [SerializeField] private Slider enemyHealthText;
 
     [Header("EnemySO")]
     [SerializeField] private EnemySO enemySO;
@@ -21,9 +23,15 @@ public class EnemyBehaviour : MonoBehaviour
     //[SerializeField] private GameObject body, face, particles;
     private SpriteRenderer bodySpriteRenderer, faceSpriteRenderer, particleSpriteRenderer;
 
+    [Header("EnemyAnimator")]
+    private Animator animator;
+    private string currentAnimation;
+    private float savedTime;
+
     private void Awake()
     {
-        enemyHealthText = GetComponentInChildren<TMP_Text>();
+        animator = GetComponent<Animator>();
+        enemyHealthText = GetComponentInChildren<Slider>();
         bodySpriteRenderer = transform.Find("Body").GetComponent<SpriteRenderer>();
         faceSpriteRenderer = transform.Find("Face").GetComponent<SpriteRenderer>();
         particleSpriteRenderer = transform.Find("Particle").GetComponent<SpriteRenderer>();
@@ -31,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         bodySpriteRenderer.sprite = enemySO.bodySprite;
-        faceSpriteRenderer.sprite = enemySO.faceSprite;
+        faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
         if (enemySO.particleSprite != null) particleSpriteRenderer.sprite = enemySO.particleSprite;
     }
 
@@ -39,12 +47,24 @@ public class EnemyBehaviour : MonoBehaviour
     {
         this.enemySO = enemySO;
         maxHealth = enemySO.maxHealth;
+        enemyHealthText.maxValue = maxHealth;
+        enemyHealthText.value = maxHealth;
         maxBasicDamageAttack = enemySO.maxBasicDamageAttack;
+        if (enemySO.enemyType == "Boss")
+        {
+            health = maxHealth;
+            basicDamageAttack = maxBasicDamageAttack;
+        }
     }
 
-    public void AttackPlayer(GameObject target, BattleControler battleControler)
+    public async Task AttackPlayer(GameObject target, BattleControler battleControler)
     {
-        target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
+        PauseAnimation();
+        faceSpriteRenderer.sprite = enemySO.madFaceSprite;
+        await target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
+        //await Task.Delay(500);
+        ResumeAnimation();
+        faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
     }
 
     // M�todo para receber dano
@@ -58,7 +78,11 @@ public class EnemyBehaviour : MonoBehaviour
 
             if (item.Key == enemySO.elementalWeakType) damage = damage * 2; // Dano dobrado contra fraquezas
 
-            else if (item.Key == enemySO.elementalStrongType) damage = -(damage / 2); // Dano reduzido contra resist�ncias
+            else if (item.Key == enemySO.elementalStrongType)
+            {
+                damage = -(damage / 2);
+                if(health > maxHealth) health = maxHealth;
+            }// Dano reduzido contra resist�ncias
 
             totalDamage += damage;
         }
@@ -70,7 +94,7 @@ public class EnemyBehaviour : MonoBehaviour
             Die(battleControler);
             return;
         }
-        enemyHealthText.text = health.ToString();
+        enemyHealthText.value = health;
     }
 
     private void Die(BattleControler battleControler)
@@ -86,15 +110,37 @@ public class EnemyBehaviour : MonoBehaviour
     {
         //print("Maxhealth: " + maxHealth);
         if (GameManager.gameManager.gameLevel == 1) health = maxHealth;
-        else health = maxHealth + (maxHealth * (healthPercentage));
+        else
+        {
+            maxHealth += maxHealth * (healthPercentage);
+            health = maxHealth;
+        }
         
         //print("Health: " + health);
-        enemyHealthText.text = health.ToString();
+        enemyHealthText.maxValue = maxHealth;
     }
 
     public void SetBasicDamageAttackIncrease(float damagePercentage) 
     {
         if (GameManager.gameManager.gameLevel == 1) basicDamageAttack = enemySO.maxBasicDamageAttack;
-        else basicDamageAttack += maxBasicDamageAttack + (maxBasicDamageAttack * (damagePercentage)); 
+        else
+        {
+            maxBasicDamageAttack += maxBasicDamageAttack * (damagePercentage);
+            basicDamageAttack = maxBasicDamageAttack;
+        }
+    }
+
+    void PauseAnimation()
+    {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        currentAnimation = state.IsName("EnemyIdle") ? "EnemyIdle" : state.fullPathHash.ToString(); // Store current animation name
+        savedTime = state.normalizedTime; // Store current time (normalized)
+        animator.speed = 0;
+    }
+
+    void ResumeAnimation()
+    {
+        animator.speed = 1;
+        animator.Play(currentAnimation, 0, savedTime); // Resume from saved time
     }
 }
