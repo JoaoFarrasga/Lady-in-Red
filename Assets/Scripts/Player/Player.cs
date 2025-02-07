@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     [Header("DamageEffect")]
     [SerializeField] Image damageEffect;
 
+    [Header("SFX")]
+    [SerializeField] AudioManager audioManager;
+
     private void Awake()
     {
         GameManager.OnGameStateChanged += OnGameEnd;
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour
         Color newColor = damageEffect.color;
         newColor.a = 120f / 255f;             
         damageEffect.color = newColor;
-
+        audioManager.SFXClip(audioManager.enemyAttackSound);
         await Task.Delay(400);
 
         while (newColor.a > 0f) 

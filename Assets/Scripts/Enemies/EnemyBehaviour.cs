@@ -32,6 +32,9 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("Dead VFX")]
     [SerializeField] private GameObject deadVFX;
 
+    [Header("SFX")]
+    [SerializeField] AudioManager audioManager;
+
     private bool amIFocused = false;
 
     private void Awake()
@@ -127,6 +130,7 @@ public class EnemyBehaviour : MonoBehaviour
             Instantiate(deadVFX, transform.position, Quaternion.identity);
         }
 
+        audioManager.SFXClip(audioManager.enemyDeathSound);
         Destroy(gameObject); // Destr�i o inimigo
     }
 
@@ -200,4 +204,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         deadVFX = _deadVFX;
     }
+
+    public void SetAudioManager(AudioManager _audioManager) { audioManager = _audioManager; }
 }

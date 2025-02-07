@@ -48,6 +48,9 @@ public class PotionBoard : MonoBehaviour
     // Damage VFX
     [SerializeField] private DamageVFX damageVFX;
 
+    [Header("SFX")]
+    [SerializeField] AudioManager audioManager;
+
     private void Awake()
     {
         Instance = this;
@@ -105,6 +108,7 @@ public class PotionBoard : MonoBehaviour
         {
             EnableAndDisableChildSprite(potion.transform);
             SelectPotion(potion);
+            audioManager.SFXClip(audioManager.clickSound);
         }
     }
 
@@ -312,11 +316,13 @@ public class PotionBoard : MonoBehaviour
         {
             matchType = MatchType.SuperMatch;
             totalCombos += 2;  // Exemplo: +2 combos para um SuperMatch (4 peças)
+            audioManager.SFXClip(audioManager.comboSound);
         }
         else
         {
             matchType = MatchType.Normal;
             totalCombos += 1;  // Exemplo: +1 combo para um match normal (3 peças)
+            audioManager.SFXClip(audioManager.comboSound);
         }
 
         HashSet<OrbType> uniqueColors = new HashSet<OrbType>();
@@ -554,7 +560,7 @@ public class PotionBoard : MonoBehaviour
             {
                 potion.animator.SetTrigger("Destroyed");
             }
-
+            if(!firstTurn) audioManager.SFXClip(audioManager.piecesdestroySound);
             Destroy(potion.gameObject);
 
             potionBoard[_xIndex, _yIndex] = new Node(true, null);
