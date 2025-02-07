@@ -11,7 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float maxBasicDamageAttack;
     [SerializeField] private float basicDamageAttack;
-    private float heavyDamageAttack;
+    // private float heavyDamageAttack;
 
     [Header("EnemyHealthText")]
     [SerializeField] private Slider enemyHealthText;
@@ -23,16 +23,15 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("EnemyAppearence")]
     //[SerializeField] private GameObject body, face, particles;
     private SpriteRenderer bodySpriteRenderer, faceSpriteRenderer, particleSpriteRenderer;
+    private GameObject lightObject;
 
     [Header("EnemyAnimator")]
     private Animator animator;
-    private string currentAnimation;
-    private float savedTime;
+    // private string currentAnimation;
+    // private float savedTime;
 
     [Header("Dead VFX")]
     [SerializeField] private GameObject deadVFX;
-
-    private bool amIFocused = false;
 
     private void Awake()
     {
@@ -42,6 +41,9 @@ public class EnemyBehaviour : MonoBehaviour
         faceSpriteRenderer = transform.Find("Face").GetComponent<SpriteRenderer>();
         particleSpriteRenderer = transform.Find("Particle").GetComponent<SpriteRenderer>();
         healthSprite = transform.Find("HealthSprite").GetComponent<SpriteRenderer>();
+
+        lightObject = transform.Find("Light").gameObject;
+        lightObject.SetActive(false);
     }
     private void Start()
     {
@@ -79,11 +81,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public async Task AttackPlayer(GameObject target, BattleControler battleControler)
     {
-        PauseAnimation();
+        speedAnimation(3);
         faceSpriteRenderer.sprite = enemySO.madFaceSprite;
         await target.GetComponent<Player>().TakeDamage(basicDamageAttack, battleControler);
         //await Task.Delay(500);
-        ResumeAnimation();
+        speedAnimation(1);
         faceSpriteRenderer.sprite = enemySO.normalFaceSprite;
     }
 
@@ -157,6 +159,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    /*
     void PauseAnimation()
     {
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
@@ -167,33 +170,30 @@ public class EnemyBehaviour : MonoBehaviour
 
     void ResumeAnimation()
     {
-        speedAnimation();
+        speedAnimation(1);
         animator.Play(currentAnimation, 0, savedTime); // Resume from saved time
     }
+    */
 
-    void speedAnimation()
+    void speedAnimation(int speed)
     {
-        animator.speed = amIFocused ? 2 : 1;
+        animator.speed = speed;
     }
 
     public void FocusEnemy()
     {
-        if (!amIFocused)
+        if (lightObject != null)
         {
-            amIFocused = true;
+            lightObject.SetActive(true);
         }
-
-        speedAnimation();
     }
 
     public void DefocusEnemy()
     {
-        if (amIFocused)
+        if (lightObject != null)
         {
-            amIFocused = false;
+            lightObject.SetActive(false);
         }
-
-        speedAnimation();
     }
 
     public void SetDeadVFX(GameObject _deadVFX)

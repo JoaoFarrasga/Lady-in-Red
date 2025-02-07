@@ -1069,6 +1069,7 @@ MonoBehaviour:
   battleGenerator: {fileID: 994066207}
   hudController: {fileID: 288581802}
   deadVFX: {fileID: 3864907387597458791, guid: 87158dee42863c84fbbd988b04ddb8c3, type: 3}
+  cameraShake: {fileID: 0}
 --- !u!4 &288581801
 Transform:
   m_ObjectHideFlags: 0
@@ -6211,6 +6212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2044331477}
   - component: {fileID: 2044331476}
+  - component: {fileID: 2044331478}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6235,6 +6237,7 @@ MonoBehaviour:
   maxDamageAttack: 10
   damageAttack: 0
   damageEffect: {fileID: 1555019072}
+  cameraShake: {fileID: 2044331478}
 --- !u!4 &2044331477
 Transform:
   m_ObjectHideFlags: 0
@@ -6250,6 +6253,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044331478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044331475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8716ee1209cf15547b464a615ddc8342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 330585546}
+  shakeDuration: 0.3
+  shakeMagnitude: 0.2
 --- !u!1 &2047871878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7804323896209517903, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}

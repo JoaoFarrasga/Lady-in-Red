@@ -41,6 +41,8 @@ public class BattleControler : MonoBehaviour
     [Header("Dead VFX")]
     [SerializeField] GameObject deadVFX;
 
+    [Header("ShakeCamara")]
+    [SerializeField] CameraShake cameraShake;
 
     private void Awake()
     {

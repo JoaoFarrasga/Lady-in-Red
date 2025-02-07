@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("DamageEffect")]
     [SerializeField] Image damageEffect;
+    [SerializeField] CameraShake cameraShake;
 
     private void Awake()
     {
@@ -45,14 +46,14 @@ public class Player : MonoBehaviour
         newColor.a = 120f / 255f;             
         damageEffect.color = newColor;
 
-        await Task.Delay(400);
+        StartCoroutine(cameraShake.Shake());
 
         while (newColor.a > 0f) 
         {
             newColor.a -= 0.01f;
             damageEffect.color = newColor;
 
-            await Task.Delay(100); ;
+            await Task.Delay(50); ;
         }
     }
 
