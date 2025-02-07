@@ -41,8 +41,8 @@ public class BattleControler : MonoBehaviour
     [Header("Dead VFX")]
     [SerializeField] GameObject deadVFX;
 
-    [Header("ShakeCamara")]
-    [SerializeField] CameraShake cameraShake;
+    [Header("SFX")]
+    [SerializeField] AudioManager audioManager;
 
     private void Awake()
     {
@@ -82,6 +82,7 @@ public class BattleControler : MonoBehaviour
         if (enemy != null)
         {
             FocusEnemy(enemy.gameObject);
+            audioManager.SFXClip(audioManager.clickSound);
         }
     }
 
@@ -160,6 +161,7 @@ public class BattleControler : MonoBehaviour
             GameObject go = Instantiate(enemyPrefab, transform);
             go.AddComponent<EnemyBehaviour>().SetEnemySO(battleGenerator.Battles()[level - 1][i]);
             go.GetComponent<EnemyBehaviour>().SetDeadVFX(deadVFX);
+            go.GetComponent<EnemyBehaviour>().SetAudioManager(audioManager);
 
             if (go.GetComponent<EnemyBehaviour>().GetEnemySO().enemyType == "Minion")
             {

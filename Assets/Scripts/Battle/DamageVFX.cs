@@ -16,6 +16,9 @@ public class DamageVFX : MonoBehaviour
 
     private GameObject _focusedEnemy;
 
+    [Header("AudioManager")]
+    [SerializeField] AudioManager audioManager;
+
     private void Update()
     {
         _focusedEnemy = battleControler.focusedEnemy;
@@ -82,6 +85,7 @@ public class DamageVFX : MonoBehaviour
 
         // Garantir que ao final esteja exato na posição do inimigo
         projectile.transform.position = targetPos;
+        audioManager.SFXClip(audioManager.attackSound);
 
         // Se quiser, podemos destruir o projetil depois de chegar
         // ou disparar alguma animação adicional, etc.
