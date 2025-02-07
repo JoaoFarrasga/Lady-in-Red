@@ -43,6 +43,7 @@ public class PotionBoard : MonoBehaviour
     private int gameLevel = 0;
     private int currentGameLevel = 0;
 
+    private bool canMove = true;
     public bool firstTurn = true;
 
     // Damage VFX
@@ -93,6 +94,11 @@ public class PotionBoard : MonoBehaviour
         if (firstTurn && GameManager.gameManager.State == GameState.InBattle)
         {
             firstTurn = false;
+        }
+
+        if (!canMove)
+        {
+            return;
         }
 
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
@@ -281,6 +287,7 @@ public class PotionBoard : MonoBehaviour
                     yield return new WaitForSeconds(1f);
 
                     player.AttackEnemy(matchCountsByColor, battleControler, totalCombos);
+                    canMove = true;
                 }
 
                 totalTurns++;
@@ -422,6 +429,7 @@ public class PotionBoard : MonoBehaviour
         }
         else if (selectedPotion != _potion)
         {
+            canMove = false;
             SwapPosition(selectedPotion, _potion);
             selectedPotion = null;
         }
@@ -434,6 +442,7 @@ public class PotionBoard : MonoBehaviour
         {
             EnableAndDisableChildSprite(_currentPotion.transform);
             EnableAndDisableChildSprite(_targetPotion.transform);
+            canMove = true;
             return;
         }
 
@@ -466,6 +475,7 @@ public class PotionBoard : MonoBehaviour
             DoSwap(_currentPotion, _targetPotion);
             EnableAndDisableChildSprite(_currentPotion.transform);
             EnableAndDisableChildSprite(_targetPotion.transform);
+            canMove = true;
             yield return StartForAllPotionsSettleAgain();
         }
 

@@ -793,6 +793,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SairJogo
       objectReference: {fileID: 0}
+    - target: {fileID: 6457366446879136050, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6621267794800511292, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -808,6 +812,10 @@ PrefabInstance:
     - target: {fileID: 6621267794800511292, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852286310186306855, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7102096936090458636, guid: f10be9e7669ac3c4690e7a69dc923fd3, type: 3}
       propertyPath: m_SizeDelta.x
