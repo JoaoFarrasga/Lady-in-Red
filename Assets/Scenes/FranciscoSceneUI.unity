@@ -1069,7 +1069,7 @@ MonoBehaviour:
   battleGenerator: {fileID: 994066207}
   hudController: {fileID: 288581802}
   deadVFX: {fileID: 3864907387597458791, guid: 87158dee42863c84fbbd988b04ddb8c3, type: 3}
-  cameraShake: {fileID: 0}
+  audioManager: {fileID: 1316139765}
 --- !u!4 &288581801
 Transform:
   m_ObjectHideFlags: 0
@@ -3678,6 +3678,7 @@ GameObject:
   - component: {fileID: 1316139762}
   - component: {fileID: 1316139763}
   - component: {fileID: 1316139764}
+  - component: {fileID: 1316139765}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3754,6 +3755,7 @@ MonoBehaviour:
   ataque_Folha: {fileID: 3270700038113783200, guid: c4d127d6f0309ea4b80c12a36975a21b, type: 3}
   ataque_Normal: {fileID: 4879448161167804293, guid: d0dc7cd55031be343aa807563b03b7bb, type: 3}
   Livro: {fileID: 1818301551}
+  audioManager: {fileID: 1316139765}
 --- !u!114 &1316139764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3767,6 +3769,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsMenu: {fileID: 1736834806}
+--- !u!114 &1316139765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316139759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13bd70efbd139549bf6bcbb17a05a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFXSource: {fileID: 1401639717}
+  attackSound: {fileID: 8300000, guid: 16434682355238442a9466c204a9699d, type: 3}
+  clickSound: {fileID: 8300000, guid: 74602ed949e1d3e4c9f06bd956136ade, type: 3}
+  comboSound: {fileID: 8300000, guid: 7bfa431d978178b48a96d6a45dd1cb24, type: 3}
+  enemyAttackSound: {fileID: 8300000, guid: 65b95755dc6848541997eb90f89a4e10, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 024efbb3ff45d6746acf5d2598e6bd56, type: 3}
+  piecesdestroySound: {fileID: 8300000, guid: fed07386022e8d4459c6dd1429fb7f7d, type: 3}
 --- !u!1 &1323999774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,6 +4976,7 @@ MonoBehaviour:
   totalTurns: 0
   firstTurn: 1
   damageVFX: {fileID: 1316139763}
+  audioManager: {fileID: 1316139765}
 --- !u!1 &1736419603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,6 +6260,7 @@ MonoBehaviour:
   damageAttack: 0
   damageEffect: {fileID: 1555019072}
   cameraShake: {fileID: 2044331478}
+  audioManager: {fileID: 1316139765}
 --- !u!4 &2044331477
 Transform:
   m_ObjectHideFlags: 0

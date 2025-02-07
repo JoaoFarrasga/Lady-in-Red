@@ -43,7 +43,7 @@ public class BattleGenerator : MonoBehaviour
     private int NumberOfEnemysInLevel()
     {
         //StartBattleLogic
-        int currentBattleEnemyCount = (int)Random.Range(1.0f, 3.9f);
+        int currentBattleEnemyCount = (int)Random.Range(2.0f, 3.9f);
         return currentBattleEnemyCount;
     }
 
